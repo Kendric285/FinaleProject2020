@@ -3,7 +3,7 @@ package com.example.finalproject2020;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-
+//nothing
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -14,4 +14,3 @@ public class MainActivity extends AppCompatActivity {
 }
 //Kendric's Comment
 //no
-//new comment
