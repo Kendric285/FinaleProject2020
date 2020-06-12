@@ -14,7 +14,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="108dp"
-        android:layout_marginTop="204dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -27,10 +26,10 @@
         android:layout_marginTop="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/gymImageView"
-        app:layout_constraintHorizontal_bias="0.138"
+        app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.466"
+        app:layout_constraintVertical_bias="0.109"
         app:srcCompat="@drawable/backarrow" />
 
     <ImageView
@@ -38,41 +37,51 @@
         android:layout_width="48dp"
         android:layout_height="50dp"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginEnd="44dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.466"
+        app:layout_constraintVertical_bias="0.109"
         app:srcCompat="@drawable/frontarrow" />
 
     <ImageView
         android:id="@+id/poke1"
-        android:layout_width="104dp"
-        android:layout_height="87dp"
-        android:layout_marginEnd="288dp"
-        android:layout_marginBottom="172dp"
+        android:layout_width="400px"
+        android:layout_height="400px"
+        android:layout_marginEnd="240dp"
+        android:layout_marginBottom="288dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
         android:id="@+id/poke2"
-        android:layout_width="104dp"
-        android:layout_height="87dp"
-        android:layout_marginEnd="152dp"
-        android:layout_marginBottom="172dp"
+        android:layout_width="400px"
+        android:layout_height="400px"
+        android:layout_marginEnd="240dp"
+        android:layout_marginBottom="136dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
         android:id="@+id/poke3"
-        android:layout_width="104dp"
-        android:layout_height="87dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="172dp"
+        android:layout_width="400px"
+        android:layout_height="400px"
+        android:layout_marginEnd="240dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/gymName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="144dp"
+        android:layout_marginBottom="392dp"
+        android:text="Pewter Gym"
+        android:textSize="22dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
