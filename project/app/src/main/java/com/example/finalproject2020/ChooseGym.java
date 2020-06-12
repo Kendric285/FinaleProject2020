@@ -35,6 +35,11 @@ public class ChooseGym extends AppCompatActivity {
 
     Integer gymNumber;
 
+    Integer userMoney;
+    Integer userPokeBalls;
+
+    TextView money;
+    TextView pokeBalls;
     String pokeImageFront;
 
 
@@ -51,7 +56,17 @@ public class ChooseGym extends AppCompatActivity {
         client = new OkHttpClient();
         gymImageView = findViewById(R.id.gymImageView);
         gymName = findViewById(R.id.gymName);
+
+        money = findViewById(R.id.money);
+        pokeBalls = findViewById(R.id.pokeballs);
+
         pokeImgs = new ImageView[6];
+        userMoney = 100;
+        userPokeBalls = 3;
+
+        money.setText("Money:" + userMoney);
+        pokeBalls.setText("PokeBalls: "+ userPokeBalls);
+
 
         Log.d("pokemon", "onCreate: "+sharedPref.getPokemon(0));
 
@@ -75,7 +90,7 @@ public class ChooseGym extends AppCompatActivity {
         gymImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                toBattle();
             }
         });
 
