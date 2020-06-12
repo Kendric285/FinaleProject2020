@@ -49,10 +49,13 @@ public class MainActivity extends AppCompatActivity {
     String squirtleApiInfoURL;
     String charmanderApiInfoURL;
 
+    SharedPref sharedPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sharedPref = new SharedPref(this);
         client = new OkHttpClient();
 
         add = findViewById(R.id.add);
@@ -61,6 +64,15 @@ public class MainActivity extends AppCompatActivity {
         squirtleImageView = findViewById(R.id.squirtleImageView);
         charmanderImageView = findViewById(R.id.charmanderImageView);
 
+        if (sharedPref.pokemons[0] == 0) {
+            bulbasaurImageView.setVisibility(View.VISIBLE);
+            squirtleImageView.setVisibility(View.VISIBLE);
+            charmanderImageView.setVisibility(View.VISIBLE);
+        } else {
+            bulbasaurImageView.setVisibility(View.INVISIBLE);
+            squirtleImageView.setVisibility(View.INVISIBLE);
+            charmanderImageView.setVisibility(View.INVISIBLE);
+        }
 
         bulbasaurApiInfoURL = "https://pokeapi.co/api/v2/pokemon/1";
         squirtleApiInfoURL = "https://pokeapi.co/api/v2/pokemon/7";
@@ -84,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 userStarterPokemonImage = bulbasaurImageViewURL;
                 gyms();
+                sharedPref.addPokemon(1);
             }
         });
         squirtleImageView.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 userStarterPokemonImage = squirtleImageViewURL;
                 gyms();
+                sharedPref.addPokemon(7);
             }
         });
         charmanderImageView.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 userStarterPokemonImage = charmanderImageViewURL;
                 gyms();
+                sharedPref.addPokemon(4);
             }
         });
 

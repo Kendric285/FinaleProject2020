@@ -12,9 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="536dp"
-        android:text="Button" />
+        android:layout_marginEnd="146dp"
+        android:layout_marginBottom="558dp"
+        android:text="Start" />
 
     <ImageView
         android:id="@+id/bulbasaurImageView"
@@ -23,9 +23,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="3dp"
-        android:layout_marginEnd="218dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginBottom="12dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
@@ -35,9 +35,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="3dp"
-        android:layout_marginEnd="218dp"
-        android:layout_marginBottom="215dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginBottom="217dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
@@ -47,8 +47,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="3dp"
-        android:layout_marginEnd="218dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginEnd="96dp"
         android:layout_marginBottom="416dp"
         tools:srcCompat="@tools:sample/avatars" />
 
