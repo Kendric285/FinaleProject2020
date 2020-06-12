@@ -6,34 +6,50 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="match_parent"
-        android:layout_height="506dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="5dp"
-        android:text="Hello World!" />
-
     <Button
         android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="323dp"
-        android:layout_marginBottom="557dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="536dp"
         android:text="Button" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="300px"
-        android:layout_height="300px"
+        android:id="@+id/bulbasaurImageView"
+        android:layout_width="500px"
+        android:layout_height="500px"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="155dp"
-        android:layout_marginBottom="229dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="218dp"
+        android:layout_marginBottom="14dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/squirtleImageView"
+        android:layout_width="500px"
+        android:layout_height="500px"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="218dp"
+        android:layout_marginBottom="215dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/charmanderImageView"
+        android:layout_width="500px"
+        android:layout_height="500px"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="218dp"
+        android:layout_marginBottom="416dp"
         tools:srcCompat="@tools:sample/avatars" />
 
 </RelativeLayout>
