@@ -11,6 +11,7 @@ public class SharedPref {
     SharedPreferences mySharedPref;
     SharedPreferences.Editor editor;
     int[] pokemons = new int[6];
+    int money;
 
     public SharedPref(Context context) {
         mySharedPref = context.getSharedPreferences("filename",Context.MODE_PRIVATE);
@@ -21,10 +22,27 @@ public class SharedPref {
         pokemons[3] = mySharedPref.getInt("pokemon4",0);
         pokemons[4] = mySharedPref.getInt("pokemon5",0);
         pokemons[5] = mySharedPref.getInt("pokemon6",0);
+
+        money = mySharedPref.getInt("userMoney",0);
+
+
+
+
+
+
     }
 
     public int getPokemon(int x) {
         return pokemons[x];
+    }
+
+    public int addMoney(int x) {
+        money = money + x;
+        return money;
+    }
+    public int subMoney(int x){
+        money = money - x;
+        return money;
     }
 
     public void addPokemon (int x) {
