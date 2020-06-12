@@ -54,4 +54,9 @@ public class SharedPref {
         //editor.putInt("MODE",mode).commit();
 
     }
+
+    public void pokemonStartBattle() {
+        pokemons[0] = 0;
+    }
+
 }
