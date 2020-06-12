@@ -7,6 +7,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -15,27 +16,18 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-
 public class ChooseGym extends AppCompatActivity {
 
     ImageView frontArrow;
     ImageView backArrow;
     ImageView gymImageView;
+    ImageView userStarterPokemon;
 
     OkHttpClient client;
 
     Integer gymNumber;
 
-    String pokeImageFront;
-
-    ImageView[] pokeImgs;
-    String pokeFront1;
-    int poke;
-    SharedPref sharedPref;
+    String userStarterPokemonImageURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
