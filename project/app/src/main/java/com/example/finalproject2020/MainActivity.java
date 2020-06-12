@@ -7,6 +7,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     String squirtleImageViewURL;
     String charmanderImageViewURL;
 
+    String userStarterPokemonImage;
+
     TextView dad;
 
 
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         squirtleImageView = findViewById(R.id.squirtleImageView);
         charmanderImageView = findViewById(R.id.charmanderImageView);
 
+
         bulbasaurApiInfoURL = "https://pokeapi.co/api/v2/pokemon/1";
         squirtleApiInfoURL = "https://pokeapi.co/api/v2/pokemon/7";
         charmanderApiInfoURL = "https://pokeapi.co/api/v2/pokemon/4";
@@ -72,6 +76,28 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+            }
+        });
+
+        bulbasaurImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userStarterPokemonImage = bulbasaurImageViewURL;
+                gyms();
+            }
+        });
+        squirtleImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userStarterPokemonImage = squirtleImageViewURL;
+                gyms();
+            }
+        });
+        charmanderImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userStarterPokemonImage = charmanderImageViewURL;
+                gyms();
             }
         });
 
@@ -206,5 +232,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    public void gyms(){
+        Intent toGyms = new Intent(this, ChooseGym.class);
+        toGyms.putExtra("starter",userStarterPokemonImage );
+        startActivity(toGyms);
+    }
+
 
 }
