@@ -83,8 +83,9 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(View v) {
 
-
+            if (sharedPref.pokemons[0] == 0) {
                 starterPokemon();
+            } else{gyms();}
 
 
 
