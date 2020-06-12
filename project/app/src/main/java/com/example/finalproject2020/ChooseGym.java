@@ -7,6 +7,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -70,6 +71,13 @@ public class ChooseGym extends AppCompatActivity {
         gymImageView.setImageResource(R.drawable.pewtergym);
 
         getPokemon(sharedPref.pokemons[0],0);
+
+        gymImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         frontArrow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -233,6 +241,11 @@ public class ChooseGym extends AppCompatActivity {
         });
 
 
+    }
+    public void toBattle(){
+        Intent toBattle = new Intent(this, Battle.class);
+        toBattle.putExtra("gymNumber",gymNumber );
+        startActivity(toBattle);
     }
 
     public void pic() {
