@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(View v) {
 
-            if (sharedPref.pokemons[0] == "") {
+            if (sharedPref.pokemons[0] == "" || sharedPref.pokemons[0] == null) {
                 starterPokemon();
             } else{gyms();}
 
@@ -104,6 +104,15 @@ public class MainActivity extends AppCompatActivity {
                 poke = bulbasaur;
                 sharedPref.addPokemon(poke);
                 gyms();
+                if (sharedPref.pokemons[0] == "") {
+                    bulbasaurImageView.setVisibility(View.VISIBLE);
+                    squirtleImageView.setVisibility(View.VISIBLE);
+                    charmanderImageView.setVisibility(View.VISIBLE);
+                } else {
+                    bulbasaurImageView.setVisibility(View.INVISIBLE);
+                    squirtleImageView.setVisibility(View.INVISIBLE);
+                    charmanderImageView.setVisibility(View.INVISIBLE);
+                }
             }
         });
         squirtleImageView.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +122,15 @@ public class MainActivity extends AppCompatActivity {
                 poke = squirtle;
                 sharedPref.addPokemon(poke);
                 gyms();
+                if (sharedPref.pokemons[0] == "") {
+                    bulbasaurImageView.setVisibility(View.VISIBLE);
+                    squirtleImageView.setVisibility(View.VISIBLE);
+                    charmanderImageView.setVisibility(View.VISIBLE);
+                } else {
+                    bulbasaurImageView.setVisibility(View.INVISIBLE);
+                    squirtleImageView.setVisibility(View.INVISIBLE);
+                    charmanderImageView.setVisibility(View.INVISIBLE);
+                }
             }
         });
         charmanderImageView.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +140,15 @@ public class MainActivity extends AppCompatActivity {
                 poke = charmander;
                 sharedPref.addPokemon(poke);
                 gyms();
+                if (sharedPref.pokemons[0] == "") {
+                    bulbasaurImageView.setVisibility(View.VISIBLE);
+                    squirtleImageView.setVisibility(View.VISIBLE);
+                    charmanderImageView.setVisibility(View.VISIBLE);
+                } else {
+                    bulbasaurImageView.setVisibility(View.INVISIBLE);
+                    squirtleImageView.setVisibility(View.INVISIBLE);
+                    charmanderImageView.setVisibility(View.INVISIBLE);
+                }
             }
         });
 

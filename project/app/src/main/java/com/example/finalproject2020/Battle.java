@@ -60,6 +60,8 @@ public class Battle extends AppCompatActivity {
 
     int gymNum;
 
+    Random r = new Random();
+
     ProgressBar myHP;
     String pokeMoves;
 
@@ -76,8 +78,6 @@ public class Battle extends AppCompatActivity {
         opponentPokemonImage = findViewById(R.id.opponentPokemon);
         Intent intent = getIntent();
         gymNum = intent.getIntExtra("gymNumber",0);
-
-        Random r = new Random();
 
         tLeft = findViewById(R.id.tLeft);
         bLeft = findViewById(R.id.bLeft);
@@ -136,8 +136,29 @@ public class Battle extends AppCompatActivity {
                                 JSONObject sprites = obj.getJSONObject("sprites");
                                 pokeImageBack = sprites.getString("back_default");
                                 JSONArray moves = obj.getJSONArray("moves");
+                                int papa = moves.length();
+                                int laka = r.nextInt(papa);
+                                int laka2 = r.nextInt(papa);
+                                int laka3 = r.nextInt(papa);
+                                int laka4 = r.nextInt(papa);
 
-                               // pokeMoves =
+                                JSONObject move01 = moves.getJSONObject(laka);
+                                JSONObject move02 = moves.getJSONObject(laka2);
+                                JSONObject move03 = moves.getJSONObject(laka3);
+                                JSONObject move04 = moves.getJSONObject(laka4);
+                                JSONObject m1 = move01.getJSONObject("move");
+                                JSONObject m2 = move01.getJSONObject("move");
+                                JSONObject m3 = move01.getJSONObject("move");
+                                JSONObject m4 = move01.getJSONObject("move");
+
+                                // pokeMoves =
+
+                                move1 = m1.getString("name");
+                                move2 = m2.getString("name");
+                                move3 = m3.getString("name");
+                                move4 = m4.getString("name");
+
+                                //Other Shit
 
                                 pokeName.setText(name);
                                 myHP.setMax(100);

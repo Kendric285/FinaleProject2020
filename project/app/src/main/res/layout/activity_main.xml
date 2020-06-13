@@ -26,6 +26,8 @@
         android:layout_marginStart="125dp"
         android:layout_marginEnd="96dp"
         android:layout_marginBottom="12dp"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
@@ -38,6 +40,9 @@
         android:layout_marginStart="125dp"
         android:layout_marginEnd="96dp"
         android:layout_marginBottom="217dp"
+        android:scaleType="fitCenter"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
@@ -50,6 +55,9 @@
         android:layout_marginStart="125dp"
         android:layout_marginEnd="96dp"
         android:layout_marginBottom="416dp"
+        android:scaleType="fitCenter"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
         tools:srcCompat="@tools:sample/avatars" />
 
 </RelativeLayout>
