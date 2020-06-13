@@ -68,7 +68,7 @@ public class ChooseGym extends AppCompatActivity {
         pokeBalls.setText("PokeBalls: "+ userPokeBalls);
 
 
-        Log.d("pokemon", "onCreate: "+sharedPref.getPokemon(0));
+        //Log.d("pokemon", "onCreate: "+sharedPref.getPokemon(0));
 
         gymNumber = 1;
 
@@ -85,7 +85,7 @@ public class ChooseGym extends AppCompatActivity {
 
         gymImageView.setImageResource(R.drawable.pewtergym);
 
-        getPokemon(sharedPref.pokemons[0],0);
+        getPokemon(0);
 
         gymImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -212,36 +212,15 @@ public class ChooseGym extends AppCompatActivity {
 
     }
 
-    public void getPokemon(int x, int y) {
-        poke = y;
+    public void getPokemon(final int x) {
+        //poke = y;
         Log.d("mode", "onClick: ");
-        String url = "https://pokeapi.co/api/v2/pokemon/" + x;
-        final Request request = new Request.Builder()
-                .url(url)
-                .get()
-                .build();
 
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-                Log.d("mode", "onFailure: ");
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    final String myResponse = response.body().string();
-                    // Log.d("mode", "onResponse: " + myResponse);
-
-                    ChooseGym.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
                             try {
-                                JSONObject obj = new JSONObject(myResponse);
+                                JSONObject obj = new JSONObject(sharedPref.pokemons[x]);
                                 //JSONArray info = obj.getJSONArray("sprites");
                                 String name = obj.getString("name");
-                                Log.d("pokemon", "run: " +name);
+                                Log.d("pokemon", "run: " + name);
                                 JSONObject sprites = obj.getJSONObject("sprites");
                                 pokeImageFront = sprites.getString("front_default");
                                 pic();
@@ -249,11 +228,7 @@ public class ChooseGym extends AppCompatActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                        }
-                    });
-                }
-            }
-        });
+
 
 
     }

@@ -107,7 +107,7 @@ public class Battle extends AppCompatActivity {
 
         }
 
-        getMyPokemon(sharedPref.pokemons[0]);
+        getMyPokemon(0);
 
     }
 
@@ -117,30 +117,9 @@ public class Battle extends AppCompatActivity {
 
     public void getMyPokemon(int x) {
         Log.d("mode", "onClick: ");
-        String url = "https://pokeapi.co/api/v2/pokemon/" + x;
-        final Request request = new Request.Builder()
-                .url(url)
-                .get()
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-                Log.d("mode", "onFailure: ");
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    final String myResponse = response.body().string();
-                    // Log.d("mode", "onResponse: " + myResponse);
-
-                    Battle.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+        poke = x;
                             try {
-                                JSONObject obj = new JSONObject(myResponse);
+                                JSONObject obj = new JSONObject(sharedPref.pokemons[poke]);
                                 //JSONArray info = obj.getJSONArray("sprites");
 
                                 String name = obj.getString("name");
@@ -160,14 +139,6 @@ public class Battle extends AppCompatActivity {
                                 e.printStackTrace();
 
                             }
-                        }
-
-                    });
-                }
-
-            }
-
-        });
 
 
     }
@@ -175,30 +146,9 @@ public class Battle extends AppCompatActivity {
     public void getOpponentPokemon(int x, String y) {
         type = y;
         Log.d("mode", "onClick: ");
-        String url = "https://pokeapi.co/api/v2/pokemon/" + x;
-        final Request request = new Request.Builder()
-                .url(url)
-                .get()
-                .build();
 
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-                Log.d("mode", "onFailure: ");
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    final String myResponse = response.body().string();
-                    // Log.d("mode", "onResponse: " + myResponse);
-
-                    Battle.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
                             try {
-                                JSONObject obj = new JSONObject(myResponse);
+                                JSONObject obj = new JSONObject("shanana");
                                 //JSONArray info = obj.getJSONArray("sprites");
                                 String name = obj.getString("name");
                                 Log.d("pokemon", "run: " + name);
@@ -209,20 +159,11 @@ public class Battle extends AppCompatActivity {
                                 e.printStackTrace();
 
                             }
+
                         }
 
-                    });
-                }
-
-            }
-
-        });
-
-
-    }
-
     public void pic(String x, ImageView y) {
-        Picasso.with(this).load(x).into(y);
+        Picasso.with(Battle.this).load(x).into(y);
     }
 
 }

@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     String bulbasaurApiInfoURL;
     String squirtleApiInfoURL;
     String charmanderApiInfoURL;
+    String poke;
 
     SharedPref sharedPref;
 
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         squirtleImageView = findViewById(R.id.squirtleImageView);
         charmanderImageView = findViewById(R.id.charmanderImageView);
 
-        if (sharedPref.pokemons[0] == 0) {
+        if (sharedPref.pokemons[0] == "") {
             bulbasaurImageView.setVisibility(View.VISIBLE);
             squirtleImageView.setVisibility(View.VISIBLE);
             charmanderImageView.setVisibility(View.VISIBLE);
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(View v) {
 
-            if (sharedPref.pokemons[0] == 0) {
+            if (sharedPref.pokemons[0] == "") {
                 starterPokemon();
             } else{gyms();}
 
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 userStarterPokemonImage = bulbasaurImageViewURL;
                 gyms();
-                sharedPref.addPokemon(1);
+                sharedPref.addPokemon(poke);
             }
         });
         squirtleImageView.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 userStarterPokemonImage = squirtleImageViewURL;
                 gyms();
-                sharedPref.addPokemon(7);
+                sharedPref.addPokemon(poke);
             }
         });
         charmanderImageView.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 userStarterPokemonImage = charmanderImageViewURL;
                 gyms();
-                sharedPref.addPokemon(4);
+                sharedPref.addPokemon(poke);
             }
         });
 
@@ -154,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             try {
                                 JSONObject obj = new JSONObject(myResponse);
+                                poke = myResponse;
                                 //JSONArray info = obj.getJSONArray("sprites");
                                 String name = obj.getString("name");
                                 JSONObject sprites = obj.getJSONObject("sprites");
@@ -193,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             try {
                                 JSONObject obj = new JSONObject(myResponse);
+                                poke = myResponse;
                                 //JSONArray info = obj.getJSONArray("sprites");
                                 String name = obj.getString("name");
                                 JSONObject sprites = obj.getJSONObject("sprites");
@@ -234,6 +237,7 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             try {
                                 JSONObject obj = new JSONObject(myResponse);
+                                poke = myResponse;
                                 //JSONArray info = obj.getJSONArray("sprites");
                                 String name = obj.getString("name");
                                 JSONObject sprites = obj.getJSONObject("sprites");
