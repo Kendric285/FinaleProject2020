@@ -7,6 +7,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -54,10 +55,12 @@ public class Battle extends AppCompatActivity {
 
     TextView pokeName;
 
+    int gymNum;
+
     ProgressBar myHP;
     String pokeMoves;
 
-    @Override
+    @Override///////807 POKEMONNNNS
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle);
@@ -68,6 +71,8 @@ public class Battle extends AppCompatActivity {
         myHP = findViewById(R.id.hp);
         myPokemon = findViewById(R.id.myPokemon);
         opponentPokemon = findViewById(R.id.opponentPokemon);
+        Intent intent = getIntent();
+        gymNum = intent.getIntExtra("gymNumber",0);
 
         Random r = new Random();
 
@@ -143,8 +148,11 @@ public class Battle extends AppCompatActivity {
 
     }
 
-    public void getOpponentPokemon(int x, String y) {
-        type = y;
+    public void getOpponentPokemon(int x) {
+        if (x ==1){
+
+        }
+        final String type;
         Log.d("mode", "onClick: ");
 
                             try {

@@ -234,7 +234,7 @@ public class ChooseGym extends AppCompatActivity {
     }
     public void toBattle(){
         Intent toBattle = new Intent(this, Battle.class);
-        toBattle.putExtra("gymNumber",gymNumber );
+        toBattle.putExtra("gymNumber",gymNumber);
         startActivity(toBattle);
     }
 

@@ -70,6 +70,10 @@ public class SharedPref {
 
     }
 
+    public void opponentPokemon() {
+
+    }
+
     public void pokemonStartBattle() {
         //pokemons[0] = 0;
     }
