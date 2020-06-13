@@ -40,6 +40,8 @@ public class Battle extends AppCompatActivity {
     String move3;
     String move4;
 
+    int[] opponentPokemon;
+
     String pokeImageFront;
     String pokeImageBack;
 
@@ -51,7 +53,8 @@ public class Battle extends AppCompatActivity {
     JSONObject usingPokemon;
 
     ImageView myPokemon;
-    ImageView opponentPokemon;
+    ImageView opponentPokemonImage;
+    String opponentPokemonImageURL;
 
     TextView pokeName;
 
@@ -70,7 +73,7 @@ public class Battle extends AppCompatActivity {
         pokeName = findViewById(R.id.pokeName);
         myHP = findViewById(R.id.hp);
         myPokemon = findViewById(R.id.myPokemon);
-        opponentPokemon = findViewById(R.id.opponentPokemon);
+        opponentPokemonImage = findViewById(R.id.opponentPokemon);
         Intent intent = getIntent();
         gymNum = intent.getIntExtra("gymNumber",0);
 
@@ -81,6 +84,7 @@ public class Battle extends AppCompatActivity {
         tRight = findViewById(R.id.tRight);
         bRight = findViewById(R.id.bRight);
 
+        getOpponentPokemon(gymNum);
 
         if (fight == false) {
 
@@ -149,13 +153,107 @@ public class Battle extends AppCompatActivity {
     }
 
     public void getOpponentPokemon(int x) {
-        if (x ==1){
+        if (x == 1){
+            //
+            opponentPokemon = new int[2];
+            opponentPokemon[0] = 95;
+            opponentPokemon[1] = 74;
+        }
+        else if(x == 2){
+            opponentPokemon = new int[4];
+            opponentPokemon[0] = 55;
+            opponentPokemon[1] = 121;
+            opponentPokemon[2] = 131;
+            opponentPokemon[3] = 119;
+        }
+        else if(x == 3){
+            opponentPokemon = new int[3];
+            opponentPokemon[0] = 100;
+            opponentPokemon[1] = 26;
+            opponentPokemon[2] = 25;
 
         }
+        else if(x == 4){
+            opponentPokemon = new int[3];
+            opponentPokemon[0] = 71;
+            opponentPokemon[1] = 114;
+            opponentPokemon[2] = 45;
+        }
+        else if(x == 5){
+            opponentPokemon = new int[3];
+            opponentPokemon[0] = 109;
+            opponentPokemon[1] = 89;
+            opponentPokemon[2] = 110;
+        }
+        else if(x == 6){
+            opponentPokemon = new int[4];
+            opponentPokemon[0] = 64;
+            opponentPokemon[1] = 122;
+            opponentPokemon[2] = 65;
+            opponentPokemon[3] = 196;
+        }
+        else if(x == 7){
+            opponentPokemon = new int[7];
+            opponentPokemon[0] = 58;
+            opponentPokemon[1] = 77;
+            opponentPokemon[2] = 78;
+            opponentPokemon[3] = 59;
+            opponentPokemon[4] = 38;
+            opponentPokemon[5] = 126;
+            opponentPokemon[6] = 467;
+        }
+        else if(x == 8){
+            opponentPokemon = new int[3];
+            opponentPokemon[0] = 111;
+            opponentPokemon[1] = 115;
+            opponentPokemon[2] = 51;
+        }
+
+        else{
+            System.out.println("toobad");
+        }
+        Random rand = new Random();
+        int pokeNum = rand.nextInt(opponentPokemon.length);
+
         final String type;
         Log.d("mode", "onClick: ");
+        final Request request = new Request.Builder()
+                .url("https://pokeapi.co/api/v2/pokemon/" + opponentPokemon[pokeNum])
+                .get()
+                .build();
 
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                Log.d("mode", "onFailure: ");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    final String myResponse = response.body().string();
+                    // Log.d("mode", "onResponse: " + myResponse);
+
+                    Battle.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
                             try {
+                                JSONObject obj = new JSONObject(myResponse);
+                                //JSONArray info = obj.getJSONArray("sprites");
+                                String name = obj.getString("name");
+                                JSONObject sprites = obj.getJSONObject("sprites");
+                                opponentPokemonImageURL = sprites.getString("front_default");
+                                pic(opponentPokemonImageURL, opponentPokemonImage);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+                           /* try {
                                 JSONObject obj = new JSONObject("shanana");
                                 //JSONArray info = obj.getJSONArray("sprites");
                                 String name = obj.getString("name");
@@ -166,9 +264,25 @@ public class Battle extends AppCompatActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
 
-                            }
+                            }*/
+                            Log.d("pokenum", "getOpponentPokemon: " + opponentPokemon[1]);
+                            Log.d("pokenum", "getOpponentPokemon: " + opponentPokemonImageURL);
+                            Log.d("pokelength", "" + opponentPokemon.length);
+
+                            System.out.println(opponentPokemon.length);
+
+
+
+
+
+
 
                         }
+
+
+
+
+
 
     public void pic(String x, ImageView y) {
         Picasso.with(Battle.this).load(x).into(y);
