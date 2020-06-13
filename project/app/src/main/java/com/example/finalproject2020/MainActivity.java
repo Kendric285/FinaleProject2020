@@ -49,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
     String squirtleApiInfoURL;
     String charmanderApiInfoURL;
     String poke;
+    String squirtle;
+    String  charmander;
+    String bulbasaur;
 
     SharedPref sharedPref;
 
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         sharedPref = new SharedPref(this);
         client = new OkHttpClient();
+        Log.d("poke", "POKEMON: "+sharedPref.pokemons[0]);
 
         add = findViewById(R.id.add);
 
@@ -97,24 +101,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 userStarterPokemonImage = bulbasaurImageViewURL;
-                gyms();
+                poke = bulbasaur;
                 sharedPref.addPokemon(poke);
+                gyms();
             }
         });
         squirtleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 userStarterPokemonImage = squirtleImageViewURL;
-                gyms();
+                poke = squirtle;
                 sharedPref.addPokemon(poke);
+                gyms();
             }
         });
         charmanderImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 userStarterPokemonImage = charmanderImageViewURL;
-                gyms();
+                poke = charmander;
                 sharedPref.addPokemon(poke);
+                gyms();
             }
         });
 
@@ -155,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             try {
                                 JSONObject obj = new JSONObject(myResponse);
-                                poke = myResponse;
+                                squirtle = myResponse;
                                 //JSONArray info = obj.getJSONArray("sprites");
                                 String name = obj.getString("name");
                                 JSONObject sprites = obj.getJSONObject("sprites");
@@ -195,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             try {
                                 JSONObject obj = new JSONObject(myResponse);
-                                poke = myResponse;
+                                charmander = myResponse;
                                 //JSONArray info = obj.getJSONArray("sprites");
                                 String name = obj.getString("name");
                                 JSONObject sprites = obj.getJSONObject("sprites");
@@ -237,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             try {
                                 JSONObject obj = new JSONObject(myResponse);
-                                poke = myResponse;
+                                bulbasaur = myResponse;
                                 //JSONArray info = obj.getJSONArray("sprites");
                                 String name = obj.getString("name");
                                 JSONObject sprites = obj.getJSONObject("sprites");
