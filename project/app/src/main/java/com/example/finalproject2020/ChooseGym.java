@@ -264,7 +264,7 @@ public class ChooseGym extends AppCompatActivity {
     }
 
     public void pic() {
-        Picasso.with(this).load(pokeImageFront).into(pokeImgs[poke]);}
+        Picasso.with(this).load(pokeImageFront).into(pokeImgs[poke]); }
 
     /*private void pokeIdle(){
         pokeFront1 = new CountDownTimer(happyTime,1) {

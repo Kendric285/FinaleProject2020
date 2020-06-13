@@ -35,7 +35,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/opponentPokemon"
         android:layout_width="400px"
         android:layout_height="400px"
         android:layout_alignParentEnd="true"

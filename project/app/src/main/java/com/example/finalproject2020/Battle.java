@@ -50,7 +50,10 @@ public class Battle extends AppCompatActivity {
     JSONObject usingPokemon;
 
     ImageView myPokemon;
+    ImageView opponentPokemon;
+
     TextView pokeName;
+
     ProgressBar myHP;
     String pokeMoves;
 
@@ -64,6 +67,7 @@ public class Battle extends AppCompatActivity {
         pokeName = findViewById(R.id.pokeName);
         myHP = findViewById(R.id.hp);
         myPokemon = findViewById(R.id.myPokemon);
+        opponentPokemon = findViewById(R.id.opponentPokemon);
 
         Random r = new Random();
 
@@ -144,6 +148,7 @@ public class Battle extends AppCompatActivity {
                                 JSONObject sprites = obj.getJSONObject("sprites");
                                 pokeImageBack = sprites.getString("back_default");
                                 JSONArray moves = obj.getJSONArray("moves");
+
                                // pokeMoves =
 
                                 pokeName.setText(name);
