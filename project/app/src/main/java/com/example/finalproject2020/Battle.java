@@ -9,6 +9,7 @@ import okhttp3.Response;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -65,6 +66,20 @@ public class Battle extends AppCompatActivity {
     String move3URL;
     String move4URL;
 
+    int move1Acc;
+    int move2Acc;
+    int move3Acc;
+    int move4Acc;
+
+    int move1Str;
+    int move2Str;
+    int move3Str;
+    int move4Str;
+
+    String move1i;
+    String move2i;
+    String move3i;
+    String move4i;
 
     int[] opponentPokemon;
 
@@ -95,8 +110,13 @@ public class Battle extends AppCompatActivity {
 
     Random r = new Random();
 
-    ProgressBar myHP;
-    String pokeMoves;
+    ProgressBar myHealth;
+    ProgressBar opponentHealth;
+
+    int myHP;
+    int opponentHP;
+
+    CountDownTimer healthPlr;
 
     @Override///////807 POKEMONNNNS
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,12 +126,17 @@ public class Battle extends AppCompatActivity {
         sharedPref = new SharedPref(this);
         fight = false;
         pokeName = findViewById(R.id.pokeName);
-        myHP = findViewById(R.id.hp);
+        myHealth = findViewById(R.id.hp);
+        opponentHealth = findViewById(R.id.hp2);
         myPokemon = findViewById(R.id.myPokemon);
         opponentPokemonImage = findViewById(R.id.opponentPokemon);
         Intent intent = getIntent();
         gymNum = intent.getIntExtra("gymNumber",0);
         battleNarration = findViewById(R.id.battleNarration);
+
+        opponentHP = 300;
+        opponentHealth.setMax(opponentHP);
+        opponentHealth.setProgress(opponentHP);
 
         textClicks = 0;
 
@@ -123,6 +148,226 @@ public class Battle extends AppCompatActivity {
 
 
         getOpponentPokemon(gymNum);
+
+        tLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //move1
+                if (fight == true) {
+                    Log.d("poke", "onClick: " + opponentHP);
+
+                    opponentHP = opponentHP - move1Str;
+                    tLeft.setText("Fight");
+                    bLeft.setText("Backpack");
+                    tRight.setText("Pokemon");
+                    bRight.setText("Run");
+                    fight = false;
+
+                    Log.d("poke", "onClick: " + opponentHP);
+                } else {
+                    if(textClicks > 0) {
+                        fight = true;
+
+                        tLeft.setText("" + move1);
+                        bLeft.setText("" + move2);
+                        tRight.setText("" + move3);
+                        bRight.setText("" + move4);
+
+                        final Request request1 = new Request.Builder()
+                                .url(move1URL)
+                                .get()
+                                .build();
+
+                        client.newCall(request1).enqueue(new Callback() {
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+                                e.printStackTrace();
+                                Log.d("mode", "onFailure: ");
+                            }
+
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                if (response.isSuccessful()) {
+                                    final String myResponse = response.body().string();
+                                    // Log.d("mode", "onResponse: " + myResponse);
+
+                                    Battle.this.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                JSONObject objMove1 = new JSONObject(myResponse);
+                                                move1i = myResponse;
+                                                move1Str = objMove1.getInt("power");
+                                                move1Acc = objMove1.getInt("accuracy");
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+                        final Request request2 = new Request.Builder()
+                                .url(move2URL)
+                                .get()
+                                .build();
+
+                        client.newCall(request2).enqueue(new Callback() {
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+                                e.printStackTrace();
+                                Log.d("mode", "onFailure: ");
+                            }
+
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                if (response.isSuccessful()) {
+                                    final String myResponse = response.body().string();
+                                    // Log.d("mode", "onResponse: " + myResponse);
+
+                                    Battle.this.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                JSONObject objMove2 = new JSONObject(myResponse);
+                                                move2i = myResponse;
+                                                move2Str = objMove2.getInt("power");
+                                                move2Acc = objMove2.getInt("accuracy");
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+                        final Request request3 = new Request.Builder()
+                                .url(move3URL)
+                                .get()
+                                .build();
+
+                        client.newCall(request3).enqueue(new Callback() {
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+                                e.printStackTrace();
+                                Log.d("mode", "onFailure: ");
+                            }
+
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                if (response.isSuccessful()) {
+                                    final String myResponse = response.body().string();
+                                    // Log.d("mode", "onResponse: " + myResponse);
+
+                                    Battle.this.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                JSONObject objMove3= new JSONObject(myResponse);
+                                                move3i = myResponse;
+                                                move3Str = objMove3.getInt("power");
+                                                move3Acc = objMove3.getInt("accuracy");
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+                        final Request request4 = new Request.Builder()
+                                .url(move4URL)
+                                .get()
+                                .build();
+
+                        client.newCall(request4).enqueue(new Callback() {
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+                                e.printStackTrace();
+                                Log.d("mode", "onFailure: ");
+                            }
+
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                if (response.isSuccessful()) {
+                                    final String myResponse = response.body().string();
+                                    // Log.d("mode", "onResponse: " + myResponse);
+
+                                    Battle.this.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                JSONObject objMove4 = new JSONObject(myResponse);
+                                                move4i = myResponse;
+                                                move4Str = objMove4.getInt("power");
+                                                move4Acc = objMove4.getInt("accuracy");
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+                        Log.d("poke", "POKE: "+move4Acc+move4Str+move3Acc+move3Str+move2Acc+move2Str+move1Acc+move1Str);
+
+                    }else{
+                        System.out.println("read text");
+                    }
+                }
+            }
+        });
+
+        bLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //move2
+                if (fight == true) {
+                    opponentHP = opponentHP - move2Str;
+                    tLeft.setText("Fight");
+                    bLeft.setText("Backpack");
+                    tRight.setText("Pokemon");
+                    bRight.setText("Run");
+                    fight = false;
+
+                    Log.d("poke", "onClick: " + opponentHP);
+                }
+            }
+        });
+
+        tRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //move3
+                if (fight == true) {
+                    opponentHP = opponentHP - move3Str;
+                    tLeft.setText("Fight");
+                    bLeft.setText("Backpack");
+                    tRight.setText("Pokemon");
+                    bRight.setText("Run");
+                    fight = false;
+                }
+            }
+        });
+
+        bRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //move4
+                if (fight == true) {
+                    opponentHP = opponentHP - move4Str;
+                    tLeft.setText("Fight");
+                    bLeft.setText("Backpack");
+                    tRight.setText("Pokemon");
+                    bRight.setText("Run");
+                    fight = false;
+                }
+            }
+        });
 
         battleNarration.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,24 +389,6 @@ public class Battle extends AppCompatActivity {
             bLeft.setText("Backpack");
             tRight.setText("Pokemon");
             bRight.setText("Run");
-
-            tLeft.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    if(textClicks > 0) {
-                        fight = true;
-
-                        tLeft.setText("" + move1);
-                        bLeft.setText("" + move2);
-                        tRight.setText("" + move3);
-                        bRight.setText("" + move4);
-                    }else{
-                        System.out.println("read text");
-                    }
-
-                }
-            });
 
         } else {
 
@@ -224,20 +451,18 @@ public class Battle extends AppCompatActivity {
                                 move3URL = m3.getString("url");
                                 move4URL = m4.getString("url");
 
-
-
                                 //Other Shit
 
                                 pokeName.setText(name.toUpperCase());
-                                myHP.setMax(100);
-                                myHP.setProgress(100);
+                                myHealth.setMax(300);
+                                myHealth.setProgress(300);
                                 pic(pokeImageBack,myPokemon);
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
 
                             }
-
+        healthHandler();
 
     }
 
@@ -493,6 +718,23 @@ public class Battle extends AppCompatActivity {
         });
 
 
+    }
+
+    private void healthHandler(){
+        healthPlr = new CountDownTimer(999999999,1) {
+            @Override
+            public void onTick (long millisUntilFinished){
+
+                opponentHealth.setProgress(opponentHP);
+
+            }
+
+            @Override
+            public void onFinish () {
+
+            }
+
+        }.start();
     }
 
 }
