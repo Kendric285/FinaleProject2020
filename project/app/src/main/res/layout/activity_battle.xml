@@ -14,17 +14,6 @@
         android:layout_marginBottom="32dp"
         android:background="#000000" />
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="191dp"
-        android:layout_height="83dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="7dp"
-        android:layout_marginBottom="258dp"
-        android:background="#5A5A5A" />
-
-
 
     <ImageView
         android:id="@+id/myPokemon"
@@ -82,6 +71,16 @@
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="56dp" />
 
+    <View
+        android:id="@+id/view2"
+        android:layout_width="191dp"
+        android:layout_height="83dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="258dp"
+        android:background="#5A5A5A" />
+
     <ProgressBar
         android:id="@+id/hp"
         style="?android:attr/progressBarStyleHorizontal"
@@ -99,7 +98,8 @@
         android:layout_alignBottom="@+id/view2"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="67dp"
-        android:layout_marginBottom="59dp" />
+        android:layout_marginBottom="59dp"
+        android:text="pikachu" />
 
     <TextView
         android:id="@+id/pokeLvl"
@@ -112,7 +112,7 @@
         android:text="Lv 0" />
 
     <TextView
-        android:id="@+id/Health"
+        android:id="@+id/health"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/view2"
@@ -131,5 +131,56 @@
         android:layout_marginEnd="195dp"
         android:layout_marginBottom="-19dp"
         android:textSize="30dp" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="191dp"
+        android:layout_height="83dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="201dp"
+        android:layout_marginBottom="519dp"
+        android:background="#5A5A5A" />
+
+    <ProgressBar
+        android:id="@+id/hp2"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="214dp"
+        android:layout_marginBottom="546dp" />
+
+    <TextView
+        android:id="@+id/pokeName2"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/view2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="262dp"
+        android:layout_marginBottom="320dp"
+        android:text="pikachu" />
+
+    <TextView
+        android:id="@+id/pokeLvl2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/view2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="203dp"
+        android:layout_marginBottom="320dp"
+        android:text="Lv 0" />
+
+    <TextView
+        android:id="@+id/health2"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/view2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="231dp"
+        android:layout_marginBottom="267dp"
+        android:gravity="center"
+        android:text="100/100" />
 
 </RelativeLayout>
