@@ -99,7 +99,8 @@
         android:layout_alignBottom="@+id/view2"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="67dp"
-        android:layout_marginBottom="59dp" />
+        android:layout_marginBottom="59dp"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/pokeLvl"
@@ -109,7 +110,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="7dp"
         android:layout_marginBottom="59dp"
-        android:text="Lv 0" />
+        android:text="Lv 0"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/Health"
@@ -120,7 +122,8 @@
         android:layout_marginEnd="37dp"
         android:layout_marginBottom="6dp"
         android:gravity="center"
-        android:text="100/100" />
+        android:text="100/100"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/battleNarration"
