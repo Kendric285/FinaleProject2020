@@ -228,7 +228,7 @@ public class Battle extends AppCompatActivity {
 
                                 //Other Shit
 
-                                pokeName.setText(name);
+                                pokeName.setText(name.toUpperCase());
                                 myHP.setMax(100);
                                 myHP.setProgress(100);
                                 pic(pokeImageBack,myPokemon);
