@@ -24,6 +24,8 @@
         android:layout_marginBottom="258dp"
         android:background="#5A5A5A" />
 
+
+
     <ImageView
         android:id="@+id/myPokemon"
         android:layout_width="400px"
@@ -97,8 +99,7 @@
         android:layout_alignBottom="@+id/view2"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="67dp"
-        android:layout_marginBottom="59dp"
-        android:text="Pikachu" />
+        android:layout_marginBottom="59dp" />
 
     <TextView
         android:id="@+id/pokeLvl"
@@ -120,5 +121,15 @@
         android:layout_marginBottom="6dp"
         android:gravity="center"
         android:text="100/100" />
+
+    <TextView
+        android:id="@+id/battleNarration"
+        android:layout_width="211dp"
+        android:layout_height="154dp"
+        android:layout_above="@+id/myPokemon"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="195dp"
+        android:layout_marginBottom="-19dp"
+        android:textSize="30dp" />
 
 </RelativeLayout>

@@ -25,9 +25,29 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Random;
 
+import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+import java.util.Timer;
+import java.util.TimerTask;
+
+
 public class Battle extends AppCompatActivity {
 
     OkHttpClient client;
+
+
 
     boolean fight;
     Button tLeft;
@@ -40,6 +60,12 @@ public class Battle extends AppCompatActivity {
     String move3;
     String move4;
 
+    String move1URL;
+    String move2URL;
+    String move3URL;
+    String move4URL;
+
+
     int[] opponentPokemon;
 
     String pokeImageFront;
@@ -47,6 +73,12 @@ public class Battle extends AppCompatActivity {
 
     int poke;
     String type;
+
+    String opponentPokeName;
+
+    Integer textClicks;
+
+
 
     SharedPref sharedPref;
 
@@ -57,6 +89,7 @@ public class Battle extends AppCompatActivity {
     String opponentPokemonImageURL;
 
     TextView pokeName;
+    TextView battleNarration;
 
     int gymNum;
 
@@ -78,13 +111,32 @@ public class Battle extends AppCompatActivity {
         opponentPokemonImage = findViewById(R.id.opponentPokemon);
         Intent intent = getIntent();
         gymNum = intent.getIntExtra("gymNumber",0);
+        battleNarration = findViewById(R.id.battleNarration);
+
+        textClicks = 0;
 
         tLeft = findViewById(R.id.tLeft);
         bLeft = findViewById(R.id.bLeft);
         tRight = findViewById(R.id.tRight);
         bRight = findViewById(R.id.bRight);
 
+
+
         getOpponentPokemon(gymNum);
+
+        battleNarration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(textClicks == 0) {
+                    opponentThrowsPokemon();
+                    textClicks++;
+                }else{
+                    System.out.println("nothing");
+                }
+
+
+            }
+        });
 
         if (fight == false) {
 
@@ -96,13 +148,17 @@ public class Battle extends AppCompatActivity {
             tLeft.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    fight = true;
 
-                    tLeft.setText("" + move1);
-                    bLeft.setText("" + move2);
-                    tRight.setText("" + move3);
-                    bRight.setText("" + move4);
+                    if(textClicks > 0) {
+                        fight = true;
 
+                        tLeft.setText("" + move1);
+                        bLeft.setText("" + move2);
+                        tRight.setText("" + move3);
+                        bRight.setText("" + move4);
+                    }else{
+                        System.out.println("read text");
+                    }
 
                 }
             });
@@ -146,10 +202,13 @@ public class Battle extends AppCompatActivity {
                                 JSONObject move02 = moves.getJSONObject(laka2);
                                 JSONObject move03 = moves.getJSONObject(laka3);
                                 JSONObject move04 = moves.getJSONObject(laka4);
+
                                 JSONObject m1 = move01.getJSONObject("move");
-                                JSONObject m2 = move01.getJSONObject("move");
-                                JSONObject m3 = move01.getJSONObject("move");
-                                JSONObject m4 = move01.getJSONObject("move");
+                                JSONObject m2 = move02.getJSONObject("move");
+                                JSONObject m3 = move03.getJSONObject("move");
+                                JSONObject m4 = move04.getJSONObject("move");
+
+
 
                                 // pokeMoves =
 
@@ -157,6 +216,15 @@ public class Battle extends AppCompatActivity {
                                 move2 = m2.getString("name");
                                 move3 = m3.getString("name");
                                 move4 = m4.getString("name");
+
+                                // pokeMoves STATS
+
+                                move1URL = m1.getString("url");
+                                move2URL = m2.getString("url");
+                                move3URL = m3.getString("url");
+                                move4URL = m4.getString("url");
+
+
 
                                 //Other Shit
 
@@ -176,12 +244,22 @@ public class Battle extends AppCompatActivity {
     public void getOpponentPokemon(int x) {
         if (x == 1){
             //
+            opponentPokemonImage.setImageResource(R.drawable.brock);
+            battleNarration.setText("");
+
+            setBattleNarration("BROCK would like to battle!");
+
             opponentPokemon = new int[2];
             opponentPokemon[0] = 95;
             opponentPokemon[1] = 74;
         }
         else if(x == 2){
             opponentPokemon = new int[4];
+
+            opponentPokemonImage.setImageResource(R.drawable.misty);
+            battleNarration.setText("");
+
+            setBattleNarration("MISTY would like to battle!");
             opponentPokemon[0] = 55;
             opponentPokemon[1] = 121;
             opponentPokemon[2] = 131;
@@ -189,6 +267,10 @@ public class Battle extends AppCompatActivity {
         }
         else if(x == 3){
             opponentPokemon = new int[3];
+            opponentPokemonImage.setImageResource(R.drawable.ltsurge);
+            battleNarration.setText("");
+
+            setBattleNarration("Lt. SURGE would like to battle!");
             opponentPokemon[0] = 100;
             opponentPokemon[1] = 26;
             opponentPokemon[2] = 25;
@@ -196,18 +278,35 @@ public class Battle extends AppCompatActivity {
         }
         else if(x == 4){
             opponentPokemon = new int[3];
+
+            opponentPokemonImage.setImageResource(R.drawable.erika);
+            battleNarration.setText("");
+
+            setBattleNarration("ERIKA would like to battle!");
             opponentPokemon[0] = 71;
             opponentPokemon[1] = 114;
             opponentPokemon[2] = 45;
         }
         else if(x == 5){
             opponentPokemon = new int[3];
+
+            opponentPokemonImage.setImageResource(R.drawable.koga);
+            battleNarration.setText("");
+
+            setBattleNarration("KOGA would like to battle!");
+
             opponentPokemon[0] = 109;
             opponentPokemon[1] = 89;
             opponentPokemon[2] = 110;
         }
         else if(x == 6){
             opponentPokemon = new int[4];
+
+            opponentPokemonImage.setImageResource(R.drawable.sabrina);
+            battleNarration.setText("");
+
+            setBattleNarration("SABRINA would like to battle!");
+
             opponentPokemon[0] = 64;
             opponentPokemon[1] = 122;
             opponentPokemon[2] = 65;
@@ -215,6 +314,10 @@ public class Battle extends AppCompatActivity {
         }
         else if(x == 7){
             opponentPokemon = new int[7];
+            opponentPokemonImage.setImageResource(R.drawable.blaine);
+            battleNarration.setText("");
+
+            setBattleNarration("BLAINE would like to battle!");
             opponentPokemon[0] = 58;
             opponentPokemon[1] = 77;
             opponentPokemon[2] = 78;
@@ -225,6 +328,10 @@ public class Battle extends AppCompatActivity {
         }
         else if(x == 8){
             opponentPokemon = new int[3];
+            opponentPokemonImage.setImageResource(R.drawable.giovanni);
+            battleNarration.setText("");
+
+            setBattleNarration("GIOVANNI would like to battle!");
             opponentPokemon[0] = 111;
             opponentPokemon[1] = 115;
             opponentPokemon[2] = 51;
@@ -233,6 +340,68 @@ public class Battle extends AppCompatActivity {
         else{
             System.out.println("toobad");
         }
+
+                           /* try {
+                                JSONObject obj = new JSONObject("shanana");
+                                //JSONArray info = obj.getJSONArray("sprites");
+                                String name = obj.getString("name");
+                                Log.d("pokemon", "run: " + name);
+                                JSONObject sprites = obj.getJSONObject("sprites");
+                                pokeImageFront = sprites.getString("front_default");
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+
+                            }*/
+                            Log.d("pokenum", "getOpponentPokemon: " + opponentPokemon[1]);
+                            Log.d("pokenum", "getOpponentPokemon: " + opponentPokemonImageURL);
+                            Log.d("pokelength", "" + opponentPokemon.length);
+
+                            System.out.println(opponentPokemon.length);
+
+
+
+
+
+
+                        }
+
+
+
+
+
+
+    public void pic(String x, ImageView y) {
+        Picasso.with(Battle.this).load(x).into(y);
+    }
+    public void setBattleNarration(final String s) {
+        final int[] i = new int[1];
+        i[0] = 0;
+        final int length = s.length();
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                char c = s.charAt(i[0]);
+                battleNarration.append(String.valueOf(c));
+                i[0]++;
+            }
+        };
+        final Timer timer = new Timer();
+        TimerTask taskEverySplitSecond = new TimerTask() {
+            @Override
+            public void run() {
+                handler.sendEmptyMessage(0);
+                if (i[0] == length - 1) {
+                    timer.cancel();
+                }
+            }
+        };
+        timer.schedule(taskEverySplitSecond, 1, 100);
+
+
+    }
+    public void opponentThrowsPokemon(){
         Random rand = new Random();
         int pokeNum = rand.nextInt(opponentPokemon.length);
 
@@ -262,10 +431,58 @@ public class Battle extends AppCompatActivity {
                             try {
                                 JSONObject obj = new JSONObject(myResponse);
                                 //JSONArray info = obj.getJSONArray("sprites");
-                                String name = obj.getString("name");
+                                String opponentPokeName = obj.getString("name");
                                 JSONObject sprites = obj.getJSONObject("sprites");
                                 opponentPokemonImageURL = sprites.getString("front_default");
+
+                                if (gymNum == 1){
+                                    //
+                                    battleNarration.setText("");
+                                    setBattleNarration("BROCK sent out " + opponentPokeName.toUpperCase() + " !");
+
+
+                                }
+                                else if(gymNum == 2){
+                                    battleNarration.setText("");
+                                    setBattleNarration("MISTY sent out " + opponentPokeName.toUpperCase() + " !");
+
+                                }
+                                else if(gymNum == 3){
+                                    battleNarration.setText("");
+                                    setBattleNarration("Lt. SURGE sent out " + opponentPokeName.toUpperCase() + " !");
+
+
+                                }
+                                else if(gymNum == 4){
+                                    battleNarration.setText("");
+                                    setBattleNarration("ERIKA sent out " + opponentPokeName.toUpperCase() + " !");
+
+                                }
+                                else if(gymNum == 5){
+                                    battleNarration.setText("");
+                                    setBattleNarration("KOGA sent out " + opponentPokeName.toUpperCase() + " !");
+                                }
+                                else if(gymNum == 6){
+                                    battleNarration.setText("");
+                                    setBattleNarration("SABRINA sent out " + opponentPokeName.toUpperCase() + " !");
+
+                                }
+                                else if(gymNum == 7){
+                                    battleNarration.setText("");
+                                    setBattleNarration("BLAINE sent out " + opponentPokeName.toUpperCase() + " !");
+
+                                }
+                                else if(gymNum == 8){
+                                    battleNarration.setText("");
+                                    setBattleNarration("GIOVANNI sent out " + opponentPokeName.toUpperCase() + " !");
+
+                                }
+
+                                else{
+                                    System.out.println("toobad");
+                                }
                                 pic(opponentPokemonImageURL, opponentPokemonImage);
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -274,39 +491,8 @@ public class Battle extends AppCompatActivity {
                 }
             }
         });
-                           /* try {
-                                JSONObject obj = new JSONObject("shanana");
-                                //JSONArray info = obj.getJSONArray("sprites");
-                                String name = obj.getString("name");
-                                Log.d("pokemon", "run: " + name);
-                                JSONObject sprites = obj.getJSONObject("sprites");
-                                pokeImageFront = sprites.getString("front_default");
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-
-                            }*/
-                            Log.d("pokenum", "getOpponentPokemon: " + opponentPokemon[1]);
-                            Log.d("pokenum", "getOpponentPokemon: " + opponentPokemonImageURL);
-                            Log.d("pokelength", "" + opponentPokemon.length);
-
-                            System.out.println(opponentPokemon.length);
 
 
-
-
-
-
-
-                        }
-
-
-
-
-
-
-    public void pic(String x, ImageView y) {
-        Picasso.with(Battle.this).load(x).into(y);
     }
 
 }
