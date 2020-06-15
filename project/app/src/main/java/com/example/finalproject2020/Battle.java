@@ -42,6 +42,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 
 public class Battle extends AppCompatActivity {
@@ -81,6 +82,8 @@ public class Battle extends AppCompatActivity {
     String move3i;
     String move4i;
 
+    Integer textLengthTime;
+
     int[] opponentPokemon;
 
     String pokeImageFront;
@@ -107,6 +110,10 @@ public class Battle extends AppCompatActivity {
     TextView pokeName;
     TextView battleNarration;
 
+    Integer accCalculate;
+
+    Boolean printing;
+
     int gymNum;
 
     Random r = new Random();
@@ -119,7 +126,7 @@ public class Battle extends AppCompatActivity {
 
     CountDownTimer healthPlr;
 
-    boolean printing = false;
+    boolean textPrinting = false;
 
     @Override///////807 POKEMONNNNS
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +147,8 @@ public class Battle extends AppCompatActivity {
         opponentHP = 300;
         opponentHealth.setMax(opponentHP);
         opponentHealth.setProgress(opponentHP);
+
+        printing = true;
 
         textClicks = 0;
 
@@ -165,9 +174,21 @@ public class Battle extends AppCompatActivity {
                     if (move1Str != 0) {
                         setBattleNarration((myPokeName+" used "+move1).toUpperCase());
                         Log.d("poke", "onClick: "+myPokeName+" used "+move1);
-                        battleNarration.setText("");
-                        setBattleNarration((move1+" did "+move1Str+" damage!").toUpperCase());
-                    } else {setBattleNarration((myPokeName+" used "+move1+"!").toUpperCase());}
+
+                        //textLengthTime = battleNarration.length() * 100;
+
+
+
+                        setBattleNarration("");
+
+
+
+
+                        //setBattleNarration((move1+" did "+move1Str+" damage!").toUpperCase());
+
+                    } else {
+                        setBattleNarration((myPokeName+" used "+move1+"!").toUpperCase());
+                    }
 
 
                     tLeft.setText("Fight");
@@ -622,12 +643,12 @@ public class Battle extends AppCompatActivity {
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                if (printing == false) {
+
                     super.handleMessage(msg);
                     char c = s.charAt(i[0]);
                     battleNarration.append(String.valueOf(c));
                     i[0]++;
-                }
+
             }
         };
         final Timer timer = new Timer();
@@ -637,6 +658,7 @@ public class Battle extends AppCompatActivity {
                 handler.sendEmptyMessage(0);
                 if (i[0] == length - 1) {
                     timer.cancel();
+                    textPrinting = false;
                 }
             }
         };
@@ -753,6 +775,16 @@ public class Battle extends AppCompatActivity {
             }
 
         }.start();
+    }
+    public static void wait(int ms){
+        try
+        {
+            Thread.sleep(ms);
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
     }
 
 }
