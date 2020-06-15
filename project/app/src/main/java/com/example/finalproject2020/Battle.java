@@ -97,6 +97,10 @@ public class Battle extends AppCompatActivity {
 
     Integer textClicks;
 
+    Handler setDelay;
+    Runnable startDelay;
+
+
 
 
     SharedPref sharedPref;
@@ -127,6 +131,8 @@ public class Battle extends AppCompatActivity {
     CountDownTimer healthPlr;
     CountDownTimer waitbby;
 
+    Integer fighterTurn;
+
     boolean textPrinting = false;
 
     @Override///////807 POKEMONNNNS
@@ -148,6 +154,8 @@ public class Battle extends AppCompatActivity {
         opponentHP = 300;
         opponentHealth.setMax(opponentHP);
         opponentHealth.setProgress(opponentHP);
+
+        setDelay = new Handler();
 
         printing = true;
 
@@ -172,17 +180,31 @@ public class Battle extends AppCompatActivity {
                     opponentHP = opponentHP - move1Str;
                     battleNarration.setText("");
 
+                    accCalculate = r.nextInt(150);
+
                     if (move1Str != 0) {
-                        setBattleNarration((myPokeName+" used "+move1).toUpperCase());
-                        Log.d("poke", "onClick: "+myPokeName+" used "+move1);
 
-                        //textLengthTime = battleNarration.length() * 100;
 
-                        waiti(battleNarration.length()*100);
+                        if(move1Acc < accCalculate) {
+                            setBattleNarration(move1.toUpperCase() + " was very effective");
+                            Log.d("poke", "onClick: " + myPokeName + " used " + move1);
 
-                        setBattleNarration("");
+                            textLengthTime = battleNarration.length() * 100;
+                        }else{
+                            setBattleNarration( move1.toUpperCase() + " and was not effective");
 
-                        setBattleNarration((move1+" did "+move1Str+" damage!").toUpperCase());
+                        }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
