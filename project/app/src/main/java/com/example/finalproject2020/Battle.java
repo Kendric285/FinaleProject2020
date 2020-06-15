@@ -178,13 +178,17 @@ public class Battle extends AppCompatActivity {
                         //textLengthTime = battleNarration.length() * 100;
 
 
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            public void run() {
+                                // yourMethod();
+                                setBattleNarration("");
 
-                        setBattleNarration("");
+                                setBattleNarration((move1+" did "+move1Str+" damage!").toUpperCase());
+                            }
+                        }, battleNarration.length()*100);
 
 
-
-
-                        //setBattleNarration((move1+" did "+move1Str+" damage!").toUpperCase());
 
                     } else {
                         setBattleNarration((myPokeName+" used "+move1+"!").toUpperCase());
