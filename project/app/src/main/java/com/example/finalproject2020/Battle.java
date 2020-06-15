@@ -125,6 +125,8 @@ public class Battle extends AppCompatActivity {
     ProgressBar myHealth;
     ProgressBar opponentHealth;
 
+    TextView opponentHealthNum;
+
     int myHP;
     int opponentHP;
 
@@ -155,6 +157,8 @@ public class Battle extends AppCompatActivity {
         opponentHealth.setMax(opponentHP);
         opponentHealth.setProgress(opponentHP);
 
+        opponentHealthNum = findViewById(R.id.health2);
+
         setDelay = new Handler();
 
         printing = true;
@@ -177,17 +181,20 @@ public class Battle extends AppCompatActivity {
                 if (fight == true) {
                     Log.d("poke", "onClick: " + opponentHP);
 
-                    opponentHP = opponentHP - move1Str;
                     battleNarration.setText("");
 
-                    accCalculate = r.nextInt(150);
+                    accCalculate = r.nextInt(110);
 
                     if (move1Str != 0) {
 
 
-                        if(move1Acc < accCalculate) {
-                            setBattleNarration(move1+" did "+move1Str+" damage very effective!");
-                            Log.d("poke", "onClick: " + myPokeName + " used " + move1);
+
+
+                        if(move1Acc > accCalculate) {
+                            opponentHP = opponentHP - move1Str;
+
+                            setBattleNarration(move1.toUpperCase()+" did "+move1Str+" damage very effective!");
+                            Log.d("poke", "onClick: " + myPokeName.toUpperCase() + " used " + move1.toUpperCase());
 
                             textLengthTime = battleNarration.length() * 100;
                         }else{
@@ -210,7 +217,7 @@ public class Battle extends AppCompatActivity {
 
 
                     } else {
-                        setBattleNarration((myPokeName+" used "+move1+"!").toUpperCase());
+                        setBattleNarration(myPokeName.toUpperCase()+" used "+move1.toUpperCase()+"!");
                     }
 
 
@@ -335,6 +342,7 @@ public class Battle extends AppCompatActivity {
                                     });
                                 }
                             }
+
                         });
 
                         final Request request4 = new Request.Builder()
@@ -386,7 +394,54 @@ public class Battle extends AppCompatActivity {
             public void onClick(View v) {
                 //move2
                 if (fight == true) {
-                    opponentHP = opponentHP - move2Str;
+
+                    Log.d("poke", "onClick: " + opponentHP);
+
+                    battleNarration.setText("");
+
+                    accCalculate = r.nextInt(110);
+
+                    if (move2Str != 0) {
+
+
+                        if(move2Acc > accCalculate) {
+                            opponentHP = opponentHP - move2Str;
+
+                            setBattleNarration(move2.toUpperCase()+" did "+move2Str+" damage very effective!");
+                            Log.d("poke", "onClick: " + myPokeName + " used " + move2);
+
+                            textLengthTime = battleNarration.length() * 100;
+                        }else{
+                            setBattleNarration( move2.toUpperCase() + " missed and was not effective");
+
+
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    } else {
+                        setBattleNarration(myPokeName.toUpperCase()+" used "+move2.toUpperCase()+"!");
+                    }
+
+
+
+
+
+
+
+
+
                     tLeft.setText("Fight");
                     bLeft.setText("Backpack");
                     tRight.setText("Pokemon");
@@ -403,7 +458,47 @@ public class Battle extends AppCompatActivity {
             public void onClick(View v) {
                 //move3
                 if (fight == true) {
-                    opponentHP = opponentHP - move3Str;
+                    Log.d("poke", "onClick: " + opponentHP);
+
+                    battleNarration.setText("");
+
+                    accCalculate = r.nextInt(110);
+
+                    if (move3Str != 0) {
+
+
+                        if(move3Acc > accCalculate) {
+                            opponentHP = opponentHP - move3Str;
+
+                            setBattleNarration(move3.toUpperCase()+" did "+move3Str+" damage very effective!");
+                            Log.d("poke", "onClick: " + myPokeName.toUpperCase() + " used " + move3);
+
+                            textLengthTime = battleNarration.length() * 100;
+                        }else{
+                            setBattleNarration(move3.toUpperCase() + " missed and was not effective");
+
+
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    } else {
+                        setBattleNarration((myPokeName.toUpperCase()+" used "+move3.toUpperCase()+"!").toUpperCase());
+                    }
+
+
+
                     tLeft.setText("Fight");
                     bLeft.setText("Backpack");
                     tRight.setText("Pokemon");
@@ -418,7 +513,47 @@ public class Battle extends AppCompatActivity {
             public void onClick(View v) {
                 //move4
                 if (fight == true) {
-                    opponentHP = opponentHP - move4Str;
+
+
+
+                    Log.d("poke", "onClick: " + opponentHP);
+
+                    battleNarration.setText("");
+
+                    accCalculate = r.nextInt(110);
+
+                    if (move4Str != 0) {
+
+
+                        if(move3Acc > accCalculate) {
+                            opponentHP = opponentHP - move4Str;
+
+                            setBattleNarration(move4.toUpperCase()+" did "+move4Str+" damage very effective!");
+                            Log.d("poke", "onClick: " + myPokeName.toUpperCase() + " used " + move4.toUpperCase());
+
+                            textLengthTime = battleNarration.length() * 100;
+                        }else{
+                            setBattleNarration( move4.toUpperCase() + " missed and was not effective");
+
+
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    } else {
+                        setBattleNarration((myPokeName+" used "+move4+"!").toUpperCase());
+                    }
                     tLeft.setText("Fight");
                     bLeft.setText("Backpack");
                     tRight.setText("Pokemon");
@@ -789,6 +924,8 @@ public class Battle extends AppCompatActivity {
             public void onTick (long millisUntilFinished){
 
                 opponentHealth.setProgress(opponentHP);
+                opponentHealthNum.setText(opponentHP + "/300");
+
 
             }
 
