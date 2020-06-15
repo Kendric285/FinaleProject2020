@@ -176,9 +176,7 @@ public class Battle extends AppCompatActivity {
                         setBattleNarration((myPokeName+" used "+move1).toUpperCase());
                         Log.d("poke", "onClick: "+myPokeName+" used "+move1);
 
-                        //textLengthTime = battleNarration.length() * 100;
-
-                        waiti(battleNarration.length()*100);
+                        //textLengthTime = battleNarration.length() * 100
 
                         setBattleNarration("");
 
@@ -777,20 +775,6 @@ public class Battle extends AppCompatActivity {
         }.start();
     }
 
-    private void waiti(int x){
-        waitbby = new CountDownTimer(x,1) {
-            @Override
-            public void onTick (long millisUntilFinished){
-
-            }
-
-            @Override
-            public void onFinish () {
-
-            }
-
-        }.start();
-    }
     public static void wait(int ms){
         try
         {
