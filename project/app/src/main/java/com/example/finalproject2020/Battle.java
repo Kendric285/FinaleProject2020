@@ -89,6 +89,7 @@ public class Battle extends AppCompatActivity {
     int poke;
     String type;
 
+    String myPokeName;
     String opponentPokeName;
 
     Integer textClicks;
@@ -117,6 +118,8 @@ public class Battle extends AppCompatActivity {
     int opponentHP;
 
     CountDownTimer healthPlr;
+
+    boolean printing = false;
 
     @Override///////807 POKEMONNNNS
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,8 +160,13 @@ public class Battle extends AppCompatActivity {
                     Log.d("poke", "onClick: " + opponentHP);
 
                     opponentHP = opponentHP - move1Str;
-                    battleNarration.setText( "");
-
+                    battleNarration.setText("");
+                    if (move1Str != 0) {
+                        setBattleNarration((myPokeName+" used "+move1).toUpperCase());
+                        Log.d("poke", "onClick: "+myPokeName+" used "+move1);
+                        battleNarration.setText("");
+                        setBattleNarration((move1+" did "+move1Str+" damage!").toUpperCase());
+                    } else {setBattleNarration((myPokeName+" used "+move1+"!").toUpperCase());}
 
 
                     tLeft.setText("Fight");
@@ -421,6 +429,7 @@ public class Battle extends AppCompatActivity {
                                 //JSONArray info = obj.getJSONArray("sprites");
 
                                 String name = obj.getString("name");
+                                myPokeName = name;
                                 Log.d("pokemon", "run: " + name);
                                 JSONObject sprites = obj.getJSONObject("sprites");
                                 pokeImageBack = sprites.getString("back_default");
@@ -612,10 +621,12 @@ public class Battle extends AppCompatActivity {
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                char c = s.charAt(i[0]);
-                battleNarration.append(String.valueOf(c));
-                i[0]++;
+                if (printing == false) {
+                    super.handleMessage(msg);
+                    char c = s.charAt(i[0]);
+                    battleNarration.append(String.valueOf(c));
+                    i[0]++;
+                }
             }
         };
         final Timer timer = new Timer();
