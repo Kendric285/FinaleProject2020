@@ -97,17 +97,14 @@ public class Battle extends AppCompatActivity {
     String myPokeName;
     String opponentPokeName;
 
+    TextView myHealthNum;
+
     TextView opponentPokemonNameText;
 
     Integer textClicks;
 
     Handler setDelay;
     Runnable startDelay;
-
-    String opponentAttackName;
-    Integer opponentAttackDamage;
-    Integer opponentAttackAcc;
-    String opponentAttackURL;
 
 
     Boolean opponentIsAttacking;
@@ -145,11 +142,19 @@ public class Battle extends AppCompatActivity {
     int opponentHP;
 
     CountDownTimer healthPlr;
-    CountDownTimer waitbby;
 
     Integer fighterTurn;
 
     boolean textPrinting = false;
+    
+    
+    //Opponent Pokemon
+    String opponentMove;
+    int opponentMoveStr;
+    int opponentMoveAcc;
+    String opponentMoveName;
+    String opponentMoveUrl;
+    JSONObject opponentObject;
 
     @Override///////807 POKEMONNNNS
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,6 +164,7 @@ public class Battle extends AppCompatActivity {
         sharedPref = new SharedPref(this);
         fight = false;
         pokeName = findViewById(R.id.pokeName);
+        myHealthNum = findViewById(R.id.health);
         myHealth = findViewById(R.id.hp);
         opponentHealth = findViewById(R.id.hp2);
         myPokemon = findViewById(R.id.myPokemon);
@@ -166,6 +172,7 @@ public class Battle extends AppCompatActivity {
         Intent intent = getIntent();
         gymNum = intent.getIntExtra("gymNumber",0);
         battleNarration = findViewById(R.id.battleNarration);
+        myHP = 300;
 
         opponentHP = 300;
         opponentHealth.setMax(opponentHP);
@@ -273,6 +280,7 @@ public class Battle extends AppCompatActivity {
 
                     Log.d("poke", "onClick: " + opponentHP);
                 } else {
+                    opponentAttacks();
                     if(textClicks > 0) {
                         fight = true;
 
@@ -909,33 +917,13 @@ public class Battle extends AppCompatActivity {
                         public void run() {
                             try {
                                 JSONObject obj = new JSONObject(myResponse);
+                                opponentObject = obj;
                                 //JSONArray info = obj.getJSONArray("sprites");
                                 String opponentPokeName = obj.getString("name");
                                 JSONObject sprites = obj.getJSONObject("sprites");
                                 opponentPokemonImageURL = sprites.getString("front_default");
 
-                                JSONArray moves = obj.getJSONArray("moves");
-                                int papa = moves.length();
-                                int laka = r.nextInt(papa);
-
-
-                                JSONObject move01 = moves.getJSONObject(laka);
-
-
-                                JSONObject m1 = move01.getJSONObject("move");
-
-
-
-                                opponentAttackName = m1.getString("name");
-
                                 // pokeMoves STATS
-
-                                opponentAttackURL = m1.getString("url");
-
-
-
-
-
 
 
                                 if (gymNum == 1){
@@ -1029,7 +1017,7 @@ public class Battle extends AppCompatActivity {
                 }
             }
         }); */
-            System.out.println("hello" + opponentAttackURL);
+            //System.out.println("hello" + opponentAttackURL);
 
     }
 
@@ -1037,12 +1025,68 @@ public class Battle extends AppCompatActivity {
 
         if(fight == false && opponentIsAttacking == true){
 
+            JSONArray moves = null;
+            try {
+                moves = opponentObject.getJSONArray("moves");
 
+                int papa = moves.length();
+                int laka = r.nextInt(papa);
 
+                JSONObject move01 = moves.getJSONObject(laka);
+
+                JSONObject m1 = move01.getJSONObject("move");
+
+                opponentMoveName = m1.getString("name");
+                opponentMoveUrl = m1.getString("url");
+
+                final Request requestOpp = new Request.Builder()
+                        .url(opponentMoveUrl)
+                        .get()
+                        .build();
+
+                client.newCall(requestOpp).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        e.printStackTrace();
+                        Log.d("mode", "onFailure: ");
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (response.isSuccessful()) {
+                            final String myResponse = response.body().string();
+                            // Log.d("mode", "onResponse: " + myResponse);
+
+                            Battle.this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        JSONObject objMove1 = new JSONObject(myResponse);
+                                        move1i = myResponse;
+                                        opponentMoveStr = objMove1.getInt("power");
+                                        opponentMoveAcc = objMove1.getInt("accuracy");
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+
+                myHP = myHP - opponentMoveStr;
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         }
 
+        opponentIsAttacking = false;
 
+    }
+    
+    public void getOpponentMove(){
 
     }
 
@@ -1055,6 +1099,8 @@ public class Battle extends AppCompatActivity {
                 opponentHealth.setProgress(opponentHP);
                 opponentHealthNum.setText(opponentHP + "/300");
 
+                myHealth.setProgress(myHP);
+                myHealthNum.setText(myHP +"/300");
 
             }
 
