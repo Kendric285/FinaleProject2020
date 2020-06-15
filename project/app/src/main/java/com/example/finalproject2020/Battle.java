@@ -157,7 +157,7 @@ public class Battle extends AppCompatActivity {
                     Log.d("poke", "onClick: " + opponentHP);
 
                     opponentHP = opponentHP - move1Str;
-                    battleNarration.setText( "");
+                    battleNarration.setText("");
 
 
 
