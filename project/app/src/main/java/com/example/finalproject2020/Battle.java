@@ -82,6 +82,8 @@ public class Battle extends AppCompatActivity {
     String move3i;
     String move4i;
 
+    String opponentMovei;
+
     Integer textLengthTime;
 
     int[] opponentPokemon;
@@ -95,13 +97,23 @@ public class Battle extends AppCompatActivity {
     String myPokeName;
     String opponentPokeName;
 
+    TextView opponentPokemonNameText;
+
     Integer textClicks;
 
     Handler setDelay;
     Runnable startDelay;
 
+    String opponentAttackName;
+    Integer opponentAttackDamage;
+    Integer opponentAttackAcc;
+    String opponentAttackURL;
 
 
+    Boolean opponentIsAttacking;
+
+
+    Boolean first;
 
     SharedPref sharedPref;
 
@@ -126,6 +138,8 @@ public class Battle extends AppCompatActivity {
     ProgressBar opponentHealth;
 
     TextView opponentHealthNum;
+
+    TextView opponentPokeMonName;
 
     int myHP;
     int opponentHP;
@@ -157,9 +171,13 @@ public class Battle extends AppCompatActivity {
         opponentHealth.setMax(opponentHP);
         opponentHealth.setProgress(opponentHP);
 
+        opponentPokemonNameText = findViewById(R.id.pokeName2);
+
         opponentHealthNum = findViewById(R.id.health2);
 
         setDelay = new Handler();
+
+        opponentIsAttacking = false;
 
         printing = true;
 
@@ -170,6 +188,24 @@ public class Battle extends AppCompatActivity {
         tRight = findViewById(R.id.tRight);
         bRight = findViewById(R.id.bRight);
 
+        /*first = true;
+
+        if (first == true){
+            tLeft.setText("Fight");
+            bLeft.setText("Backpack");
+            tRight.setText("Pokemon");
+            bRight.setText("Run");
+
+            first = false;
+
+        }
+        */
+
+        tLeft.setText("Fight");
+        bLeft.setText("Backpack");
+        tRight.setText("Pokemon");
+        bRight.setText("Run");
+
 
 
         getOpponentPokemon(gymNum);
@@ -178,7 +214,12 @@ public class Battle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //move1
-                if (fight == true) {
+
+
+                if (fight == true && opponentIsAttacking == false) {
+
+
+
                     Log.d("poke", "onClick: " + opponentHP);
 
                     battleNarration.setText("");
@@ -226,6 +267,7 @@ public class Battle extends AppCompatActivity {
                     tRight.setText("Pokemon");
                     bRight.setText("Run");
                     fight = false;
+                    opponentIsAttacking = true;
 
                     System.out.println(move1Str);
 
@@ -233,6 +275,9 @@ public class Battle extends AppCompatActivity {
                 } else {
                     if(textClicks > 0) {
                         fight = true;
+
+
+
 
                         tLeft.setText("" + move1);
                         bLeft.setText("" + move2);
@@ -393,7 +438,7 @@ public class Battle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //move2
-                if (fight == true) {
+                if (fight == true && opponentIsAttacking == false) {
 
                     Log.d("poke", "onClick: " + opponentHP);
 
@@ -447,6 +492,8 @@ public class Battle extends AppCompatActivity {
                     tRight.setText("Pokemon");
                     bRight.setText("Run");
                     fight = false;
+                    opponentIsAttacking = true;
+
 
                     Log.d("poke", "onClick: " + opponentHP);
                 }
@@ -457,7 +504,7 @@ public class Battle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //move3
-                if (fight == true) {
+                if (fight == true && opponentIsAttacking == false ) {
                     Log.d("poke", "onClick: " + opponentHP);
 
                     battleNarration.setText("");
@@ -504,6 +551,8 @@ public class Battle extends AppCompatActivity {
                     tRight.setText("Pokemon");
                     bRight.setText("Run");
                     fight = false;
+                    opponentIsAttacking = true;
+
                 }
             }
         });
@@ -512,7 +561,7 @@ public class Battle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //move4
-                if (fight == true) {
+                if (fight == true && opponentIsAttacking == false) {
 
 
 
@@ -577,21 +626,28 @@ public class Battle extends AppCompatActivity {
             }
         });
 
-        if (fight == false) {
+      /*  if(first == false) {
 
-            tLeft.setText("Fight");
-            bLeft.setText("Backpack");
-            tRight.setText("Pokemon");
-            bRight.setText("Run");
+            if (fight == false && opponentIsAttacking == true) {
 
-        } else {
+                tLeft.setText("Fight");
+                bLeft.setText("Backpack");
+                tRight.setText("Pokemon");
+                bRight.setText("Run");
 
-            tLeft.setText("" + move1);
-            bLeft.setText("" + move2);
-            tRight.setText("" + move3);
-            bRight.setText("" + move4);
+            } else {
+
+                tLeft.setText("" + move1);
+                bLeft.setText("" + move2);
+                tRight.setText("" + move3);
+                bRight.setText("" + move4);
+
+            }
 
         }
+
+
+       */
 
         getMyPokemon(0);
 
@@ -826,7 +882,7 @@ public class Battle extends AppCompatActivity {
     }
     public void opponentThrowsPokemon(){
         Random rand = new Random();
-        int pokeNum = rand.nextInt(opponentPokemon.length);
+        int pokeNum = r.nextInt(opponentPokemon.length);
 
         final String type;
         Log.d("mode", "onClick: ");
@@ -857,6 +913,30 @@ public class Battle extends AppCompatActivity {
                                 String opponentPokeName = obj.getString("name");
                                 JSONObject sprites = obj.getJSONObject("sprites");
                                 opponentPokemonImageURL = sprites.getString("front_default");
+
+                                JSONArray moves = obj.getJSONArray("moves");
+                                int papa = moves.length();
+                                int laka = r.nextInt(papa);
+
+
+                                JSONObject move01 = moves.getJSONObject(laka);
+
+
+                                JSONObject m1 = move01.getJSONObject("move");
+
+
+
+                                opponentAttackName = m1.getString("name");
+
+                                // pokeMoves STATS
+
+                                opponentAttackURL = m1.getString("url");
+
+
+
+
+
+
 
                                 if (gymNum == 1){
                                     //
@@ -905,6 +985,7 @@ public class Battle extends AppCompatActivity {
                                     System.out.println("toobad");
                                 }
                                 pic(opponentPokemonImageURL, opponentPokemonImage);
+                                opponentPokemonNameText.setText(opponentPokeName.toUpperCase());
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -914,9 +995,57 @@ public class Battle extends AppCompatActivity {
                 }
             }
         });
+        /*final Request request1 = new Request.Builder()
+                .url(opponentAttackURL)
+                .get()
+                .build();
+
+        client.newCall(request1).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                Log.d("mode", "onFailure: ");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    final String myResponse = response.body().string();
+                    // Log.d("mode", "onResponse: " + myResponse);
+
+                    Battle.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                JSONObject objMove1 = new JSONObject(myResponse);
+                                opponentMovei = myResponse;
+                                opponentAttackDamage = objMove1.getInt("power");
+                                opponentAttackAcc = objMove1.getInt("accuracy");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+            }
+        }); */
+            System.out.println("hello" + opponentAttackURL);
+
+    }
+
+    public void opponentAttacks(){
+
+        if(fight == false && opponentIsAttacking == true){
+
+
+
+
+        }
+
 
 
     }
+
 
     private void healthHandler(){
         healthPlr = new CountDownTimer(999999999,1) {
