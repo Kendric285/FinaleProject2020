@@ -163,6 +163,8 @@ public class Battle extends AppCompatActivity {
                     bRight.setText("Run");
                     fight = false;
 
+                    System.out.println(move1Str);
+
                     Log.d("poke", "onClick: " + opponentHP);
                 } else {
                     if(textClicks > 0) {
