@@ -125,6 +125,7 @@ public class Battle extends AppCompatActivity {
     int opponentHP;
 
     CountDownTimer healthPlr;
+    CountDownTimer waitbby;
 
     boolean textPrinting = false;
 
@@ -177,16 +178,11 @@ public class Battle extends AppCompatActivity {
 
                         //textLengthTime = battleNarration.length() * 100;
 
+                        waiti(battleNarration.length()*100);
 
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            public void run() {
-                                // yourMethod();
-                                setBattleNarration("");
+                        setBattleNarration("");
 
-                                setBattleNarration((move1+" did "+move1Str+" damage!").toUpperCase());
-                            }
-                        }, battleNarration.length()*100);
+                        setBattleNarration((move1+" did "+move1Str+" damage!").toUpperCase());
 
 
 
@@ -770,6 +766,21 @@ public class Battle extends AppCompatActivity {
             public void onTick (long millisUntilFinished){
 
                 opponentHealth.setProgress(opponentHP);
+
+            }
+
+            @Override
+            public void onFinish () {
+
+            }
+
+        }.start();
+    }
+
+    private void waiti(int x){
+        waitbby = new CountDownTimer(x,1) {
+            @Override
+            public void onTick (long millisUntilFinished){
 
             }
 
