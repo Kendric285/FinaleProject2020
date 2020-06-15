@@ -1088,16 +1088,57 @@ public class Battle extends AppCompatActivity {
                     }
                 });
 
-                myHP = myHP - opponentMoveStr;
+                battleNarration.setText("");
+
+                accCalculate = r.nextInt(110);
+
+                if (opponentMoveStr != 0) {
+
+
+
+
+                    if(opponentMoveAcc > accCalculate) {
+                        myHP = myHP - opponentMoveStr;
+
+                        setBattleNarration(opponentMove.toUpperCase()+" did "+opponentMoveStr+" damage very effective!");
+                        Log.d("poke", "onClick: " + myPokeName.toUpperCase() + " used " + move1.toUpperCase());
+
+                        textLengthTime = battleNarration.length() * 100;
+                    }else{
+                        setBattleNarration( opponentMove.toUpperCase() + " missed and was not effective");
+
+
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                } else {
+                    //setBattleNarration(opponentPokeName.toUpperCase()+" used "+opponentMove.toUpperCase()+"!");
+                }
+
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
+        }else {
+
         }
 
         opponentIsAttacking = false;
-
+        fight = true;
     }
     
     public void getOpponentMove(){
