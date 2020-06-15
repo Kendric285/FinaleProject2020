@@ -186,12 +186,13 @@ public class Battle extends AppCompatActivity {
 
 
                         if(move1Acc < accCalculate) {
-                            setBattleNarration(move1.toUpperCase() + " was very effective");
+                            setBattleNarration(move1+" did "+move1Str+" damage very effective!");
                             Log.d("poke", "onClick: " + myPokeName + " used " + move1);
 
                             textLengthTime = battleNarration.length() * 100;
                         }else{
-                            setBattleNarration( move1.toUpperCase() + " and was not effective");
+                            setBattleNarration( move1.toUpperCase() + " missed and was not effective");
+
 
                         }
 
@@ -797,17 +798,6 @@ public class Battle extends AppCompatActivity {
             }
 
         }.start();
-    }
-
-    public static void wait(int ms){
-        try
-        {
-            Thread.sleep(ms);
-        }
-        catch(InterruptedException ex)
-        {
-            Thread.currentThread().interrupt();
-        }
     }
 
 }
