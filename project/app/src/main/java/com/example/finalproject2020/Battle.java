@@ -890,7 +890,8 @@ public class Battle extends AppCompatActivity {
                 battleNarration.append(String.valueOf(c));
                 i[0]++;
                 typing = true;
-                hide.setVisibility(VISIBLE);
+                hide.setHeight(700);
+                hide.setWidth(700);
             }
         };
         final Timer timer = new Timer();
@@ -899,7 +900,8 @@ public class Battle extends AppCompatActivity {
             public void run() {
                 handler.sendEmptyMessage(0);
                 if (i[0] == length - 1) {
-                    hide.setVisibility(View.INVISIBLE);
+                    hide.setHeight(1);
+                    hide.setWidth(1);
                     Log.d("poke", "INVDISIFGADFJDAJRJEIGJIREJIGJIREJGIJRIJEGIIJG ");
                     timer.cancel();
                     typing = false;
@@ -928,7 +930,9 @@ public class Battle extends AppCompatActivity {
                 battleNarration2.append(String.valueOf(c));
                 i[0]++;
                 typing = true;
-                hide.setVisibility(VISIBLE);
+                hide.setHeight(700);
+                hide.setWidth(700);
+
             }
         };
         TimerTask taskEverySplitSecond = new TimerTask() {
@@ -936,7 +940,8 @@ public class Battle extends AppCompatActivity {
             public void run() {
                 handler.sendEmptyMessage(0);
                 if (i[0] == length - 1) {
-                    hide.setVisibility(View.INVISIBLE);
+                    hide.setHeight(1);
+                    hide.setWidth(1);
                     timer.cancel();
                     typing = false;
                 }
