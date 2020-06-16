@@ -929,7 +929,7 @@ public class Battle extends AppCompatActivity {
     }
     public void setBattleNarration2(final String s) {
         if (typing = true) {
-          //  timer2.cancel();
+          //timer2.cancel();
         }
         final int[] i = new int[1];
         i[0] = 0;
