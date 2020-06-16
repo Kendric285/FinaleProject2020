@@ -45,12 +45,15 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
+import static android.view.View.VISIBLE;
+
 
 public class Battle extends AppCompatActivity {
 
     OkHttpClient client;
 
-
+    Timer timer1 = new Timer();
+    Timer timer2 = new Timer();
 
     boolean fight;
     Button tLeft;
@@ -226,14 +229,6 @@ public class Battle extends AppCompatActivity {
 
         battleNarration2.setVisibility(View.INVISIBLE);
 
-        if(battleNarration.getVisibility() == View.VISIBLE){
-            battleNarration2.setVisibility(View.INVISIBLE);
-
-        }else{
-            battleNarration.setVisibility(View.VISIBLE);
-        }
-
-
 
         tLeft.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -248,6 +243,7 @@ public class Battle extends AppCompatActivity {
                     Log.d("poke", "onClick: " + opponentHP);
 
                     battleNarration.setText("");
+                    battleNarration2.setText("");
 
                     accCalculate = r.nextInt(110);
 
@@ -259,12 +255,12 @@ public class Battle extends AppCompatActivity {
                         if(move1Acc > accCalculate) {
                             opponentHP = opponentHP - move1Str;
 
-                            setBattleNarration(move1.toUpperCase()+" did "+move1Str+" damage very effective!");
+                            battlefood(move1.toUpperCase()+" did "+move1Str+" damage very effective!");
                             Log.d("poke", "onClick: " + myPokeName.toUpperCase() + " used " + move1.toUpperCase());
 
                             textLengthTime = battleNarration.length() * 100;
                         }else{
-                            setBattleNarration( move1.toUpperCase() + " missed and was not effective");
+                            battlefood( move1.toUpperCase() + " missed and was not effective");
 
 
                         }
@@ -283,7 +279,7 @@ public class Battle extends AppCompatActivity {
 
 
                     } else {
-                        setBattleNarration(myPokeName.toUpperCase()+" used "+move1.toUpperCase()+"!");
+                        battlefood(myPokeName.toUpperCase()+" used "+move1.toUpperCase()+"!");
                     }
 
 
@@ -478,12 +474,12 @@ public class Battle extends AppCompatActivity {
                         if(move2Acc > accCalculate) {
                             opponentHP = opponentHP - move2Str;
 
-                            setBattleNarration(move2.toUpperCase()+" did "+move2Str+" damage very effective!");
+                            battlefood(move2.toUpperCase()+" did "+move2Str+" damage very effective!");
                             Log.d("poke", "onClick: " + myPokeName + " used " + move2);
 
                             textLengthTime = battleNarration.length() * 100;
                         }else{
-                            setBattleNarration( move2.toUpperCase() + " missed and was not effective");
+                            battlefood( move2.toUpperCase() + " missed and was not effective");
 
 
                         }
@@ -502,7 +498,7 @@ public class Battle extends AppCompatActivity {
 
 
                     } else {
-                        setBattleNarration(myPokeName.toUpperCase()+" used "+move2.toUpperCase()+"!");
+                        battlefood(myPokeName.toUpperCase()+" used "+move2.toUpperCase()+"!");
                     }
 
 
@@ -543,12 +539,12 @@ public class Battle extends AppCompatActivity {
                         if(move3Acc > accCalculate) {
                             opponentHP = opponentHP - move3Str;
 
-                            setBattleNarration(move3.toUpperCase()+" did "+move3Str+" damage very effective!");
+                            battlefood(move3.toUpperCase()+" did "+move3Str+" damage very effective!");
                             Log.d("poke", "onClick: " + myPokeName.toUpperCase() + " used " + move3);
 
                             textLengthTime = battleNarration.length() * 100;
                         }else{
-                            setBattleNarration(move3.toUpperCase() + " missed and was not effective");
+                            battlefood(move3.toUpperCase() + " missed and was not effective");
 
 
                         }
@@ -567,7 +563,7 @@ public class Battle extends AppCompatActivity {
 
 
                     } else {
-                        setBattleNarration((myPokeName.toUpperCase()+" used "+move3.toUpperCase()+"!").toUpperCase());
+                        battlefood((myPokeName.toUpperCase()+" used "+move3.toUpperCase()+"!").toUpperCase());
                     }
 
 
@@ -603,12 +599,24 @@ public class Battle extends AppCompatActivity {
                         if(move3Acc > accCalculate) {
                             opponentHP = opponentHP - move4Str;
 
-                                setBattleNarration(move4.toUpperCase() + " did " + move4Str + " damage very effective!");
+                                battlefood(move4.toUpperCase() + " did " + move4Str + " damage");
                                 Log.d("poke", "onClick: " + myPokeName.toUpperCase() + " used " + move4.toUpperCase());
 
                             textLengthTime = battleNarration.length() * 100;
                         }else{
+                            if(battleNarration.getVisibility() == VISIBLE){
+                                battleNarration.setText("");
+                                battleNarration2.setText("");
+                                battleNarration2.setVisibility(VISIBLE);
+                                battleNarration.setVisibility(View.INVISIBLE);
+                                setBattleNarration2((myPokeName + " used " + move4 + "!").toUpperCase());
+                            }else{
+                                battleNarration.setText("");
+                                battleNarration2.setText("");
+                                battleNarration2.setVisibility(View.INVISIBLE);
+                                battleNarration.setVisibility(VISIBLE);
                                 setBattleNarration(move4.toUpperCase() + " missed and was not effective");
+                            }
 
                         }
 
@@ -626,7 +634,19 @@ public class Battle extends AppCompatActivity {
 
 
                     } else {
+                        if(battleNarration.getVisibility() == VISIBLE){
+                            battleNarration.setText("");
+                            battleNarration2.setText("");
+                            battleNarration2.setVisibility(VISIBLE);
+                            battleNarration.setVisibility(View.INVISIBLE);
+                            setBattleNarration2((myPokeName + " used " + move4 + "!").toUpperCase());
+                        }else{
+                            battleNarration.setText("");
+                            battleNarration2.setText("");
+                            battleNarration2.setVisibility(View.INVISIBLE);
+                            battleNarration.setVisibility(VISIBLE);
                             setBattleNarration((myPokeName + " used " + move4 + "!").toUpperCase());
+                        }
                     }
                     tLeft.setText("Fight");
                     bLeft.setText("Backpack");
@@ -876,10 +896,12 @@ public class Battle extends AppCompatActivity {
         Picasso.with(Battle.this).load(x).into(y);
     }
     public void setBattleNarration(final String s) {
+        if (typing = true) {
+           // timer1.cancel();
+        }
         final int[] i = new int[1];
         i[0] = 0;
         final int length = s.length();
-        final Timer timer = new Timer();
         @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
             @SuppressLint("HandlerLeak")
             @Override
@@ -888,6 +910,7 @@ public class Battle extends AppCompatActivity {
                 char c = s.charAt(i[0]);
                 battleNarration.append(String.valueOf(c));
                 i[0]++;
+                typing = true;
             }
         };
         TimerTask taskEverySplitSecond = new TimerTask() {
@@ -895,19 +918,22 @@ public class Battle extends AppCompatActivity {
             public void run() {
                 handler.sendEmptyMessage(0);
                 if (i[0] == length - 1) {
-                    timer.cancel();
+                    timer1.cancel();
+                    typing = false;
                 }
             }
         };
-        timer.schedule(taskEverySplitSecond, 1, 100);
+        timer1.schedule(taskEverySplitSecond, 1, 100);
 
 
     }
     public void setBattleNarration2(final String s) {
+        if (typing = true) {
+          //  timer2.cancel();
+        }
         final int[] i = new int[1];
         i[0] = 0;
         final int length = s.length();
-        final Timer timer = new Timer();
         @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
             @SuppressLint("HandlerLeak")
             @Override
@@ -916,6 +942,7 @@ public class Battle extends AppCompatActivity {
                 char c = s.charAt(i[0]);
                 battleNarration2.append(String.valueOf(c));
                 i[0]++;
+                typing = true;
             }
         };
         TimerTask taskEverySplitSecond = new TimerTask() {
@@ -923,11 +950,12 @@ public class Battle extends AppCompatActivity {
             public void run() {
                 handler.sendEmptyMessage(0);
                 if (i[0] == length - 1) {
-                    timer.cancel();
+                    timer2.cancel();
+                    typing = false;
                 }
             }
         };
-        timer.schedule(taskEverySplitSecond, 1, 100);
+        timer2.schedule(taskEverySplitSecond, 1, 100);
 
 
     }
@@ -972,43 +1000,139 @@ public class Battle extends AppCompatActivity {
                                 if (gymNum == 1){
                                     //
                                     battleNarration.setText("");
-                                    setBattleNarration("BROCK sent out " + opponentPokeName.toUpperCase() + " !");
+                                    if(battleNarration.getVisibility() == VISIBLE){
+                                        battleNarration.setText("");
+                                        battleNarration2.setText("");
+                                        battleNarration2.setVisibility(VISIBLE);
+                                        battleNarration.setVisibility(View.INVISIBLE);
+                                        setBattleNarration2("BROCK sent out " + opponentPokeName.toUpperCase() + " !");
+                                    }else{
+                                        battleNarration.setText("");
+                                        battleNarration2.setText("");
+                                        battleNarration2.setVisibility(View.INVISIBLE);
+                                        battleNarration.setVisibility(VISIBLE);
+                                        setBattleNarration("BROCK sent out " + opponentPokeName.toUpperCase() + " !");
+                                    }
 
 
                                 }
                                 else if(gymNum == 2){
                                     battleNarration.setText("");
-                                    setBattleNarration("MISTY sent out " + opponentPokeName.toUpperCase() + " !");
+                                    if(battleNarration.getVisibility() == VISIBLE){
+                                        battleNarration.setText("");
+                                        battleNarration2.setText("");
+                                        battleNarration2.setVisibility(VISIBLE);
+                                        battleNarration.setVisibility(View.INVISIBLE);
+                                        setBattleNarration2("MISTY sent out " + opponentPokeName.toUpperCase() + " !");
+                                    }else{
+                                        battleNarration.setText("");
+                                        battleNarration2.setText("");
+                                        battleNarration2.setVisibility(View.INVISIBLE);
+                                        battleNarration.setVisibility(VISIBLE);
+                                        setBattleNarration("MISTY sent out " + opponentPokeName.toUpperCase() + " !");
+                                    }
 
                                 }
                                 else if(gymNum == 3){
                                     battleNarration.setText("");
-                                    setBattleNarration("Lt. SURGE sent out " + opponentPokeName.toUpperCase() + " !");
+                                    if(battleNarration.getVisibility() == VISIBLE){
+                                        battleNarration.setText("");
+                                        battleNarration2.setText("");
+                                        battleNarration2.setVisibility(VISIBLE);
+                                        battleNarration.setVisibility(View.INVISIBLE);
+                                        setBattleNarration2("Lt. SURGE sent out " + opponentPokeName.toUpperCase() + " !");
+                                    }else{
+                                        battleNarration.setText("");
+                                        battleNarration2.setText("");
+                                        battleNarration2.setVisibility(View.INVISIBLE);
+                                        battleNarration.setVisibility(VISIBLE);
+                                        setBattleNarration("Lt. SURGE sent out " + opponentPokeName.toUpperCase() + " !");
+                                    }
 
 
                                 }
                                 else if(gymNum == 4){
                                     battleNarration.setText("");
-                                    setBattleNarration("ERIKA sent out " + opponentPokeName.toUpperCase() + " !");
+                                    if(battleNarration.getVisibility() == VISIBLE){
+                                        battleNarration.setText("");
+                                        battleNarration2.setText("");
+                                        battleNarration2.setVisibility(VISIBLE);
+                                        battleNarration.setVisibility(View.INVISIBLE);
+                                        setBattleNarration2("ERIKA sent out " + opponentPokeName.toUpperCase() + " !");
+                                    }else{
+                                        battleNarration.setText("");
+                                        battleNarration2.setText("");
+                                        battleNarration2.setVisibility(View.INVISIBLE);
+                                        battleNarration.setVisibility(VISIBLE);
+                                        setBattleNarration("ERIKA sent out " + opponentPokeName.toUpperCase() + " !");
+                                    }
 
                                 }
                                 else if(gymNum == 5){
                                     battleNarration.setText("");
-                                    setBattleNarration("KOGA sent out " + opponentPokeName.toUpperCase() + " !");
+                                    if(battleNarration.getVisibility() == VISIBLE){
+                                        battleNarration.setText("");
+                                        battleNarration2.setText("");
+                                        battleNarration2.setVisibility(VISIBLE);
+                                        battleNarration.setVisibility(View.INVISIBLE);
+                                        setBattleNarration2("KOGA sent out " + opponentPokeName.toUpperCase() + " !");
+                                    }else{
+                                        battleNarration.setText("");
+                                        battleNarration2.setText("");
+                                        battleNarration2.setVisibility(View.INVISIBLE);
+                                        battleNarration.setVisibility(VISIBLE);
+                                        setBattleNarration("KOGA sent out " + opponentPokeName.toUpperCase() + " !");
+                                    }
                                 }
                                 else if(gymNum == 6){
                                     battleNarration.setText("");
-                                    setBattleNarration("SABRINA sent out " + opponentPokeName.toUpperCase() + " !");
+                                    if(battleNarration.getVisibility() == VISIBLE){
+                                        battleNarration.setText("");
+                                        battleNarration2.setText("");
+                                        battleNarration2.setVisibility(VISIBLE);
+                                        battleNarration.setVisibility(View.INVISIBLE);
+                                        setBattleNarration2("SABRINA sent out " + opponentPokeName.toUpperCase() + " !");
+                                    }else{
+                                        battleNarration.setText("");
+                                        battleNarration2.setText("");
+                                        battleNarration2.setVisibility(View.INVISIBLE);
+                                        battleNarration.setVisibility(VISIBLE);
+                                        setBattleNarration("SABRINA sent out " + opponentPokeName.toUpperCase() + " !");
+                                    }
 
                                 }
                                 else if(gymNum == 7){
                                     battleNarration.setText("");
-                                    setBattleNarration("BLAINE sent out " + opponentPokeName.toUpperCase() + " !");
+                                    if(battleNarration.getVisibility() == VISIBLE){
+                                        battleNarration.setText("");
+                                        battleNarration2.setText("");
+                                        battleNarration2.setVisibility(VISIBLE);
+                                        battleNarration.setVisibility(View.INVISIBLE);
+                                        setBattleNarration2("BLAINE sent out " + opponentPokeName.toUpperCase() + " !");
+                                    }else{
+                                        battleNarration.setText("");
+                                        battleNarration2.setText("");
+                                        battleNarration2.setVisibility(View.INVISIBLE);
+                                        battleNarration.setVisibility(VISIBLE);
+                                        setBattleNarration("BLAINE sent out " + opponentPokeName.toUpperCase() + " !");
+                                    }
 
                                 }
                                 else if(gymNum == 8){
                                     battleNarration.setText("");
-                                    setBattleNarration("GIOVANNI sent out " + opponentPokeName.toUpperCase() + " !");
+                                    if(battleNarration.getVisibility() == VISIBLE){
+                                        battleNarration.setText("");
+                                        battleNarration2.setText("");
+                                        battleNarration2.setVisibility(VISIBLE);
+                                        battleNarration.setVisibility(View.INVISIBLE);
+                                        setBattleNarration2("GIOVANNI sent out " + opponentPokeName.toUpperCase() + " !");
+                                    }else{
+                                        battleNarration.setText("");
+                                        battleNarration2.setText("");
+                                        battleNarration2.setVisibility(View.INVISIBLE);
+                                        battleNarration.setVisibility(VISIBLE);
+                                        setBattleNarration("GIOVANNI sent out " + opponentPokeName.toUpperCase() + " !");
+                                    }
 
                                 }
 
@@ -1172,6 +1296,22 @@ public class Battle extends AppCompatActivity {
     
     public void getOpponentMove(){
 
+    }
+
+    public void battlefood(String x){
+        if(battleNarration.getVisibility() == VISIBLE){
+            battleNarration.setText("");
+            battleNarration2.setText("");
+            battleNarration2.setVisibility(VISIBLE);
+            battleNarration.setVisibility(View.INVISIBLE);
+            setBattleNarration2(x);
+        }else{
+            battleNarration.setText("");
+            battleNarration2.setText("");
+            battleNarration2.setVisibility(View.INVISIBLE);
+            battleNarration.setVisibility(VISIBLE);
+            setBattleNarration(x);
+        }
     }
 
 
