@@ -52,9 +52,6 @@ public class Battle extends AppCompatActivity {
 
     OkHttpClient client;
 
-    Timer timer1 = new Timer();
-    Timer timer2 = new Timer();
-
     boolean fight;
     Button tLeft;
     Button bLeft;
@@ -913,17 +910,18 @@ public class Battle extends AppCompatActivity {
                 typing = true;
             }
         };
+        final Timer timer = new Timer();
         TimerTask taskEverySplitSecond = new TimerTask() {
             @Override
             public void run() {
                 handler.sendEmptyMessage(0);
                 if (i[0] == length - 1) {
-                    timer1.cancel();
+                    timer.cancel();
                     typing = false;
                 }
             }
         };
-        timer1.schedule(taskEverySplitSecond, 1, 100);
+        timer.schedule(taskEverySplitSecond, 1, 100);
 
 
     }
@@ -934,6 +932,8 @@ public class Battle extends AppCompatActivity {
         final int[] i = new int[1];
         i[0] = 0;
         final int length = s.length();
+        
+        final Timer timer = new Timer();
         @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
             @SuppressLint("HandlerLeak")
             @Override
@@ -950,12 +950,12 @@ public class Battle extends AppCompatActivity {
             public void run() {
                 handler.sendEmptyMessage(0);
                 if (i[0] == length - 1) {
-                    timer2.cancel();
+                    timer.cancel();
                     typing = false;
                 }
             }
         };
-        timer2.schedule(taskEverySplitSecond, 1, 100);
+        timer.schedule(taskEverySplitSecond, 1, 100);
 
 
     }
