@@ -149,6 +149,7 @@ public class Battle extends AppCompatActivity {
     int opponentHP;
 
     CountDownTimer healthPlr;
+    CountDownTimer winnerPlr;
 
     Integer fighterTurn;
 
@@ -181,8 +182,8 @@ public class Battle extends AppCompatActivity {
         battleNarration = findViewById(R.id.battleNarration);
         //hide = findViewById(R.id.button);
 
-        myHP = 300;
-        opponentHP = 300;
+        myHP = 100;
+        opponentHP = 100;
 
         opponentHealth.setMax(opponentHP);
         opponentHealth.setProgress(opponentHP);
@@ -251,16 +252,16 @@ public class Battle extends AppCompatActivity {
 
 
 
-                        if(move1Acc > accCalculate) {
+                       // if(move1Acc > accCalculate) {
                             opponentHP = opponentHP - move1Str;
 
                             battlefood(move1.toUpperCase()+" did "+move1Str+" damage very effective!");
                             Log.d("poke", "onClick: " + myPokeName.toUpperCase() + " used " + move1.toUpperCase());
 
                             textLengthTime = battleNarration.length() * 100;
-                        }else{
-                            battlefood( move1.toUpperCase() + " missed and was not effective");
-                        }
+                      //  }else{
+                           // battlefood( move1.toUpperCase() + " missed and was not effective");
+                      //  }
 
 
                     } else if (move1Str == 0) {
@@ -293,6 +294,11 @@ public class Battle extends AppCompatActivity {
 
                     }
                 }
+                if(myHP == 0 || myHP < 0){
+                    battlefood(opponentPokemonNameText.getText() + " wins !");
+                }else if(opponentHP == 0 || opponentHP < 0) {
+                    battlefood(myPokeName.toUpperCase() + " wins !");
+                }
             }
         });
 
@@ -311,18 +317,18 @@ public class Battle extends AppCompatActivity {
                     if (move2Str != 0) {
 
 
-                        if(move2Acc > accCalculate) {
+                     //   if(move2Acc > accCalculate) {
                             opponentHP = opponentHP - move2Str;
 
                             battlefood(move2.toUpperCase()+" did "+move2Str+" damage very effective!");
                             Log.d("poke", "onClick: " + myPokeName + " used " + move2);
 
                             textLengthTime = battleNarration.length() * 100;
-                        }else{
-                            battlefood( move2.toUpperCase() + " missed and was not effective");
+                    //    }else{
+                    //        battlefood( move2.toUpperCase() + " missed and was not effective");
 
 
-                        }
+                      //  }
 
 
 
@@ -358,6 +364,12 @@ public class Battle extends AppCompatActivity {
 
 
                     Log.d("poke", "onClick: " + opponentHP);
+
+                    if(myHP == 0 || myHP < 0){
+                        battlefood(opponentPokemonNameText.getText() + " wins");
+                    }else if(opponentHP == 0 || opponentHP < 0) {
+                        battlefood(myPokeName.toUpperCase() + " wins");
+                    }
                 }
             }
         });
@@ -376,18 +388,18 @@ public class Battle extends AppCompatActivity {
                     if (move3Str != 0) {
 
 
-                        if(move3Acc > accCalculate) {
+                   //     if(move3Acc > accCalculate) {
                             opponentHP = opponentHP - move3Str;
 
                             battlefood(move3.toUpperCase()+" did "+move3Str+" damage very effective!");
                             Log.d("poke", "onClick: " + myPokeName.toUpperCase() + " used " + move3);
 
                             textLengthTime = battleNarration.length() * 100;
-                        }else{
-                            battlefood(move3.toUpperCase() + " missed and was not effective");
+                      //  }else{
+                            //battlefood(move3.toUpperCase() + " missed and was not effective");
 
 
-                        }
+                     //   }
 
 
 
@@ -414,6 +426,12 @@ public class Battle extends AppCompatActivity {
                     bRight.setText("Run");
                     fight = false;
                     opponentIsAttacking = true;
+
+                    if(myHP == 0 || myHP < 0){
+                        battlefood(opponentPokemonNameText.getText() + " wins !");
+                    }else if(opponentHP == 0 || opponentHP < 0) {
+                        battlefood(myPokeName.toUpperCase() + " wins ! ");
+                    }
 
                 }
             }
@@ -493,6 +511,12 @@ public class Battle extends AppCompatActivity {
                     tRight.setText("Pokemon");
                     bRight.setText("Run");
                     fight = false;
+
+                    if(myHP == 0 || myHP < 0){
+                        battlefood(opponentPokemonNameText.getText() + " wins");
+                    }else if(opponentHP == 0 || opponentHP < 0) {
+                        battlefood(myPokeName + " wins");
+                    }
                 }
             }
         });
@@ -739,6 +763,7 @@ public class Battle extends AppCompatActivity {
                             }
         healthHandler();
 
+
     }
 
     public void getOpponentPokemon(int x) {
@@ -927,7 +952,7 @@ public class Battle extends AppCompatActivity {
                 }
             }
         };
-        timer.schedule(taskEverySplitSecond, 1, 100);
+        timer.schedule(taskEverySplitSecond, 1, 75);
 
 
     }
@@ -985,7 +1010,7 @@ public class Battle extends AppCompatActivity {
                 }
             }
         };
-        timer.schedule(taskEverySplitSecond, 1, 100);
+        timer.schedule(taskEverySplitSecond, 1, 75);
 
 
     }
@@ -1366,5 +1391,25 @@ public class Battle extends AppCompatActivity {
 
         }.start();
     }
+
+    private void winnerHandler(){
+        winnerPlr = new CountDownTimer(999999999,1) {
+            @Override
+            public void onTick (long millisUntilFinished){
+
+
+
+            }
+
+            @Override
+            public void onFinish () {
+
+            }
+
+        }.start();
+    }
+
+
+
 
 }
