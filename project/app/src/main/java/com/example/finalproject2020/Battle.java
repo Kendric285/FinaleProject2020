@@ -110,7 +110,7 @@ public class Battle extends AppCompatActivity {
 
     Boolean opponentIsAttacking;
 
-    int typing = -1;
+    Boolean typing = false;
 
     Boolean first;
 
@@ -586,16 +586,13 @@ public class Battle extends AppCompatActivity {
 
                         if(move3Acc > accCalculate) {
                             opponentHP = opponentHP - move4Str;
-                            
-                            if (typing != battleNarration.length()) {
+
                                 setBattleNarration(move4.toUpperCase() + " did " + move4Str + " damage very effective!");
                                 Log.d("poke", "onClick: " + myPokeName.toUpperCase() + " used " + move4.toUpperCase());
-                            }
+
                             textLengthTime = battleNarration.length() * 100;
                         }else{
-                            if (typing != battleNarration.length()) {
                                 setBattleNarration(move4.toUpperCase() + " missed and was not effective");
-                            }
 
                         }
 
@@ -613,9 +610,7 @@ public class Battle extends AppCompatActivity {
 
 
                     } else {
-                        if (typing != battleNarration.length()) {
                             setBattleNarration((myPokeName + " used " + move4 + "!").toUpperCase());
-                        }
                     }
                     tLeft.setText("Fight");
                     bLeft.setText("Backpack");
@@ -865,9 +860,6 @@ public class Battle extends AppCompatActivity {
         Picasso.with(Battle.this).load(x).into(y);
     }
     public void setBattleNarration(final String s) {
-        if (typing == -1){
-            typing++;
-        }
         final int[] i = new int[1];
         i[0] = 0;
         final int length = s.length();
@@ -876,14 +868,10 @@ public class Battle extends AppCompatActivity {
             @SuppressLint("HandlerLeak")
             @Override
             public void handleMessage(Message msg) {
-                if (typing == battleNarration.length()) {
-                    typing++;
                     super.handleMessage(msg);
                     char c = s.charAt(i[0]);
                     battleNarration.append(String.valueOf(c));
                     i[0]++;
-                } else {timer.cancel(); battleNarration.setText(s); typing = -1;}
-
             }
         };
         TimerTask taskEverySplitSecond = new TimerTask() {
@@ -892,13 +880,10 @@ public class Battle extends AppCompatActivity {
                     handler.sendEmptyMessage(0);
                     if (i[0] == length - 1) {
                         timer.cancel();
-                        typing = -1;
                     }
             }
         };
-        if (typing != -1) {
             timer.schedule(taskEverySplitSecond, 1, 100);
-        }
 
 
     }
