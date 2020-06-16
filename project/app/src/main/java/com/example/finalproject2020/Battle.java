@@ -85,7 +85,7 @@ public class Battle extends AppCompatActivity {
 
     String opponentMovei;
 
-    //Button hide;
+    Button hide;
 
     Integer textLengthTime;
 
@@ -180,7 +180,6 @@ public class Battle extends AppCompatActivity {
         Intent intent = getIntent();
         gymNum = intent.getIntExtra("gymNumber",0);
         battleNarration = findViewById(R.id.battleNarration);
-        //hide = findViewById(R.id.button);
 
         myHP = 100;
         opponentHP = 100;
@@ -915,6 +914,8 @@ public class Battle extends AppCompatActivity {
                 battleNarration.append(String.valueOf(c));
                 i[0]++;
                 typing = true;
+                Log.d("poke", "RUNNING: ");
+                hide.setVisibility(VISIBLE);
 
                 /*
 
@@ -925,7 +926,24 @@ public class Battle extends AppCompatActivity {
                 hide.setWidth(700);
 
                  */
+                if (i[0] == length) {
 
+                    /*
+
+
+
+                    hide = findViewById(R.id.button);
+
+
+                    hide.setHeight(1);
+                    hide.setWidth(1);
+
+                     */
+                    hide();
+
+                    //hiding = true;
+                    //hide.setVisibility(View.INVISIBLE);
+                }
 
             }
         };
@@ -936,6 +954,7 @@ public class Battle extends AppCompatActivity {
                 handler.sendEmptyMessage(0);
                 if (i[0] == length - 1) {
 
+                    hide();
                     /*
                     hide = findViewById(R.id.button);
 
@@ -949,6 +968,7 @@ public class Battle extends AppCompatActivity {
                     Log.d("poke", "INVDISIFGADFJDAJRJEIGJIREJIGJIREJGIJRIJEGIIJG ");
                     timer.cancel();
                     typing = false;
+                    //hide.setVisibility(View.INVISIBLE);
                 }
             }
         };
@@ -974,6 +994,10 @@ public class Battle extends AppCompatActivity {
                 battleNarration2.append(String.valueOf(c));
                 i[0]++;
                 typing = true;
+
+                hide.setVisibility(VISIBLE);
+                Log.d("poke", "RUNNING: ");
+
                 /*
 
                 hide = findViewById(R.id.button);
@@ -982,6 +1006,25 @@ public class Battle extends AppCompatActivity {
                 hide.setWidth(700);
 
                  */
+
+                if (i[0] == length) {
+
+                    /*
+
+
+
+                    hide = findViewById(R.id.button);
+
+
+                    hide.setHeight(1);
+                    hide.setWidth(1);
+
+                     */
+                    hide();
+
+                    //hiding = true;
+                    //hide.setVisibility(View.INVISIBLE);
+                }
 
 
             }
@@ -1003,11 +1046,13 @@ public class Battle extends AppCompatActivity {
                     hide.setWidth(1);
 
                      */
-
+                    hide();
 
                     timer.cancel();
                     typing = false;
+                    //hide.setVisibility(View.INVISIBLE);
                 }
+
             }
         };
         timer.schedule(taskEverySplitSecond, 1, 75);
@@ -1409,6 +1454,9 @@ public class Battle extends AppCompatActivity {
         }.start();
     }
 
+    private void hide(){
+       hide.setVisibility(View.INVISIBLE);
+    }
 
 
 
