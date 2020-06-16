@@ -86,6 +86,8 @@ public class ChooseGym extends AppCompatActivity {
         gymImageView.setImageResource(R.drawable.pewtergym);
 
         getPokemon(0);
+        getPokemon(1);
+        getPokemon(2);
 
         gymImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,6 +216,7 @@ public class ChooseGym extends AppCompatActivity {
 
     public void getPokemon(final int x) {
         //poke = y;
+        poke = x;
         Log.d("mode", "onClick: ");
 
                             try {

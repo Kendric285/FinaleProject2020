@@ -90,7 +90,9 @@ public class MainActivity extends AppCompatActivity {
 
             if (sharedPref.pokemons[0] == "" || sharedPref.pokemons[0] == null) {
                 starterPokemon();
-            } else{gyms();}
+            } else{gyms();
+                Log.d("poke", "opa: "+sharedPref.pokemons[1]);
+                starterPokemon();}
 
 
 

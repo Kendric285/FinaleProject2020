@@ -85,6 +85,8 @@ public class Battle extends AppCompatActivity {
 
     String opponentMovei;
 
+    Button hide;
+
     Integer textLengthTime;
 
     int[] opponentPokemon;
@@ -177,9 +179,11 @@ public class Battle extends AppCompatActivity {
         Intent intent = getIntent();
         gymNum = intent.getIntExtra("gymNumber",0);
         battleNarration = findViewById(R.id.battleNarration);
-        myHP = 300;
+        hide = findViewById(R.id.button);
 
+        myHP = 300;
         opponentHP = 300;
+
         opponentHealth.setMax(opponentHP);
         opponentHealth.setProgress(opponentHP);
 
@@ -232,15 +236,13 @@ public class Battle extends AppCompatActivity {
             public void onClick(View v) {
                 //move1
 
+                if(textClicks > 0) {
 
                 if (fight == true && opponentIsAttacking == false) {
 
-
+                    fight = false;
 
                     Log.d("poke", "onClick: " + opponentHP);
-
-                    battleNarration.setText("");
-                    battleNarration2.setText("");
 
                     accCalculate = r.nextInt(110);
 
@@ -258,24 +260,10 @@ public class Battle extends AppCompatActivity {
                             textLengthTime = battleNarration.length() * 100;
                         }else{
                             battlefood( move1.toUpperCase() + " missed and was not effective");
-
-
                         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-                    } else {
+                    } else if (move1Str == 0) {
                         battlefood(myPokeName.toUpperCase()+" used "+move1.toUpperCase()+"!");
                     }
 
@@ -284,18 +272,15 @@ public class Battle extends AppCompatActivity {
                     bLeft.setText("Backpack");
                     tRight.setText("Pokemon");
                     bRight.setText("Run");
-                    fight = false;
                     opponentIsAttacking = true;
 
                     System.out.println(move1Str);
 
                     Log.d("poke", "onClick: " + opponentHP);
                 } else {
-                    opponentAttacks();
-                    if(textClicks > 0) {
+                    if (fight == false) {
+                        opponentAttacks();
                         fight = true;
-
-
 
 
                         tLeft.setText("" + move1);
@@ -303,151 +288,9 @@ public class Battle extends AppCompatActivity {
                         tRight.setText("" + move3);
                         bRight.setText("" + move4);
 
-                        final Request request1 = new Request.Builder()
-                                .url(move1URL)
-                                .get()
-                                .build();
+                        Log.d("poke", "POKE: " + move4Acc + move4Str + move3Acc + move3Str + move2Acc + move2Str + move1Acc + move1Str);
+                    }
 
-                        client.newCall(request1).enqueue(new Callback() {
-                            @Override
-                            public void onFailure(Call call, IOException e) {
-                                e.printStackTrace();
-                                Log.d("mode", "onFailure: ");
-                            }
-
-                            @Override
-                            public void onResponse(Call call, Response response) throws IOException {
-                                if (response.isSuccessful()) {
-                                    final String myResponse = response.body().string();
-                                    // Log.d("mode", "onResponse: " + myResponse);
-
-                                    Battle.this.runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            try {
-                                                JSONObject objMove1 = new JSONObject(myResponse);
-                                                move1i = myResponse;
-                                                move1Str = objMove1.getInt("power");
-                                                move1Acc = objMove1.getInt("accuracy");
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        final Request request2 = new Request.Builder()
-                                .url(move2URL)
-                                .get()
-                                .build();
-
-                        client.newCall(request2).enqueue(new Callback() {
-                            @Override
-                            public void onFailure(Call call, IOException e) {
-                                e.printStackTrace();
-                                Log.d("mode", "onFailure: ");
-                            }
-
-                            @Override
-                            public void onResponse(Call call, Response response) throws IOException {
-                                if (response.isSuccessful()) {
-                                    final String myResponse = response.body().string();
-                                    // Log.d("mode", "onResponse: " + myResponse);
-
-                                    Battle.this.runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            try {
-                                                JSONObject objMove2 = new JSONObject(myResponse);
-                                                move2i = myResponse;
-                                                move2Str = objMove2.getInt("power");
-                                                move2Acc = objMove2.getInt("accuracy");
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        final Request request3 = new Request.Builder()
-                                .url(move3URL)
-                                .get()
-                                .build();
-
-                        client.newCall(request3).enqueue(new Callback() {
-                            @Override
-                            public void onFailure(Call call, IOException e) {
-                                e.printStackTrace();
-                                Log.d("mode", "onFailure: ");
-                            }
-
-                            @Override
-                            public void onResponse(Call call, Response response) throws IOException {
-                                if (response.isSuccessful()) {
-                                    final String myResponse = response.body().string();
-                                    // Log.d("mode", "onResponse: " + myResponse);
-
-                                    Battle.this.runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            try {
-                                                JSONObject objMove3= new JSONObject(myResponse);
-                                                move3i = myResponse;
-                                                move3Str = objMove3.getInt("power");
-                                                move3Acc = objMove3.getInt("accuracy");
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                    });
-                                }
-                            }
-
-                        });
-
-                        final Request request4 = new Request.Builder()
-                                .url(move4URL)
-                                .get()
-                                .build();
-
-                        client.newCall(request4).enqueue(new Callback() {
-                            @Override
-                            public void onFailure(Call call, IOException e) {
-                                e.printStackTrace();
-                                Log.d("mode", "onFailure: ");
-                            }
-
-                            @Override
-                            public void onResponse(Call call, Response response) throws IOException {
-                                if (response.isSuccessful()) {
-                                    final String myResponse = response.body().string();
-                                    // Log.d("mode", "onResponse: " + myResponse);
-
-                                    Battle.this.runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            try {
-                                                JSONObject objMove4 = new JSONObject(myResponse);
-                                                move4i = myResponse;
-                                                move4Str = objMove4.getInt("power");
-                                                move4Acc = objMove4.getInt("accuracy");
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                    });
-                                }
-                            }
-                        });
-
-                        Log.d("poke", "POKE: "+move4Acc+move4Str+move3Acc+move3Str+move2Acc+move2Str+move1Acc+move1Str);
-
-                    }else{
-                        System.out.println("read text");
                     }
                 }
             }
@@ -695,10 +538,6 @@ public class Battle extends AppCompatActivity {
 
     }
 
-    public void pokemon(){
-
-    }
-
     public void getMyPokemon(int x) {
         Log.d("mode", "onClick: ");
         poke = x;
@@ -750,6 +589,149 @@ public class Battle extends AppCompatActivity {
                                 myHealth.setMax(300);
                                 myHealth.setProgress(300);
                                 pic(pokeImageBack,myPokemon);
+
+                                // GET ALL MOVES!!!!!
+
+                                final Request request1 = new Request.Builder()
+                                        .url(move1URL)
+                                        .get()
+                                        .build();
+
+                                client.newCall(request1).enqueue(new Callback() {
+                                    @Override
+                                    public void onFailure(Call call, IOException e) {
+                                        e.printStackTrace();
+                                        Log.d("mode", "onFailure: ");
+                                    }
+
+                                    @Override
+                                    public void onResponse(Call call, Response response) throws IOException {
+                                        if (response.isSuccessful()) {
+                                            final String myResponse = response.body().string();
+                                            // Log.d("mode", "onResponse: " + myResponse);
+
+                                            Battle.this.runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    try {
+                                                        JSONObject objMove1 = new JSONObject(myResponse);
+                                                        move1i = myResponse;
+                                                        move1Str = objMove1.getInt("power");
+                                                        move1Acc = objMove1.getInt("accuracy");
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+
+                                final Request request2 = new Request.Builder()
+                                        .url(move2URL)
+                                        .get()
+                                        .build();
+
+                                client.newCall(request2).enqueue(new Callback() {
+                                    @Override
+                                    public void onFailure(Call call, IOException e) {
+                                        e.printStackTrace();
+                                        Log.d("mode", "onFailure: ");
+                                    }
+
+                                    @Override
+                                    public void onResponse(Call call, Response response) throws IOException {
+                                        if (response.isSuccessful()) {
+                                            final String myResponse = response.body().string();
+                                            // Log.d("mode", "onResponse: " + myResponse);
+
+                                            Battle.this.runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    try {
+                                                        JSONObject objMove2 = new JSONObject(myResponse);
+                                                        move2i = myResponse;
+                                                        move2Str = objMove2.getInt("power");
+                                                        move2Acc = objMove2.getInt("accuracy");
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+
+                                final Request request3 = new Request.Builder()
+                                        .url(move3URL)
+                                        .get()
+                                        .build();
+
+                                client.newCall(request3).enqueue(new Callback() {
+                                    @Override
+                                    public void onFailure(Call call, IOException e) {
+                                        e.printStackTrace();
+                                        Log.d("mode", "onFailure: ");
+                                    }
+
+                                    @Override
+                                    public void onResponse(Call call, Response response) throws IOException {
+                                        if (response.isSuccessful()) {
+                                            final String myResponse = response.body().string();
+                                            // Log.d("mode", "onResponse: " + myResponse);
+
+                                            Battle.this.runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    try {
+                                                        JSONObject objMove3= new JSONObject(myResponse);
+                                                        move3i = myResponse;
+                                                        move3Str = objMove3.getInt("power");
+                                                        move3Acc = objMove3.getInt("accuracy");
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }
+
+                                });
+
+                                final Request request4 = new Request.Builder()
+                                        .url(move4URL)
+                                        .get()
+                                        .build();
+
+                                client.newCall(request4).enqueue(new Callback() {
+                                    @Override
+                                    public void onFailure(Call call, IOException e) {
+                                        e.printStackTrace();
+                                        Log.d("mode", "onFailure: ");
+                                    }
+
+                                    @Override
+                                    public void onResponse(Call call, Response response) throws IOException {
+                                        if (response.isSuccessful()) {
+                                            final String myResponse = response.body().string();
+                                            // Log.d("mode", "onResponse: " + myResponse);
+
+                                            Battle.this.runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    try {
+                                                        JSONObject objMove4 = new JSONObject(myResponse);
+                                                        move4i = myResponse;
+                                                        move4Str = objMove4.getInt("power");
+                                                        move4Acc = objMove4.getInt("accuracy");
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -908,6 +890,7 @@ public class Battle extends AppCompatActivity {
                 battleNarration.append(String.valueOf(c));
                 i[0]++;
                 typing = true;
+                hide.setVisibility(VISIBLE);
             }
         };
         final Timer timer = new Timer();
@@ -916,6 +899,8 @@ public class Battle extends AppCompatActivity {
             public void run() {
                 handler.sendEmptyMessage(0);
                 if (i[0] == length - 1) {
+                    hide.setVisibility(View.INVISIBLE);
+                    Log.d("poke", "INVDISIFGADFJDAJRJEIGJIREJIGJIREJGIJRIJEGIIJG ");
                     timer.cancel();
                     typing = false;
                 }
@@ -943,6 +928,7 @@ public class Battle extends AppCompatActivity {
                 battleNarration2.append(String.valueOf(c));
                 i[0]++;
                 typing = true;
+                hide.setVisibility(VISIBLE);
             }
         };
         TimerTask taskEverySplitSecond = new TimerTask() {
@@ -950,6 +936,7 @@ public class Battle extends AppCompatActivity {
             public void run() {
                 handler.sendEmptyMessage(0);
                 if (i[0] == length - 1) {
+                    hide.setVisibility(View.INVISIBLE);
                     timer.cancel();
                     typing = false;
                 }
@@ -1241,7 +1228,7 @@ public class Battle extends AppCompatActivity {
                     }
                 });
 
-                battleNarration.setText("");
+               // battleNarration.setText("");
 
                 accCalculate = r.nextInt(110);
 
