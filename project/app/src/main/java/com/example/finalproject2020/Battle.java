@@ -108,6 +108,9 @@ public class Battle extends AppCompatActivity {
     Runnable startDelay;
 
 
+    TextView battleNarration2;
+
+
     Boolean opponentIsAttacking;
 
     Boolean typing = false;
@@ -184,6 +187,8 @@ public class Battle extends AppCompatActivity {
 
         opponentHealthNum = findViewById(R.id.health2);
 
+        battleNarration2 = findViewById(R.id.battleNarration2);
+
         setDelay = new Handler();
 
         opponentIsAttacking = false;
@@ -218,6 +223,17 @@ public class Battle extends AppCompatActivity {
 
 
         getOpponentPokemon(gymNum);
+
+        battleNarration2.setVisibility(View.INVISIBLE);
+
+        if(battleNarration.getVisibility() == View.VISIBLE){
+            battleNarration2.setVisibility(View.INVISIBLE);
+
+        }else{
+            battleNarration.setVisibility(View.VISIBLE);
+        }
+
+
 
         tLeft.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -868,22 +884,50 @@ public class Battle extends AppCompatActivity {
             @SuppressLint("HandlerLeak")
             @Override
             public void handleMessage(Message msg) {
-                    super.handleMessage(msg);
-                    char c = s.charAt(i[0]);
-                    battleNarration.append(String.valueOf(c));
-                    i[0]++;
+                super.handleMessage(msg);
+                char c = s.charAt(i[0]);
+                battleNarration.append(String.valueOf(c));
+                i[0]++;
             }
         };
         TimerTask taskEverySplitSecond = new TimerTask() {
             @Override
             public void run() {
-                    handler.sendEmptyMessage(0);
-                    if (i[0] == length - 1) {
-                        timer.cancel();
-                    }
+                handler.sendEmptyMessage(0);
+                if (i[0] == length - 1) {
+                    timer.cancel();
+                }
             }
         };
-            timer.schedule(taskEverySplitSecond, 1, 100);
+        timer.schedule(taskEverySplitSecond, 1, 100);
+
+
+    }
+    public void setBattleNarration2(final String s) {
+        final int[] i = new int[1];
+        i[0] = 0;
+        final int length = s.length();
+        final Timer timer = new Timer();
+        @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
+            @SuppressLint("HandlerLeak")
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                char c = s.charAt(i[0]);
+                battleNarration2.append(String.valueOf(c));
+                i[0]++;
+            }
+        };
+        TimerTask taskEverySplitSecond = new TimerTask() {
+            @Override
+            public void run() {
+                handler.sendEmptyMessage(0);
+                if (i[0] == length - 1) {
+                    timer.cancel();
+                }
+            }
+        };
+        timer.schedule(taskEverySplitSecond, 1, 100);
 
 
     }
