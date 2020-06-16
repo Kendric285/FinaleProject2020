@@ -900,12 +900,19 @@ public class Battle extends AppCompatActivity {
         i[0] = 0;
         final int length = s.length();
         @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
+            String btt = "";
+
             @SuppressLint("HandlerLeak")
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 char c = s.charAt(i[0]);
-                battleNarration.append(String.valueOf(c));
+
+                btt = btt + String.valueOf(c);
+
+                battleNarration2.setText(btt);
+
+
                 i[0]++;
                 typing = true;
             }
@@ -925,6 +932,7 @@ public class Battle extends AppCompatActivity {
 
 
     }
+
     public void setBattleNarration2(final String s) {
         if (typing = true) {
           //timer2.cancel();
@@ -932,15 +940,22 @@ public class Battle extends AppCompatActivity {
         final int[] i = new int[1];
         i[0] = 0;
         final int length = s.length();
-        
         final Timer timer = new Timer();
         @SuppressLint("HandlerLeak") final Handler handler = new Handler() {
+            String btt = "";
+
             @SuppressLint("HandlerLeak")
             @Override
+
+
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 char c = s.charAt(i[0]);
-                battleNarration2.append(String.valueOf(c));
+
+                btt = btt  + String.valueOf(c);
+
+
+                battleNarration2.setText(btt);
                 i[0]++;
                 typing = true;
             }
