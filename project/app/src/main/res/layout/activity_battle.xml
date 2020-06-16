@@ -196,11 +196,4 @@
         android:gravity="center"
         android:text="300/300" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#00FFFFFF"
-        android:visibility="visible" />
-
 </RelativeLayout>
