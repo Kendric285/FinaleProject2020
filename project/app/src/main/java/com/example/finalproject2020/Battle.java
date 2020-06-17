@@ -184,6 +184,7 @@ public class Battle extends AppCompatActivity {
 
 
         Intent intent = getIntent();
+
         gymNum = intent.getIntExtra("gymNumber",0);
         badgeCollection = intent.getIntegerArrayListExtra("badgeCollection");
 
@@ -1549,7 +1550,8 @@ public class Battle extends AppCompatActivity {
         Intent toGyms = new Intent(this, ChooseGym.class);
 
        if(opponentHP == 0 || opponentHP < 0) {
-            sharedPref.addBadge(gymNum);
+           sharedPref.addBadge(gymNum);
+           Log.d("toGyms", "backToGyms: ");
 
         }
 
