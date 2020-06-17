@@ -69,7 +69,10 @@ public class ChooseGym extends AppCompatActivity {
         client = new OkHttpClient();
         gymImageView = findViewById(R.id.gymImageView);
         gymName = findViewById(R.id.gymName);
-        beat = finish()
+
+        beat = findViewById(R.id.beat);
+
+        beat.setVisibility(View.INVISIBLE);
 
         money = findViewById(R.id.money);
         pokeBalls = findViewById(R.id.pokeballs);
@@ -145,53 +148,9 @@ public class ChooseGym extends AppCompatActivity {
                     gymNumber = 1;
                 }
 
-                if(gymNumber == 1){
-                    gymImageView.setImageResource(R.drawable.pewtergym);
-                    gymName.setText("Pewter Gym");
-                    //Rock
-                }
-                else if(gymNumber == 2){
-                    gymImageView.setImageResource(R.drawable.ceruleangym);
-                    gymName.setText("Cerulean Gym");
-                    //Water
+                gymPic();
 
-                }
-                else if(gymNumber == 3){
-                    gymImageView.setImageResource(R.drawable.vermilliongym);
-                    gymName.setText("Vermillion Gym");
-                    //Electric
 
-                }
-                else if(gymNumber == 4){
-                    gymImageView.setImageResource(R.drawable.celadongym);
-                    gymName.setText("Celadon Gym");
-                    //grass
-
-                }
-                else if(gymNumber == 5){
-                    gymImageView.setImageResource(R.drawable.fuchsiagym);
-                    gymName.setText("Fuchsia Gym");
-                    //Poison
-
-                }
-                else if(gymNumber == 6){
-                    gymImageView.setImageResource(R.drawable.saffrongym);
-                    gymName.setText("Saffron Gym");
-                    //Psychic
-
-                }
-                else if(gymNumber == 7){
-                    gymImageView.setImageResource(R.drawable.cinnabargym);
-                    gymName.setText("Cinnabar Gym");
-                    //Fire
-
-                }
-                else {
-                    gymImageView.setImageResource(R.drawable.viridiangym);
-                    gymName.setText("Viridian Gym");
-                    //Ground
-
-                }
             }
 
         });
@@ -207,6 +166,8 @@ public class ChooseGym extends AppCompatActivity {
                     gymNumber = 8;
                 }
 
+
+                gymPic();
             }
         });
 
@@ -236,6 +197,8 @@ public class ChooseGym extends AppCompatActivity {
     }
     public void toBattle(){
         Intent toBattle = new Intent(this, Battle.class);
+        toBattle.putExtra("gymNumber",gymNumber);
+
         startActivity(toBattle);
     }
 
@@ -254,42 +217,100 @@ public class ChooseGym extends AppCompatActivity {
         if(gymNumber == 1){
             gymImageView.setImageResource(R.drawable.pewtergym);
             if (sharedPref.badgeCollection[0]==false) {
+                beat.setVisibility(View.INVISIBLE);
 
-            }else{}
+            }else{
+                beat.setVisibility(View.VISIBLE);
+
+            }
             gymName.setText("Pewter Gym");
         }
         else if(gymNumber == 2){
             gymImageView.setImageResource(R.drawable.ceruleangym);
+            if (sharedPref.badgeCollection[1]==false) {
+                beat.setVisibility(View.INVISIBLE);
+
+            }else{
+                beat.setVisibility(View.VISIBLE);
+
+            }
             gymName.setText("Cerulean Gym");
 
         }
         else if(gymNumber == 3){
             gymImageView.setImageResource(R.drawable.vermilliongym);
+
+            if (sharedPref.badgeCollection[2]==false) {
+                beat.setVisibility(View.INVISIBLE);
+
+            }else{
+                beat.setVisibility(View.VISIBLE);
+
+            }
             gymName.setText("Vermillion Gym");
 
         }
         else if(gymNumber == 4){
             gymImageView.setImageResource(R.drawable.celadongym);
+            if (sharedPref.badgeCollection[3]==false) {
+                beat.setVisibility(View.INVISIBLE);
+
+            }else{
+                beat.setVisibility(View.VISIBLE);
+
+            }
             gymName.setText("Celadon Gym");
 
         }
         else if(gymNumber == 5){
             gymImageView.setImageResource(R.drawable.fuchsiagym);
+
+            if (sharedPref.badgeCollection[4]==false) {
+                beat.setVisibility(View.INVISIBLE);
+
+            }else{
+                beat.setVisibility(View.VISIBLE);
+
+            }
             gymName.setText("Fuchsia Gym");
 
         }
         else if(gymNumber == 6){
             gymImageView.setImageResource(R.drawable.saffrongym);
+
+            if (sharedPref.badgeCollection[5]==false) {
+                beat.setVisibility(View.INVISIBLE);
+
+            }else{
+                beat.setVisibility(View.VISIBLE);
+
+            }
             gymName.setText("Saffron Gym");
 
         }
         else if(gymNumber == 7){
             gymImageView.setImageResource(R.drawable.cinnabargym);
+
+            if (sharedPref.badgeCollection[6]==false) {
+                beat.setVisibility(View.INVISIBLE);
+
+            }else{
+                beat.setVisibility(View.VISIBLE);
+
+            }
             gymName.setText("Cinnabar Gym");
 
         }
         else {
             gymImageView.setImageResource(R.drawable.viridiangym);
+
+            if (sharedPref.badgeCollection[7] == false) {
+                beat.setVisibility(View.INVISIBLE);
+
+            }else{
+                beat.setVisibility(View.VISIBLE);
+
+            }
             gymName.setText("Viridian Gym");
 
         }

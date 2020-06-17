@@ -555,6 +555,7 @@ public class Battle extends AppCompatActivity {
                     battlefood(opponentPokemonNameText.getText() + " wins");
 
 
+
                 }else if(opponentHP == 0 || opponentHP < 0) {
                     opponentHP = 0;
                     battlefood(myPokeName + " wins");
@@ -609,7 +610,6 @@ public class Battle extends AppCompatActivity {
 
                 }else if(opponentHP == 0 || opponentHP < 0) {
                     opponentHP = 0;
-                    badgeCollection.add(gymNum);
                     backToGyms(gymNum);
 
 
