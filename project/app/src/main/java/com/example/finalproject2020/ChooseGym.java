@@ -72,7 +72,9 @@ public class ChooseGym extends AppCompatActivity {
 
         beat = findViewById(R.id.beat);
 
-        beat.setVisibility(View.INVISIBLE);
+
+
+
 
         money = findViewById(R.id.money);
         pokeBalls = findViewById(R.id.pokeballs);
@@ -216,7 +218,7 @@ public class ChooseGym extends AppCompatActivity {
     public void gymPic(){
         if(gymNumber == 1){
             gymImageView.setImageResource(R.drawable.pewtergym);
-            if (sharedPref.badgeCollection[0]==false) {
+            if (sharedPref.badgeCollection[0] == false) {
                 beat.setVisibility(View.INVISIBLE);
 
             }else{
