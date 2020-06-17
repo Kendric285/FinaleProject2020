@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,9 +32,6 @@ public class ChooseGym extends AppCompatActivity {
 
     TextView gymName;
 
-
-    Boolean[] badgeCollection;
-
     Boolean pewterCityBadge;
     Boolean ceruleanCityBadge;
     Boolean vermillionCityBadge;
@@ -44,7 +42,7 @@ public class ChooseGym extends AppCompatActivity {
     Boolean viridianCityBadge;
 
 
-
+    Button beat;
 
     OkHttpClient client;
 
@@ -71,6 +69,7 @@ public class ChooseGym extends AppCompatActivity {
         client = new OkHttpClient();
         gymImageView = findViewById(R.id.gymImageView);
         gymName = findViewById(R.id.gymName);
+        beat = finish()
 
         money = findViewById(R.id.money);
         pokeBalls = findViewById(R.id.pokeballs);
@@ -81,11 +80,6 @@ public class ChooseGym extends AppCompatActivity {
 
         money.setText("Money:" + userMoney);
         pokeBalls.setText("PokeBalls: "+ userPokeBalls);
-
-
-
-
-        badgeCollection = new Boolean[8];
 
 
 
@@ -213,45 +207,6 @@ public class ChooseGym extends AppCompatActivity {
                     gymNumber = 8;
                 }
 
-                if(gymNumber == 1){
-                    gymImageView.setImageResource(R.drawable.pewtergym);
-                    gymName.setText("Pewter Gym");
-                }
-                else if(gymNumber == 2){
-                    gymImageView.setImageResource(R.drawable.ceruleangym);
-                    gymName.setText("Cerulean Gym");
-
-                }
-                else if(gymNumber == 3){
-                    gymImageView.setImageResource(R.drawable.vermilliongym);
-                    gymName.setText("Vermillion Gym");
-
-                }
-                else if(gymNumber == 4){
-                    gymImageView.setImageResource(R.drawable.celadongym);
-                    gymName.setText("Celadon Gym");
-
-                }
-                else if(gymNumber == 5){
-                    gymImageView.setImageResource(R.drawable.fuchsiagym);
-                    gymName.setText("Fuchsia Gym");
-
-                }
-                else if(gymNumber == 6){
-                    gymImageView.setImageResource(R.drawable.saffrongym);
-                    gymName.setText("Saffron Gym");
-
-                }
-                else if(gymNumber == 7){
-                    gymImageView.setImageResource(R.drawable.cinnabargym);
-                    gymName.setText("Cinnabar Gym");
-
-                }
-                else {
-                    gymImageView.setImageResource(R.drawable.viridiangym);
-                    gymName.setText("Viridian Gym");
-
-                }
             }
         });
 
@@ -281,8 +236,6 @@ public class ChooseGym extends AppCompatActivity {
     }
     public void toBattle(){
         Intent toBattle = new Intent(this, Battle.class);
-        toBattle.putExtra("gymNumber",gymNumber);
-        toBattle.putExtra("badgeCollection", badgeCollection);
         startActivity(toBattle);
     }
 
@@ -294,6 +247,51 @@ public class ChooseGym extends AppCompatActivity {
 
         for (int number = 0; number < arrayListName.size(); number++){
             System.out.println(arrayListName.get(number));
+        }
+    }
+
+    public void gymPic(){
+        if(gymNumber == 1){
+            gymImageView.setImageResource(R.drawable.pewtergym);
+            if (sharedPref.badgeCollection[0]==false) {
+
+            }else{}
+            gymName.setText("Pewter Gym");
+        }
+        else if(gymNumber == 2){
+            gymImageView.setImageResource(R.drawable.ceruleangym);
+            gymName.setText("Cerulean Gym");
+
+        }
+        else if(gymNumber == 3){
+            gymImageView.setImageResource(R.drawable.vermilliongym);
+            gymName.setText("Vermillion Gym");
+
+        }
+        else if(gymNumber == 4){
+            gymImageView.setImageResource(R.drawable.celadongym);
+            gymName.setText("Celadon Gym");
+
+        }
+        else if(gymNumber == 5){
+            gymImageView.setImageResource(R.drawable.fuchsiagym);
+            gymName.setText("Fuchsia Gym");
+
+        }
+        else if(gymNumber == 6){
+            gymImageView.setImageResource(R.drawable.saffrongym);
+            gymName.setText("Saffron Gym");
+
+        }
+        else if(gymNumber == 7){
+            gymImageView.setImageResource(R.drawable.cinnabargym);
+            gymName.setText("Cinnabar Gym");
+
+        }
+        else {
+            gymImageView.setImageResource(R.drawable.viridiangym);
+            gymName.setText("Viridian Gym");
+
         }
     }
 

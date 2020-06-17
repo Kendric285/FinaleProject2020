@@ -13,6 +13,7 @@ public class SharedPref {
     SharedPreferences mySharedPref;
     SharedPreferences.Editor editor;
     String[] pokemons = new String[6];
+    Boolean[] badgeCollection = new Boolean[8];
     int money;
 
     public SharedPref(Context context) {
@@ -24,6 +25,15 @@ public class SharedPref {
         pokemons[3] = mySharedPref.getString("pokemon4","");
         pokemons[4] = mySharedPref.getString("pokemon5","");
         pokemons[5] = mySharedPref.getString("pokemon6","");
+
+        badgeCollection[0] = mySharedPref.getBoolean("badge1", false);
+        badgeCollection[1] = mySharedPref.getBoolean("badge2", false);
+        badgeCollection[2] = mySharedPref.getBoolean("badge3", false);
+        badgeCollection[3] = mySharedPref.getBoolean("badge4", false);
+        badgeCollection[4] = mySharedPref.getBoolean("badge5", false);
+        badgeCollection[5] = mySharedPref.getBoolean("badge6", false);
+        badgeCollection[6] = mySharedPref.getBoolean("badge7", false);
+        badgeCollection[7] = mySharedPref.getBoolean("badge8", false);
 
         money = mySharedPref.getInt("userMoney",0);
 
@@ -76,6 +86,10 @@ public class SharedPref {
 
     public void pokemonStartBattle() {
         //pokemons[0] = 0;
+    }
+
+    public void addBadge(int gymNum) {
+        badgeCollection[gymNum-1] = true;
     }
 
 }

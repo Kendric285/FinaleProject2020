@@ -1549,7 +1549,7 @@ public class Battle extends AppCompatActivity {
         Intent toGyms = new Intent(this, ChooseGym.class);
 
        if(opponentHP == 0 || opponentHP < 0) {
-            toGyms.putExtra("badgeCollection", gymNum - 1);
+            sharedPref.addBadge(gymNum);
 
         }
 

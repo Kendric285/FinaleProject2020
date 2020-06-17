@@ -18,6 +18,18 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
+    <Button
+        android:id="@+id/beat"
+        android:layout_width="165dp"
+        android:layout_height="189dp"
+        android:layout_marginEnd="124dp"
+        android:background="#00FFFFFF"
+        android:text="X"
+        android:textColor="#FF0909"
+        android:textSize="150dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="-25dp" />
+
     <ImageView
         android:id="@+id/backArrow"
         android:layout_width="48dp"
