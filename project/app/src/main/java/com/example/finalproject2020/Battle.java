@@ -85,6 +85,8 @@ public class Battle extends AppCompatActivity {
 
     String opponentMovei;
 
+    ArrayList<Integer> badgeCollection = new ArrayList<Integer>();
+
     Button hide;
 
     Integer textLengthTime;
@@ -154,6 +156,8 @@ public class Battle extends AppCompatActivity {
     Integer fighterTurn;
 
     boolean textPrinting = false;
+
+
     
     
     //Opponent Pokemon
@@ -177,9 +181,15 @@ public class Battle extends AppCompatActivity {
         opponentHealth = findViewById(R.id.hp2);
         myPokemon = findViewById(R.id.myPokemon);
         opponentPokemonImage = findViewById(R.id.opponentPokemon);
+
+
         Intent intent = getIntent();
         gymNum = intent.getIntExtra("gymNumber",0);
+        badgeCollection = intent.getIntegerArrayListExtra("badgeCollection");
+
         battleNarration = findViewById(R.id.battleNarration);
+
+        hide = findViewById(R.id.button);
 
         myHP = 100;
         opponentHP = 100;
@@ -272,13 +282,15 @@ public class Battle extends AppCompatActivity {
                     bLeft.setText("Backpack");
                     tRight.setText("Pokemon");
                     bRight.setText("Run");
+
+                    fight = false;
                     opponentIsAttacking = true;
 
                     System.out.println(move1Str);
 
                     Log.d("poke", "onClick: " + opponentHP);
                 } else {
-                    if (fight == false) {
+                    if (fight == false ) {
                         opponentAttacks();
                         fight = true;
 
@@ -294,9 +306,13 @@ public class Battle extends AppCompatActivity {
                     }
                 }
                 if(myHP == 0 || myHP < 0){
+                    myHP = 0;
                     battlefood(opponentPokemonNameText.getText() + " wins !");
+
                 }else if(opponentHP == 0 || opponentHP < 0) {
+                    opponentHP = 0;
                     battlefood(myPokeName.toUpperCase() + " wins !");
+
                 }
             }
         });
@@ -364,11 +380,19 @@ public class Battle extends AppCompatActivity {
 
                     Log.d("poke", "onClick: " + opponentHP);
 
-                    if(myHP == 0 || myHP < 0){
-                        battlefood(opponentPokemonNameText.getText() + " wins");
-                    }else if(opponentHP == 0 || opponentHP < 0) {
-                        battlefood(myPokeName.toUpperCase() + " wins");
-                    }
+
+                }else {
+                    opponentAttacks();
+                }
+
+                if(myHP == 0 || myHP < 0){
+                    myHP = 0;
+                    battlefood(opponentPokemonNameText.getText() + " wins");
+
+                }else if(opponentHP == 0 || opponentHP < 0) {
+                    opponentHP = 0;
+                    battlefood(myPokeName.toUpperCase() + " wins");
+
                 }
             }
         });
@@ -426,11 +450,19 @@ public class Battle extends AppCompatActivity {
                     fight = false;
                     opponentIsAttacking = true;
 
-                    if(myHP == 0 || myHP < 0){
-                        battlefood(opponentPokemonNameText.getText() + " wins !");
-                    }else if(opponentHP == 0 || opponentHP < 0) {
-                        battlefood(myPokeName.toUpperCase() + " wins ! ");
-                    }
+
+
+                }else{
+                    opponentAttacks();
+                }
+
+                if(myHP == 0 || myHP < 0){
+                    myHP = 0;
+                    battlefood(opponentPokemonNameText.getText() + " wins !");
+
+                }else if(opponentHP == 0 || opponentHP < 0) {
+                    opponentHP = 0;
+                    battlefood(myPokeName.toUpperCase() + " wins ! ");
 
                 }
             }
@@ -510,12 +542,27 @@ public class Battle extends AppCompatActivity {
                     tRight.setText("Pokemon");
                     bRight.setText("Run");
                     fight = false;
+                    opponentIsAttacking = true;
 
-                    if(myHP == 0 || myHP < 0){
-                        battlefood(opponentPokemonNameText.getText() + " wins");
-                    }else if(opponentHP == 0 || opponentHP < 0) {
-                        battlefood(myPokeName + " wins");
-                    }
+
+                } else{
+                    opponentAttacks();
+                }
+
+
+                if(myHP == 0 || myHP < 0){
+                    myHP = 0;
+                    battlefood(opponentPokemonNameText.getText() + " wins");
+
+
+                }else if(opponentHP == 0 || opponentHP < 0) {
+                    opponentHP = 0;
+                    battlefood(myPokeName + " wins");
+
+
+
+
+
                 }
             }
         });
@@ -528,6 +575,46 @@ public class Battle extends AppCompatActivity {
                     textClicks++;
                 }else{
                     System.out.println("nothing");
+                }
+
+
+                if(myHP == 0 || myHP < 0){
+                    myHP = 0;
+                    backToGyms(gymNum);
+
+
+                }else if(opponentHP == 0 || opponentHP < 0) {
+                    opponentHP = 0;
+                    backToGyms(gymNum);
+
+
+
+
+                }
+
+
+            }
+        });
+
+
+        battleNarration2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if(myHP == 0 || myHP < 0){
+                    myHP = 0;
+                    backToGyms(gymNum);
+
+
+                }else if(opponentHP == 0 || opponentHP < 0) {
+                    opponentHP = 0;
+                    badgeCollection.add(gymNum);
+                    backToGyms(gymNum);
+
+
+
+
                 }
 
 
@@ -1291,7 +1378,7 @@ public class Battle extends AppCompatActivity {
 
     public void opponentAttacks(){
 
-        if(fight == false && opponentIsAttacking == true){
+
 
             JSONArray moves = null;
             try {
@@ -1333,6 +1420,12 @@ public class Battle extends AppCompatActivity {
                                         move1i = myResponse;
                                         opponentMoveStr = objMove1.getInt("power");
                                         opponentMoveAcc = objMove1.getInt("accuracy");
+
+                                        if(opponentMoveStr != 0){
+
+                                        }else{
+                                            opponentMoveStr = 20;
+                                        }
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -1344,6 +1437,10 @@ public class Battle extends AppCompatActivity {
 
                // battleNarration.setText("");
 
+
+                opponentMoveStr = 30;
+                Log.d("attack", "opponentAttacks: " + opponentMoveStr);
+
                 accCalculate = r.nextInt(110);
 
                 if (opponentMoveStr != 0) {
@@ -1354,12 +1451,15 @@ public class Battle extends AppCompatActivity {
                     if(opponentMoveAcc > accCalculate) {
                         myHP = myHP - opponentMoveStr;
 
-                        setBattleNarration(opponentMove.toUpperCase()+" did "+opponentMoveStr+" damage very effective!");
+                        battleNarration.setText("");
+                        setBattleNarration(opponentMoveName.toUpperCase()+" did "+opponentMoveStr+" damage very effective!");
                         Log.d("poke", "onClick: " + myPokeName.toUpperCase() + " used " + move1.toUpperCase());
 
                         textLengthTime = battleNarration.length() * 100;
                     }else{
-                        setBattleNarration( opponentMove.toUpperCase() + " missed and was not effective");
+                        battleNarration.setText("");
+                        battleNarration2.setText("");
+                        setBattleNarration( opponentMoveName.toUpperCase() + " missed and was not effective");
 
 
                     }
@@ -1378,7 +1478,9 @@ public class Battle extends AppCompatActivity {
 
 
                 } else {
-                    //setBattleNarration(opponentPokeName.toUpperCase()+" used "+opponentMove.toUpperCase()+"!");
+                    battleNarration.setText("");
+                    battleNarration2.setText("");
+                    setBattleNarration(opponentPokemonNameText.getText()+" used "+opponentMoveName.toUpperCase()+"!");
                 }
 
 
@@ -1387,9 +1489,7 @@ public class Battle extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-        }else {
 
-        }
 
         opponentIsAttacking = false;
         fight = true;
@@ -1437,25 +1537,24 @@ public class Battle extends AppCompatActivity {
         }.start();
     }
 
-    private void winnerHandler(){
-        winnerPlr = new CountDownTimer(999999999,1) {
-            @Override
-            public void onTick (long millisUntilFinished){
 
-
-
-            }
-
-            @Override
-            public void onFinish () {
-
-            }
-
-        }.start();
-    }
 
     private void hide(){
        hide.setVisibility(View.INVISIBLE);
+    }
+
+    public void backToGyms(int gymNum){
+
+
+        Intent toGyms = new Intent(this, ChooseGym.class);
+
+       if(opponentHP == 0 || opponentHP < 0) {
+            toGyms.putExtra("badgeCollection", gymNum - 1);
+
+        }
+
+        startActivity(toGyms);
+
     }
 
 

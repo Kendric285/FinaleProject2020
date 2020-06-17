@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ChooseGym extends AppCompatActivity {
 
@@ -29,6 +30,20 @@ public class ChooseGym extends AppCompatActivity {
     ImageView gymImageView;
 
     TextView gymName;
+
+
+    Boolean[] badgeCollection;
+
+    Boolean pewterCityBadge;
+    Boolean ceruleanCityBadge;
+    Boolean vermillionCityBadge;
+    Boolean celadonCityBadge;
+    Boolean fuchsiaCityBadge;
+    Boolean safronCityBadge;
+    Boolean cinnabarCityBadge;
+    Boolean viridianCityBadge;
+
+
 
 
     OkHttpClient client;
@@ -68,6 +83,29 @@ public class ChooseGym extends AppCompatActivity {
         pokeBalls.setText("PokeBalls: "+ userPokeBalls);
 
 
+
+
+        badgeCollection = new Boolean[8];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //Log.d("pokemon", "onCreate: "+sharedPref.getPokemon(0));
 
         gymNumber = 1;
@@ -75,6 +113,9 @@ public class ChooseGym extends AppCompatActivity {
         pokeImgs[0] = findViewById(R.id.poke1);
         pokeImgs[1] = findViewById(R.id.poke2);
         pokeImgs[2] = findViewById(R.id.poke3);
+
+
+        Intent intent = getIntent();
 
 
 
@@ -85,9 +126,12 @@ public class ChooseGym extends AppCompatActivity {
 
         gymImageView.setImageResource(R.drawable.pewtergym);
 
+
+
+
         getPokemon(0);
-        getPokemon(1);
-        getPokemon(2);
+//        getPokemon(1);
+  //      getPokemon(2);
 
         gymImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,11 +282,20 @@ public class ChooseGym extends AppCompatActivity {
     public void toBattle(){
         Intent toBattle = new Intent(this, Battle.class);
         toBattle.putExtra("gymNumber",gymNumber);
+        toBattle.putExtra("badgeCollection", badgeCollection);
         startActivity(toBattle);
     }
 
     public void pic() {
-        Picasso.with(this).load(pokeImageFront).into(pokeImgs[poke]); }
+        Picasso.with(this).load(pokeImageFront).into(pokeImgs[poke]);
+    }
+
+    public static void printBadges(ArrayList<Integer> arrayListName){
+
+        for (int number = 0; number < arrayListName.size(); number++){
+            System.out.println(arrayListName.get(number));
+        }
+    }
 
     /*private void pokeIdle(){
         pokeFront1 = new CountDownTimer(happyTime,1) {
