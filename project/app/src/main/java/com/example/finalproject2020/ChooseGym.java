@@ -125,6 +125,10 @@ public class ChooseGym extends AppCompatActivity {
 
         gymImageView.setImageResource(R.drawable.pewtergym);
 
+        for(int i = 0; i < 8; i ++){
+            System.out.println(i + 1 +  ": " + sharedPref.badgeCollection[i]);
+        }
+
 
 
 

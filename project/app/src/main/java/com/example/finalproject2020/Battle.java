@@ -93,6 +93,10 @@ public class Battle extends AppCompatActivity {
 
     int[] opponentPokemon;
 
+    int noAttackDamageMoveNum;
+
+    String[] noAttackDamage;
+
     String pokeImageFront;
     String pokeImageBack;
 
@@ -194,8 +198,8 @@ public class Battle extends AppCompatActivity {
 
         hide = findViewById(R.id.button);
 
-        myHP = 100;
-        opponentHP = 100;
+        myHP = 300;
+        opponentHP = 300;
 
         opponentHealth.setMax(opponentHP);
         opponentHealth.setProgress(opponentHP);
@@ -239,6 +243,9 @@ public class Battle extends AppCompatActivity {
 
 
 
+
+
+
         getOpponentPokemon(gymNum);
 
         battleNarration2.setVisibility(View.INVISIBLE);
@@ -276,7 +283,18 @@ public class Battle extends AppCompatActivity {
 
 
                             } else if (move1Str == 0) {
-                                battlefood(myPokeName.toUpperCase() + " used " + move1.toUpperCase() + "!");
+
+                                noAttackDamage = new String[3];
+                                noAttackDamageMoveNum = r.nextInt(3);
+
+
+                                noAttackDamage[0] = opponentPokemonNameText.getText() + "'s defense fell!";
+                                noAttackDamage[1] = opponentPokemonNameText.getText() + "'s attack fell!";
+                                noAttackDamage[2] = opponentPokemonNameText.getText() + "'s accuracy fell!";
+
+
+
+                                battlefood((myPokeName + " used " + move1 + ", " + noAttackDamage[noAttackDamageMoveNum]).toUpperCase());
                             }
 
 
@@ -362,7 +380,17 @@ public class Battle extends AppCompatActivity {
 
 
                     } else {
-                        battlefood(myPokeName.toUpperCase()+" used "+move2.toUpperCase()+"!");
+                        noAttackDamage = new String[3];
+                        noAttackDamageMoveNum = r.nextInt(3);
+
+
+                        noAttackDamage[0] = opponentPokemonNameText.getText() + "'s defense fell!";
+                        noAttackDamage[1] = opponentPokemonNameText.getText() + "'s attack fell!";
+                        noAttackDamage[2] = opponentPokemonNameText.getText() + "'s accuracy fell!";
+
+
+
+                        battlefood((myPokeName + " used " + move2 + ", " + noAttackDamage[noAttackDamageMoveNum]).toUpperCase());
                     }
 
 
@@ -441,7 +469,17 @@ public class Battle extends AppCompatActivity {
 
 
                     } else {
-                        battlefood((myPokeName.toUpperCase()+" used "+move3.toUpperCase()+"!").toUpperCase());
+                        noAttackDamage = new String[3];
+                        noAttackDamageMoveNum = r.nextInt(3);
+
+
+                        noAttackDamage[0] = opponentPokemonNameText.getText() + "'s defense fell!";
+                        noAttackDamage[1] = opponentPokemonNameText.getText() + "'s attack fell!";
+                        noAttackDamage[2] = opponentPokemonNameText.getText() + "'s accuracy fell!";
+
+
+
+                        battlefood((myPokeName + " used " + move3 + ", " + noAttackDamage[noAttackDamageMoveNum]).toUpperCase());
                     }
 
 
@@ -457,6 +495,15 @@ public class Battle extends AppCompatActivity {
 
                 }else{
                     opponentAttacks();
+                }
+                if(myHP == 0 || myHP < 0){
+                    myHP = 0;
+                    battlefood(opponentPokemonNameText.getText() + " wins");
+
+                }else if(opponentHP == 0 || opponentHP < 0) {
+                    opponentHP = 0;
+                    battlefood(myPokeName.toUpperCase() + " wins");
+
                 }
 
             }
@@ -492,7 +539,8 @@ public class Battle extends AppCompatActivity {
                                 battleNarration2.setText("");
                                 battleNarration2.setVisibility(VISIBLE);
                                 battleNarration.setVisibility(View.INVISIBLE);
-                                setBattleNarration2((myPokeName + " used " + move4 + "!").toUpperCase());
+
+                                
                             }else{
                                 battleNarration.setText("");
                                 battleNarration2.setText("");
@@ -522,13 +570,32 @@ public class Battle extends AppCompatActivity {
                             battleNarration2.setText("");
                             battleNarration2.setVisibility(VISIBLE);
                             battleNarration.setVisibility(View.INVISIBLE);
-                            setBattleNarration2((myPokeName + " used " + move4 + "!").toUpperCase());
+
+                            noAttackDamage = new String[3];
+                            noAttackDamageMoveNum = r.nextInt(3);
+
+
+                            noAttackDamage[0] = opponentPokemonNameText.getText() + "'s defense fell!";
+                            noAttackDamage[1] = opponentPokemonNameText.getText() + "'s attack fell!";
+                            noAttackDamage[2] = opponentPokemonNameText.getText() + "'s accuracy fell!";
+
+
+
+                            setBattleNarration2((myPokeName + " used " + move4 + ", " + noAttackDamage[noAttackDamageMoveNum]).toUpperCase());
                         }else{
                             battleNarration.setText("");
                             battleNarration2.setText("");
                             battleNarration2.setVisibility(View.INVISIBLE);
                             battleNarration.setVisibility(VISIBLE);
-                            setBattleNarration((myPokeName + " used " + move4 + "!").toUpperCase());
+
+                            noAttackDamage = new String[3];
+                            noAttackDamageMoveNum = r.nextInt(3);
+
+
+                            noAttackDamage[0] = opponentPokemonNameText.getText() + "'s defense fell!";
+                            noAttackDamage[1] = opponentPokemonNameText.getText() + "'s attack fell!";
+                            noAttackDamage[2] = opponentPokemonNameText.getText() + "'s accuracy fell!";
+                            setBattleNarration((myPokeName + " used " + move4 + ", " + noAttackDamage[noAttackDamageMoveNum]).toUpperCase());
                         }
                     }
                     tLeft.setText("Fight");
@@ -541,6 +608,15 @@ public class Battle extends AppCompatActivity {
 
                 } else{
                     opponentAttacks();
+                }
+                if(myHP == 0 || myHP < 0){
+                    myHP = 0;
+                    battlefood(opponentPokemonNameText.getText() + " wins");
+
+                }else if(opponentHP == 0 || opponentHP < 0) {
+                    opponentHP = 0;
+                    battlefood(myPokeName.toUpperCase() + " wins");
+
                 }
 
 
@@ -555,7 +631,14 @@ public class Battle extends AppCompatActivity {
                     textClicks++;
                 }else{
                     System.out.println("nothing");
+
                 }
+
+                if(gameOver){
+                    backToGyms(gymNum);
+                }
+
+
 
 
 
@@ -567,6 +650,11 @@ public class Battle extends AppCompatActivity {
         battleNarration2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                if(gameOver){
+                    backToGyms(gymNum);
+                }
 
 
 
@@ -1012,7 +1100,7 @@ public class Battle extends AppCompatActivity {
                 }
             }
         };
-        timer.schedule(taskEverySplitSecond, 1, 75);
+        timer.schedule(taskEverySplitSecond, 1, 60);
 
 
     }
@@ -1094,7 +1182,7 @@ public class Battle extends AppCompatActivity {
 
             }
         };
-        timer.schedule(taskEverySplitSecond, 1, 75);
+        timer.schedule(taskEverySplitSecond, 1, 60);
 
 
     }
@@ -1453,13 +1541,13 @@ public class Battle extends AppCompatActivity {
                 if(myHP == 0 || myHP < 0){ 
                     myHP = 0;
                     if (gameOver == false) {
-                        backToGyms(gymNum);
+                       // backToGyms(gymNum);
                     }
                     gameOver = true;
                 }else if(opponentHP == 0 || opponentHP < 0) {
                     opponentHP = 0;
                     if (gameOver == false) {
-                        backToGyms(gymNum);
+                     //   backToGyms(gymNum);
                     }
                     gameOver = true;
                 }
