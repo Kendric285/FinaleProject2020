@@ -418,11 +418,11 @@ public class Battle extends AppCompatActivity {
 
                 if(myHP == 0 || myHP < 0){
                     myHP = 0;
-                    battlefood(opponentPokemonNameText.getText() + " wins");
+                    battlefood(opponentPokemonNameText.getText() + " wins!");
 
                 }else if(opponentHP == 0 || opponentHP < 0) {
                     opponentHP = 0;
-                    battlefood(myPokeName.toUpperCase() + " wins");
+                    battlefood(myPokeName.toUpperCase() + " wins!");
 
                 }
             }
@@ -498,11 +498,11 @@ public class Battle extends AppCompatActivity {
                 }
                 if(myHP == 0 || myHP < 0){
                     myHP = 0;
-                    battlefood(opponentPokemonNameText.getText() + " wins");
+                    battlefood(opponentPokemonNameText.getText() + " wins!");
 
                 }else if(opponentHP == 0 || opponentHP < 0) {
                     opponentHP = 0;
-                    battlefood(myPokeName.toUpperCase() + " wins");
+                    battlefood(myPokeName.toUpperCase() + " wins!");
 
                 }
 
@@ -611,11 +611,11 @@ public class Battle extends AppCompatActivity {
                 }
                 if(myHP == 0 || myHP < 0){
                     myHP = 0;
-                    battlefood(opponentPokemonNameText.getText() + " wins");
+                    battlefood(opponentPokemonNameText.getText() + " wins!");
 
                 }else if(opponentHP == 0 || opponentHP < 0) {
                     opponentHP = 0;
-                    battlefood(myPokeName.toUpperCase() + " wins");
+                    battlefood(myPokeName.toUpperCase() + " wins!");
 
                 }
 
