@@ -540,7 +540,7 @@ public class Battle extends AppCompatActivity {
                                 battleNarration2.setVisibility(VISIBLE);
                                 battleNarration.setVisibility(View.INVISIBLE);
 
-                                
+
                             }else{
                                 battleNarration.setText("");
                                 battleNarration2.setText("");
