@@ -1395,12 +1395,12 @@ public class Battle extends AppCompatActivity {
                     if(opponentMoveAcc > accCalculate) {
                         myHP = myHP - opponentMoveStr;
 
-                        battlefood(opponentMoveName.toUpperCase()+" did "+opponentMoveStr+" damage very effective!");
+                        battlefood(opponentPokemonNameText.getText()  + "'S " +opponentMoveName.toUpperCase()+" did "+opponentMoveStr+" damage very effective!");
                         Log.d("poke", "onClick: " + myPokeName.toUpperCase() + " used " + move1.toUpperCase());
 
                         textLengthTime = battleNarration.length() * 100;
                     }else{
-                        battlefood(opponentMoveName.toUpperCase() + " missed and was not effective");
+                        battlefood(opponentPokemonNameText.getText()  + "'S "+ opponentMoveName.toUpperCase() + " missed and was not effective");
 
                     }
 
@@ -1450,7 +1450,7 @@ public class Battle extends AppCompatActivity {
                 myHealth.setProgress(myHP);
                 myHealthNum.setText(myHP +"/300");
 
-                if(myHP == 0 || myHP < 0){
+                if(myHP == 0 || myHP < 0){ 
                     myHP = 0;
                     if (gameOver == false) {
                         backToGyms(gymNum);
