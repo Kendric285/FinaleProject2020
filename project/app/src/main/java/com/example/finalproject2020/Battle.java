@@ -174,6 +174,8 @@ public class Battle extends AppCompatActivity {
     String opponentMoveUrl;
     JSONObject opponentObject;
 
+    int rnPoke = 0;
+
     @Override///////807 POKEMONNNNS
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -199,7 +201,7 @@ public class Battle extends AppCompatActivity {
         hide = findViewById(R.id.button);
 
         myHP = 300;
-        opponentHP = 300;
+        opponentHP = 5;
 
         opponentHealth.setMax(opponentHP);
         opponentHealth.setProgress(opponentHP);
@@ -255,6 +257,10 @@ public class Battle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //move1
+
+                if (move1Str == 0 && move2Str == 0 && move3Str == 0 && move4Str == 0){
+                    getMyPokemon(rnPoke);
+                }
 
                 if (gameOver == false) {
                     if (textClicks > 0) {
@@ -441,7 +447,6 @@ public class Battle extends AppCompatActivity {
 
                     if (move3Str != 0) {
 
-
                    //     if(move3Acc > accCalculate) {
                             opponentHP = opponentHP - move3Str;
 
@@ -451,22 +456,7 @@ public class Battle extends AppCompatActivity {
                             textLengthTime = battleNarration.length() * 100;
                       //  }else{
                             //battlefood(move3.toUpperCase() + " missed and was not effective");
-
-
                      //   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                     } else {
                         noAttackDamage = new String[3];
@@ -526,7 +516,7 @@ public class Battle extends AppCompatActivity {
                     if (move4Str != 0) {
 
 
-                        if(move3Acc > accCalculate) {
+                        if(move4Acc > accCalculate) {
                             opponentHP = opponentHP - move4Str;
 
                                 battlefood(move4.toUpperCase() + " did " + move4Str + " damage");
@@ -534,20 +524,8 @@ public class Battle extends AppCompatActivity {
 
                             textLengthTime = battleNarration.length() * 100;
                         }else{
-                            if(battleNarration.getVisibility() == VISIBLE){
-                                battleNarration.setText("");
-                                battleNarration2.setText("");
-                                battleNarration2.setVisibility(VISIBLE);
-                                battleNarration.setVisibility(View.INVISIBLE);
 
-
-                            }else{
-                                battleNarration.setText("");
-                                battleNarration2.setText("");
-                                battleNarration2.setVisibility(View.INVISIBLE);
-                                battleNarration.setVisibility(VISIBLE);
-                                setBattleNarration(move4.toUpperCase() + " missed and was not effective");
-                            }
+                            battlefood(move4.toUpperCase() + " missed and was not effective");
 
                         }
 
@@ -889,7 +867,6 @@ public class Battle extends AppCompatActivity {
 
                             }
         healthHandler();
-
 
     }
 
@@ -1572,11 +1549,11 @@ public class Battle extends AppCompatActivity {
 
 
         Intent toGyms = new Intent(this, ChooseGym.class);
-
+        Log.d("poke2", "backToGyms1:DADDY "+gymNum+" THIS 4 U DADDY"+sharedPref.badgeCollection[gymNum-1]);
        if(opponentHP == 0 || opponentHP < 0) {
+           Log.d("poke2", "backToGyms2:DADDY "+gymNum+" THIS 4 U DADDY"+sharedPref.badgeCollection[gymNum-1]);
            sharedPref.addBadge(gymNum);
-           Log.d("toGyms", "backToGyms: ");
-
+           Log.d("poke2", "backToGyms3:DADDY "+gymNum+" THIS 4 U DADDY"+sharedPref.badgeCollection[gymNum-1]);
         }
 
         startActivity(toGyms);

@@ -102,8 +102,7 @@ public class ChooseGym extends AppCompatActivity {
 
 
 
-
-
+//        gymPic();
 
         //Log.d("pokemon", "onCreate: "+sharedPref.getPokemon(0));
 
@@ -133,6 +132,7 @@ public class ChooseGym extends AppCompatActivity {
 
 
         getPokemon(0);
+        gymPic();
 //        getPokemon(1);
   //      getPokemon(2);
 
@@ -224,23 +224,21 @@ public class ChooseGym extends AppCompatActivity {
             gymImageView.setImageResource(R.drawable.pewtergym);
             if (sharedPref.badgeCollection[0] == false) {
                 beat.setVisibility(View.INVISIBLE);
-
+                gymName.setText("Pewter Gym");
             }else{
                 beat.setVisibility(View.VISIBLE);
-
+                gymName.setText("*BADGE COLLECTED*");
             }
-            gymName.setText("Pewter Gym");
         }
         else if(gymNumber == 2){
             gymImageView.setImageResource(R.drawable.ceruleangym);
             if (sharedPref.badgeCollection[1]==false) {
                 beat.setVisibility(View.INVISIBLE);
-
+                gymName.setText("Cerulean Gym");
             }else{
                 beat.setVisibility(View.VISIBLE);
-
+                gymName.setText("*BADGE COLLECTED*");
             }
-            gymName.setText("Cerulean Gym");
 
         }
         else if(gymNumber == 3){
@@ -248,24 +246,22 @@ public class ChooseGym extends AppCompatActivity {
 
             if (sharedPref.badgeCollection[2]==false) {
                 beat.setVisibility(View.INVISIBLE);
-
+                gymName.setText("Vermillion Gym");
             }else{
                 beat.setVisibility(View.VISIBLE);
-
+                gymName.setText("*BADGE COLLECTED*");
             }
-            gymName.setText("Vermillion Gym");
 
         }
         else if(gymNumber == 4){
             gymImageView.setImageResource(R.drawable.celadongym);
             if (sharedPref.badgeCollection[3]==false) {
                 beat.setVisibility(View.INVISIBLE);
-
+                gymName.setText("Celadon Gym");
             }else{
                 beat.setVisibility(View.VISIBLE);
-
+                gymName.setText("*BADGE COLLECTED*");
             }
-            gymName.setText("Celadon Gym");
 
         }
         else if(gymNumber == 5){
@@ -273,12 +269,12 @@ public class ChooseGym extends AppCompatActivity {
 
             if (sharedPref.badgeCollection[4]==false) {
                 beat.setVisibility(View.INVISIBLE);
-
+                gymName.setText("Fuchsia Gym");
             }else{
                 beat.setVisibility(View.VISIBLE);
-
+                gymName.setText("*BADGE COLLECTED*");
             }
-            gymName.setText("Fuchsia Gym");
+
 
         }
         else if(gymNumber == 6){
@@ -286,12 +282,11 @@ public class ChooseGym extends AppCompatActivity {
 
             if (sharedPref.badgeCollection[5]==false) {
                 beat.setVisibility(View.INVISIBLE);
-
+                gymName.setText("Saffron Gym");
             }else{
                 beat.setVisibility(View.VISIBLE);
-
+                gymName.setText("*BADGE COLLECTED*");
             }
-            gymName.setText("Saffron Gym");
 
         }
         else if(gymNumber == 7){
@@ -299,12 +294,12 @@ public class ChooseGym extends AppCompatActivity {
 
             if (sharedPref.badgeCollection[6]==false) {
                 beat.setVisibility(View.INVISIBLE);
+                gymName.setText("Cinnabar Gym");
 
             }else{
                 beat.setVisibility(View.VISIBLE);
-
+                gymName.setText("*BADGE COLLECTED*");
             }
-            gymName.setText("Cinnabar Gym");
 
         }
         else {
@@ -312,12 +307,13 @@ public class ChooseGym extends AppCompatActivity {
 
             if (sharedPref.badgeCollection[7] == false) {
                 beat.setVisibility(View.INVISIBLE);
+                gymName.setText("Viridian Gym");
 
             }else{
                 beat.setVisibility(View.VISIBLE);
+                gymName.setText("*BADGE COLLECTED*");
 
             }
-            gymName.setText("Viridian Gym");
 
         }
     }
