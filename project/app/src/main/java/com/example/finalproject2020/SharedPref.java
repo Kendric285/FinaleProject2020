@@ -89,8 +89,8 @@ public class SharedPref {
     }
 
     public void addBadge(int gymNum) {
-
         badgeCollection[gymNum-1] = true;
+        editor.putBoolean("badge"+gymNum,badgeCollection[gymNum-1]).commit();
     }
 
 }

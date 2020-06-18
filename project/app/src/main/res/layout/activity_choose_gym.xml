@@ -18,19 +18,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <Button
-        android:id="@+id/beat"
-        android:layout_width="165dp"
-        android:layout_height="189dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginBottom="576dp"
-        android:background="#00FFFFFF"
-        android:text="X"
-        android:textColor="#FF0909"
-        android:textSize="150dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <ImageView
         android:id="@+id/backArrow"
         android:layout_width="48dp"
@@ -117,5 +104,20 @@
         android:textSize="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/beat"
+        android:layout_width="162dp"
+        android:layout_height="163dp"
+        android:layout_marginEnd="124dp"
+        android:layout_marginBottom="428dp"
+        android:background="#00FFFFFF"
+        android:gravity="bottom|center"
+        android:text="X"
+        android:textColor="#FF0909"
+        android:textSize="170dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
