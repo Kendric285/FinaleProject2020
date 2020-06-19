@@ -385,6 +385,7 @@ public class ChooseGym extends AppCompatActivity {
             }
 
         }
+        //yo
         else if(gymNumber == 4){
             gymImageView.setImageResource(R.drawable.celadongym);
             if (sharedPref.badgeCollection[3]==false) {
