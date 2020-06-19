@@ -53,7 +53,6 @@ public class Battle extends AppCompatActivity {
 
     OkHttpClient client;
 
-    boolean fight;
     Button tLeft;
     Button bLeft;
     Button tRight;
@@ -176,18 +175,6 @@ public class Battle extends AppCompatActivity {
     ImageView pok5;
     ImageView pok6;
 
-
-
-
-
-
-
-
-
-
-
-
-
     //Opponent Pokemon
     String opponentMove;
     int opponentMoveStr = 30;
@@ -199,7 +186,7 @@ public class Battle extends AppCompatActivity {
     int rnPoke = 0;
 
     RelativeLayout pokemans;
-
+    Boolean choosing = false;
 
     private String pokeImageFront1;
     private String pokeImageFront2;
@@ -207,14 +194,13 @@ public class Battle extends AppCompatActivity {
     private String pokeImageFront4;
     private String pokeImageFront5;
     private String pokeImageFront6;
-
+    private Boolean fight;
     @Override///////807 POKEMONNNNS
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle);
         client = new OkHttpClient();
         sharedPref = new SharedPref(this);
-        fight = false;
         pokeName = findViewById(R.id.pokeName);
         myHealthNum = findViewById(R.id.health);
         myHealth = findViewById(R.id.hp);
@@ -227,10 +213,12 @@ public class Battle extends AppCompatActivity {
         pok4 = findViewById(R.id.pok4);
         pok5 = findViewById(R.id.pok5);
         pok6 = findViewById(R.id.pok6);
+        fight = false;
 
         pokemans = findViewById(R.id.pokemans);
 
         getPokemon();
+        getMyPokemon(0);
 
 
 
@@ -309,7 +297,7 @@ public class Battle extends AppCompatActivity {
                 if (gameOver == false) {
                     if (textClicks > 0) {
 
-                        if (fight == true && opponentIsAttacking == false) {
+                        if (fight == true && opponentIsAttacking == false && choosing == false) {
 
                             fight = false;
 
@@ -392,7 +380,8 @@ public class Battle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //move2
-                if (fight == true && opponentIsAttacking == false) {
+                if (fight == true && opponentIsAttacking == false && choosing == false) {
+                    fight = false;
 
                     Log.d("poke", "onClick: " + opponentHP);
 
@@ -462,7 +451,7 @@ public class Battle extends AppCompatActivity {
                     Log.d("poke", "onClick: " + opponentHP);
 
 
-                }else {
+                }else if (fight == true) {
                     opponentAttacks();
                 }
 
@@ -482,12 +471,27 @@ public class Battle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //move3
-                if (fight == true && opponentIsAttacking == false ) {
+
+                if (fight == false && choosing == false){
+                    pokemans.setVisibility(VISIBLE);
+                    choosing = true;
+                    tLeft.setText("");
+                    bLeft.setText("");
+                    tRight.setText("back");
+                    bRight.setText("");
+                } else if (choosing == true) {
+                    tLeft.setText("Fight");
+                    bLeft.setText("Backpack");
+                    tRight.setText("Pokemon");
+                    bRight.setText("Run");
+                    choosing = false;
+                    pokemans.setVisibility(View.INVISIBLE);
+                }
+
+
+                if (fight == true && opponentIsAttacking == false && choosing == false) {
+                    fight = false;
                     Log.d("poke", "onClick: " + opponentHP);
-
-                    if (fight == false) {
-
-                    }
 
                     battleNarration.setText("");
 
@@ -531,7 +535,7 @@ public class Battle extends AppCompatActivity {
 
 
 
-                }else{
+                }else if (fight == true){
                     opponentAttacks();
                 }
                 if(myHP == 0 || myHP < 0){
@@ -551,8 +555,8 @@ public class Battle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //move4
-                if (fight == true && opponentIsAttacking == false) {
-
+                if (fight == true && opponentIsAttacking == false && choosing == false) {
+                fight = false;
 
 
                     Log.d("poke", "onClick: " + opponentHP);
@@ -632,7 +636,7 @@ public class Battle extends AppCompatActivity {
                     opponentIsAttacking = true;
 
 
-                } else{
+                } else if (fight == true){
                     opponentAttacks();
                 }
                 if(myHP == 0 || myHP < 0){
@@ -710,8 +714,6 @@ public class Battle extends AppCompatActivity {
 
 
        */
-
-        getMyPokemon(0);
 
     }
 
