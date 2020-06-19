@@ -116,6 +116,8 @@ public class Battle extends AppCompatActivity {
     Runnable startDelay;
 
 
+
+
     TextView battleNarration2;
 
 
@@ -142,6 +144,9 @@ public class Battle extends AppCompatActivity {
 
     int gymNum;
 
+
+
+
     Random r = new Random();
 
     ProgressBar myHealth;
@@ -164,8 +169,18 @@ public class Battle extends AppCompatActivity {
     Boolean gameOver = false;
 
 
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
     //Opponent Pokemon
     String opponentMove;
     int opponentMoveStr = 30;
@@ -189,6 +204,8 @@ public class Battle extends AppCompatActivity {
         opponentHealth = findViewById(R.id.hp2);
         myPokemon = findViewById(R.id.myPokemon);
         opponentPokemonImage = findViewById(R.id.opponentPokemon);
+
+
 
 
         Intent intent = getIntent();
