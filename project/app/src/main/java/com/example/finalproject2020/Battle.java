@@ -1003,6 +1003,20 @@ public class Battle extends AppCompatActivity {
             opponentPokemon[2] = 51;
         }
 
+        else if(x == 10){
+            opponentPokemon = new int[1];
+            opponentPokemonImage.setImageResource(R.drawable.questions2);
+
+            battleNarration.setText("");
+
+            setBattleNarration("You've encountered a wild Pokémon");
+
+
+            int randWild = r.nextInt(807);
+
+            opponentPokemon[0] = randWild;
+        }
+
         else{
             System.out.println("toobad");
         }
@@ -1019,11 +1033,13 @@ public class Battle extends AppCompatActivity {
                                 e.printStackTrace();
 
                             }*/
-                            Log.d("pokenum", "getOpponentPokemon: " + opponentPokemon[1]);
+                         /*   Log.d("pokenum", "getOpponentPokemon: " + opponentPokemon[1]);
                             Log.d("pokenum", "getOpponentPokemon: " + opponentPokemonImageURL);
                             Log.d("pokelength", "" + opponentPokemon.length);
 
                             System.out.println(opponentPokemon.length);
+
+                          */
 
 
 
@@ -1376,6 +1392,9 @@ public class Battle extends AppCompatActivity {
                                     }
 
                                 }
+                                else if(gymNum == 10){
+                                    battlefood(opponentPokeName.toUpperCase() + " has appeared, what will you do ?!!");
+                                }
 
                                 else{
                                     System.out.println("toobad");
@@ -1583,14 +1602,18 @@ public class Battle extends AppCompatActivity {
     }
 
     public void backToGyms(int gymNum){
-
-
         Intent toGyms = new Intent(this, ChooseGym.class);
-        Log.d("poke2", "backToGyms1:DADDY "+gymNum+" THIS 4 U DADDY"+sharedPref.badgeCollection[gymNum-1]);
-       if(opponentHP == 0 || opponentHP < 0) {
-           Log.d("poke2", "backToGyms2:DADDY "+gymNum+" THIS 4 U DADDY"+sharedPref.badgeCollection[gymNum-1]);
-           sharedPref.addBadge(gymNum);
-           Log.d("poke2", "backToGyms3:DADDY "+gymNum+" THIS 4 U DADDY"+sharedPref.badgeCollection[gymNum-1]);
+
+
+        if(gymNum != 10) {
+
+
+            Log.d("poke2", "backToGyms1:DADDY " + gymNum + " THIS 4 U DADDY" + sharedPref.badgeCollection[gymNum - 1]);
+            if (opponentHP == 0 || opponentHP < 0) {
+                Log.d("poke2", "backToGyms2:DADDY " + gymNum + " THIS 4 U DADDY" + sharedPref.badgeCollection[gymNum - 1]);
+                sharedPref.addBadge(gymNum);
+                Log.d("poke2", "backToGyms3:DADDY " + gymNum + " THIS 4 U DADDY" + sharedPref.badgeCollection[gymNum - 1]);
+            }
         }
 
         startActivity(toGyms);

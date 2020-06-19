@@ -57,6 +57,8 @@ public class ChooseGym extends AppCompatActivity {
     ImageView cinnabarBadge;
     ImageView viridianBadge;
 
+    Button wilderness;
+
 
     Button beat;
 
@@ -99,6 +101,8 @@ public class ChooseGym extends AppCompatActivity {
           cinnabarBadge = findViewById(R.id.cinnabarBadge);
           viridianBadge =  findViewById(R.id.viridianBadge);
 
+          wilderness = findViewById(R.id.wilderness);
+
 
 
 
@@ -118,12 +122,23 @@ public class ChooseGym extends AppCompatActivity {
         seeBadges = findViewById(R.id.seeBadges);
         badgeCollectionImages = findViewById(R.id.badgeScroll);
 
+
+
+        wilderness.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gymNumber = 10;
+                toBattle();
+            }
+        });
+
         seeBadges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 seeBadgeClicks++;
                 if ((seeBadgeClicks % 2) == 0) {
                     badgeCollectionImages.setVisibility(View.VISIBLE);
+                    seeBadges.setText("Hide Badges");
 
                     //pewter
 
@@ -207,6 +222,8 @@ public class ChooseGym extends AppCompatActivity {
 
 
                 } else {
+                    seeBadges.setText("See Badges");
+
 
                     badgeCollectionImages.setVisibility(View.INVISIBLE);
 
@@ -278,7 +295,7 @@ public class ChooseGym extends AppCompatActivity {
         frontArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(gymNumber != 8){
+                if(gymNumber != 8 && gymNumber != 10){
                     gymNumber++;
 
                 }
@@ -296,7 +313,7 @@ public class ChooseGym extends AppCompatActivity {
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(gymNumber != 1){
+                if(gymNumber != 1 && gymNumber != 10){
                     gymNumber--;
 
                 }
@@ -439,7 +456,7 @@ public class ChooseGym extends AppCompatActivity {
         }
         else {
             gymImageView.setImageResource(R.drawable.viridiangym);
-
+            gymNumber = 8;
             if (sharedPref.badgeCollection[7] == false) {
                 beat.setVisibility(View.INVISIBLE);
                 gymName.setText("Viridian Gym");
