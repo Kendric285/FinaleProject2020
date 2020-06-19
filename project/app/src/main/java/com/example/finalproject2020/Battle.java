@@ -117,6 +117,8 @@ public class Battle extends AppCompatActivity {
     Runnable startDelay;
 
 
+
+
     TextView battleNarration2;
 
 
@@ -142,6 +144,9 @@ public class Battle extends AppCompatActivity {
     Boolean printing;
 
     int gymNum;
+
+
+
 
     Random r = new Random();
 
@@ -171,7 +176,18 @@ public class Battle extends AppCompatActivity {
     ImageView pok5;
     ImageView pok6;
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
     //Opponent Pokemon
     String opponentMove;
     int opponentMoveStr = 30;
@@ -215,6 +231,8 @@ public class Battle extends AppCompatActivity {
         pokemans = findViewById(R.id.pokemans);
 
         getPokemon();
+
+
 
         Intent intent = getIntent();
 
@@ -1512,7 +1530,7 @@ public class Battle extends AppCompatActivity {
         opponentIsAttacking = false;
         fight = true;
     }
-    
+
     public void getOpponentMove(){
 
     }
@@ -1545,7 +1563,7 @@ public class Battle extends AppCompatActivity {
                 myHealth.setProgress(myHP);
                 myHealthNum.setText(myHP +"/300");
 
-                if(myHP == 0 || myHP < 0){ 
+                if(myHP == 0 || myHP < 0){
                     myHP = 0;
                     if (gameOver == false) {
                        // backToGyms(gymNum);

@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -40,6 +41,21 @@ public class ChooseGym extends AppCompatActivity {
     Boolean safronCityBadge;
     Boolean cinnabarCityBadge;
     Boolean viridianCityBadge;
+
+    int seeBadgeClicks;
+
+    Button seeBadges;
+    ScrollView badgeCollectionImages;
+
+
+    ImageView pewterBadge;
+    ImageView ceruleanBadge;
+    ImageView vermillionBadge;
+    ImageView celadonBadge;
+    ImageView fuchsiaBadge;
+    ImageView saffronBadge;
+    ImageView cinnabarBadge;
+    ImageView viridianBadge;
 
 
     Button beat;
@@ -72,6 +88,19 @@ public class ChooseGym extends AppCompatActivity {
 
         beat = findViewById(R.id.beat);
 
+        seeBadgeClicks = 1;
+
+          pewterBadge = findViewById(R.id.pewterBadge);
+          ceruleanBadge = findViewById(R.id.ceruleanBadge);
+          vermillionBadge = findViewById(R.id.vermillionBadge);
+          celadonBadge = findViewById(R.id.celadonBadge);
+          fuchsiaBadge = findViewById(R.id.fuchsiaBadge);
+          saffronBadge = findViewById(R.id.saffronBadge);
+          cinnabarBadge = findViewById(R.id.cinnabarBadge);
+          viridianBadge =  findViewById(R.id.viridianBadge);
+
+
+
 
 
 
@@ -85,6 +114,109 @@ public class ChooseGym extends AppCompatActivity {
 
         money.setText("Money:" + userMoney);
         pokeBalls.setText("PokeBalls: "+ userPokeBalls);
+
+        seeBadges = findViewById(R.id.seeBadges);
+        badgeCollectionImages = findViewById(R.id.badgeScroll);
+
+        seeBadges.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                seeBadgeClicks++;
+                if ((seeBadgeClicks % 2) == 0) {
+                    badgeCollectionImages.setVisibility(View.VISIBLE);
+
+                    //pewter
+
+                    if (sharedPref.badgeCollection[0] == false){
+
+                        pewterBadge.setVisibility(View.INVISIBLE);
+                    }
+                    else if(sharedPref.badgeCollection[0] == true){
+                        pewterBadge.setVisibility(View.VISIBLE);
+                    }
+                    //cerulean
+
+                    if (sharedPref.badgeCollection[1] == false){
+
+                        ceruleanBadge.setVisibility(View.INVISIBLE);
+                    }
+                    else if(sharedPref.badgeCollection[1] == true){
+                        ceruleanBadge.setVisibility(View.VISIBLE);
+                    }
+
+                    //vermillion
+                    if (sharedPref.badgeCollection[2] == false){
+
+                        vermillionBadge.setVisibility(View.INVISIBLE);
+                    }
+                    else if(sharedPref.badgeCollection[2] == true){
+                        vermillionBadge.setVisibility(View.VISIBLE);
+                    }
+
+                    //celadon
+
+                    if (sharedPref.badgeCollection[3] == false){
+
+                        celadonBadge.setVisibility(View.INVISIBLE);
+                    }
+                    else if(sharedPref.badgeCollection[3] == true){
+                        celadonBadge.setVisibility(View.VISIBLE);
+                    }
+
+                    //fuchsia
+
+                    if (sharedPref.badgeCollection[4] == false){
+
+                        fuchsiaBadge.setVisibility(View.INVISIBLE);
+                    }
+                    else if(sharedPref.badgeCollection[4] == true){
+                        fuchsiaBadge.setVisibility(View.VISIBLE);
+                    }
+
+                    //saffron
+
+                    if (sharedPref.badgeCollection[5] == false){
+
+                        saffronBadge.setVisibility(View.INVISIBLE);
+                    }
+                    else if(sharedPref.badgeCollection[5] == true){
+                        saffronBadge.setVisibility(View.VISIBLE);
+                    }
+
+                    //cinnabar
+
+                    if (sharedPref.badgeCollection[6] == false){
+
+                        cinnabarBadge.setVisibility(View.INVISIBLE);
+                    }
+                    else if(sharedPref.badgeCollection[6] == true){
+                        cinnabarBadge.setVisibility(View.VISIBLE);
+                    }
+
+                    if (sharedPref.badgeCollection[7] == false){
+
+                        viridianBadge.setVisibility(View.INVISIBLE);
+                    }
+                    else if(sharedPref.badgeCollection[7] == true){
+                        viridianBadge.setVisibility(View.VISIBLE);
+                    }
+
+
+
+
+
+
+                } else {
+
+                    badgeCollectionImages.setVisibility(View.INVISIBLE);
+
+
+
+                }
+            }
+
+
+        });
 
 
 
