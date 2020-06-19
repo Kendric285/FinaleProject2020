@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".Battle">
 
     <View
@@ -201,5 +202,70 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#00FFFFFF" />
+
+    <RelativeLayout
+        android:id="@+id/pokemans"
+        android:layout_width="match_parent"
+        android:layout_height="411dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="203dp"
+        android:background="#818080"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/pok5"
+            android:layout_width="201dp"
+            android:layout_height="144dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="130dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/pok1"
+            android:layout_width="201dp"
+            android:layout_height="144dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="275dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/pok2"
+            android:layout_width="201dp"
+            android:layout_height="144dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="133dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/pok3"
+            android:layout_width="201dp"
+            android:layout_height="144dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="-7dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/pok6"
+            android:layout_width="201dp"
+            android:layout_height="144dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="-7dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/pok4"
+            android:layout_width="201dp"
+            android:layout_height="144dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="271dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

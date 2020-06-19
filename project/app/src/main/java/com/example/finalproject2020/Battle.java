@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -163,8 +164,13 @@ public class Battle extends AppCompatActivity {
 
     Boolean gameOver = false;
 
+    ImageView pok1;
+    ImageView pok2;
+    ImageView pok3;
+    ImageView pok4;
+    ImageView pok5;
+    ImageView pok6;
 
-    
     
     //Opponent Pokemon
     String opponentMove;
@@ -175,6 +181,16 @@ public class Battle extends AppCompatActivity {
     JSONObject opponentObject;
 
     int rnPoke = 0;
+
+    RelativeLayout pokemans;
+
+
+    private String pokeImageFront1;
+    private String pokeImageFront2;
+    private String pokeImageFront3;
+    private String pokeImageFront4;
+    private String pokeImageFront5;
+    private String pokeImageFront6;
 
     @Override///////807 POKEMONNNNS
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,9 +205,19 @@ public class Battle extends AppCompatActivity {
         opponentHealth = findViewById(R.id.hp2);
         myPokemon = findViewById(R.id.myPokemon);
         opponentPokemonImage = findViewById(R.id.opponentPokemon);
+        pok1 = findViewById(R.id.pok1);
+        pok2 = findViewById(R.id.pok2);
+        pok3 = findViewById(R.id.pok3);
+        pok4 = findViewById(R.id.pok4);
+        pok5 = findViewById(R.id.pok5);
+        pok6 = findViewById(R.id.pok6);
 
+        pokemans = findViewById(R.id.pokemans);
+
+        getPokemon();
 
         Intent intent = getIntent();
+
 
         gymNum = intent.getIntExtra("gymNumber",0);
         badgeCollection = intent.getIntegerArrayListExtra("badgeCollection");
@@ -440,6 +466,10 @@ public class Battle extends AppCompatActivity {
                 //move3
                 if (fight == true && opponentIsAttacking == false ) {
                     Log.d("poke", "onClick: " + opponentHP);
+
+                    if (fight == false) {
+
+                    }
 
                     battleNarration.setText("");
 
@@ -1560,6 +1590,87 @@ public class Battle extends AppCompatActivity {
 
     }
 
+    public void getPokemon() {
+        //poke = y;
+        Log.d("mode", "onClick: ");
 
+        try {
+            JSONObject obj = new JSONObject(sharedPref.pokemons[0]);
+            //JSONArray info = obj.getJSONArray("sprites");
+            String name = obj.getString("name");
+            Log.d("pokemon", "run: " + name);
+            JSONObject sprites = obj.getJSONObject("sprites");
+            pokeImageFront1 = sprites.getString("front_default");
+            Picasso.with(this).load(pokeImageFront1).into(pok1);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            JSONObject obj = new JSONObject(sharedPref.pokemons[1]);
+            //JSONArray info = obj.getJSONArray("sprites");
+            String name = obj.getString("name");
+            Log.d("pokemon", "run: " + name);
+            JSONObject sprites = obj.getJSONObject("sprites");
+            pokeImageFront2 = sprites.getString("front_default");
+            Picasso.with(this).load(pokeImageFront2).into(pok2);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            JSONObject obj = new JSONObject(sharedPref.pokemons[2]);
+            //JSONArray info = obj.getJSONArray("sprites");
+            String name = obj.getString("name");
+            Log.d("pokemon", "run: " + name);
+            JSONObject sprites = obj.getJSONObject("sprites");
+            pokeImageFront3 = sprites.getString("front_default");
+            Picasso.with(this).load(pokeImageFront3).into(pok3);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            JSONObject obj = new JSONObject(sharedPref.pokemons[3]);
+            //JSONArray info = obj.getJSONArray("sprites");
+            String name = obj.getString("name");
+            Log.d("pokemon", "run: " + name);
+            JSONObject sprites = obj.getJSONObject("sprites");
+            pokeImageFront4 = sprites.getString("front_default");
+            Picasso.with(this).load(pokeImageFront4).into(pok4);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            JSONObject obj = new JSONObject(sharedPref.pokemons[4]);
+            //JSONArray info = obj.getJSONArray("sprites");
+            String name = obj.getString("name");
+            Log.d("pokemon", "run: " + name);
+            JSONObject sprites = obj.getJSONObject("sprites");
+            pokeImageFront5 = sprites.getString("front_default");
+            Picasso.with(this).load(pokeImageFront5).into(pok5);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            JSONObject obj = new JSONObject(sharedPref.pokemons[5]);
+            //JSONArray info = obj.getJSONArray("sprites");
+            String name = obj.getString("name");
+            Log.d("pokemon", "run: " + name);
+            JSONObject sprites = obj.getJSONObject("sprites");
+            pokeImageFront6 = sprites.getString("front_default");
+            Picasso.with(this).load(pokeImageFront6).into(pok6);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
