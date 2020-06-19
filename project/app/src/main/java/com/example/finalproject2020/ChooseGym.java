@@ -265,8 +265,8 @@ public class ChooseGym extends AppCompatActivity {
 
         getPokemon(0);
         gymPic();
-//        getPokemon(1);
-  //      getPokemon(2);
+        getPokemon(1);
+        getPokemon(2);
 
         gymImageView.setOnClickListener(new View.OnClickListener() {
             @Override
