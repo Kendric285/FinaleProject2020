@@ -581,19 +581,6 @@ public class Battle extends AppCompatActivity {
 
                         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
                     } else {
                         if(battleNarration.getVisibility() == VISIBLE){
                             battleNarration.setText("");
@@ -928,16 +915,12 @@ public class Battle extends AppCompatActivity {
 
             setBattleNarration("BROCK would like to battle!");
 
-            opponentPokemon = new int[6];
+            opponentPokemon = new int[2];
             opponentPokemon[0] = 95;
             opponentPokemon[1] = 74;
-            opponentPokemon[2] = 75;
-            opponentPokemon[3] = 141;
-            opponentPokemon[4] = 76;
-            opponentPokemon[5] = 248;
         }
         else if(x == 2){
-            opponentPokemon = new int[8];
+            opponentPokemon = new int[4];
 
             opponentPokemonImage.setImageResource(R.drawable.misty);
             battleNarration.setText("");
@@ -947,14 +930,9 @@ public class Battle extends AppCompatActivity {
             opponentPokemon[1] = 121;
             opponentPokemon[2] = 131;
             opponentPokemon[3] = 119;
-            opponentPokemon[4] = 419;
-            opponentPokemon[5] = 350;
-            opponentPokemon[6] = 9;
-            opponentPokemon[7] = 116;
-
         }
         else if(x == 3){
-            opponentPokemon = new int[10];
+            opponentPokemon = new int[3];
             opponentPokemonImage.setImageResource(R.drawable.ltsurge);
             battleNarration.setText("");
 
@@ -962,17 +940,10 @@ public class Battle extends AppCompatActivity {
             opponentPokemon[0] = 100;
             opponentPokemon[1] = 26;
             opponentPokemon[2] = 25;
-            opponentPokemon[3] = 125;
-            opponentPokemon[4] = 101;
-            opponentPokemon[5] = 82;
-            opponentPokemon[6] = 310;
-            opponentPokemon[7] = 466;
-            opponentPokemon[8] = 462;
-            opponentPokemon[9] = 417;
 
         }
         else if(x == 4){
-            opponentPokemon = new int[10];
+            opponentPokemon = new int[3];
 
             opponentPokemonImage.setImageResource(R.drawable.erika);
             battleNarration.setText("");
@@ -981,13 +952,6 @@ public class Battle extends AppCompatActivity {
             opponentPokemon[0] = 71;
             opponentPokemon[1] = 114;
             opponentPokemon[2] = 45;
-            opponentPokemon[4] = 189;
-            opponentPokemon[5] = 182;
-            opponentPokemon[6] = 465;
-            opponentPokemon[7] = 3;
-            opponentPokemon[8] = 547;
-            opponentPokemon[9] = 549;
-
         }
         else if(x == 5){
             opponentPokemon = new int[3];
@@ -1002,7 +966,7 @@ public class Battle extends AppCompatActivity {
             opponentPokemon[2] = 110;
         }
         else if(x == 6){
-            opponentPokemon = new int[5];
+            opponentPokemon = new int[4];
 
             opponentPokemonImage.setImageResource(R.drawable.sabrina);
             battleNarration.setText("");
@@ -1013,8 +977,6 @@ public class Battle extends AppCompatActivity {
             opponentPokemon[1] = 122;
             opponentPokemon[2] = 65;
             opponentPokemon[3] = 196;
-            opponentPokemon[4] = 97;
-
         }
         else if(x == 7){
             opponentPokemon = new int[7];
@@ -1532,7 +1494,7 @@ public class Battle extends AppCompatActivity {
 
                     accCalculate = r.nextInt(110);
 
-                    if(opponentMoveAcc > accCalculate) {
+                    if(opponentMoveAcc < accCalculate) {
                         myHP = myHP - opponentMoveStr;
 
                         battlefood(opponentPokemonNameText.getText()  + "'S " +opponentMoveName.toUpperCase()+" did "+opponentMoveStr+" damage very effective!");
