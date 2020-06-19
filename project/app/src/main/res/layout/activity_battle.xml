@@ -203,6 +203,11 @@
         android:layout_height="match_parent"
         android:background="#00FFFFFF" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"></LinearLayout>
+
     <RelativeLayout
         android:id="@+id/pokemans"
         android:layout_width="match_parent"

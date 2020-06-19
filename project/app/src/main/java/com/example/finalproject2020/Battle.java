@@ -144,6 +144,7 @@ public class Battle extends AppCompatActivity {
 
     int gymNum;
 
+    boolean battleStarted;
 
 
 
@@ -184,6 +185,8 @@ public class Battle extends AppCompatActivity {
     JSONObject opponentObject;
 
     int rnPoke = 0;
+
+
 
     RelativeLayout pokemans;
     Boolean choosing = false;
@@ -472,7 +475,7 @@ public class Battle extends AppCompatActivity {
             public void onClick(View v) {
                 //move3
 
-                if (fight == false && choosing == false){
+                if (fight == false && choosing == false && battleStarted){
                     pokemans.setVisibility(VISIBLE);
                     choosing = true;
                     tLeft.setText("");
@@ -555,6 +558,18 @@ public class Battle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //move4
+
+                if (fight == false && gymNum == 10 && battleStarted) {
+                    int runAcc = r.nextInt(110);
+                    if (runAcc > 40) {
+                        backToGyms(10);
+                    } else {
+                        battlefood("You could not escape!");
+                    }
+                } else if (gymNum != 10 && battleStarted) {
+                    battlefood("Cannot run in a trainer battle!");
+                }
+
                 if (fight == true && opponentIsAttacking == false && choosing == false) {
                 fight = false;
 
@@ -1270,7 +1285,7 @@ public class Battle extends AppCompatActivity {
                                         battleNarration.setVisibility(VISIBLE);
                                         setBattleNarration("BROCK sent out " + opponentPokeName.toUpperCase() + " !");
                                     }
-
+battleStarted = true;
 
                                 }
                                 else if(gymNum == 2){
@@ -1288,7 +1303,7 @@ public class Battle extends AppCompatActivity {
                                         battleNarration.setVisibility(VISIBLE);
                                         setBattleNarration("MISTY sent out " + opponentPokeName.toUpperCase() + " !");
                                     }
-
+                                    battleStarted = true;
                                 }
                                 else if(gymNum == 3){
                                     battleNarration.setText("");
@@ -1306,7 +1321,7 @@ public class Battle extends AppCompatActivity {
                                         setBattleNarration("Lt. SURGE sent out " + opponentPokeName.toUpperCase() + " !");
                                     }
 
-
+                                    battleStarted = true;
                                 }
                                 else if(gymNum == 4){
                                     battleNarration.setText("");
@@ -1323,7 +1338,7 @@ public class Battle extends AppCompatActivity {
                                         battleNarration.setVisibility(VISIBLE);
                                         setBattleNarration("ERIKA sent out " + opponentPokeName.toUpperCase() + " !");
                                     }
-
+                                    battleStarted = true;
                                 }
                                 else if(gymNum == 5){
                                     battleNarration.setText("");
@@ -1340,6 +1355,7 @@ public class Battle extends AppCompatActivity {
                                         battleNarration.setVisibility(VISIBLE);
                                         setBattleNarration("KOGA sent out " + opponentPokeName.toUpperCase() + " !");
                                     }
+                                    battleStarted = true;
                                 }
                                 else if(gymNum == 6){
                                     battleNarration.setText("");
@@ -1356,7 +1372,7 @@ public class Battle extends AppCompatActivity {
                                         battleNarration.setVisibility(VISIBLE);
                                         setBattleNarration("SABRINA sent out " + opponentPokeName.toUpperCase() + " !");
                                     }
-
+                                    battleStarted = true;
                                 }
                                 else if(gymNum == 7){
                                     battleNarration.setText("");
@@ -1373,7 +1389,7 @@ public class Battle extends AppCompatActivity {
                                         battleNarration.setVisibility(VISIBLE);
                                         setBattleNarration("BLAINE sent out " + opponentPokeName.toUpperCase() + " !");
                                     }
-
+                                    battleStarted = true;
                                 }
                                 else if(gymNum == 8){
                                     battleNarration.setText("");
@@ -1390,10 +1406,11 @@ public class Battle extends AppCompatActivity {
                                         battleNarration.setVisibility(VISIBLE);
                                         setBattleNarration("GIOVANNI sent out " + opponentPokeName.toUpperCase() + " !");
                                     }
-
+                                    battleStarted = true;
                                 }
                                 else if(gymNum == 10){
                                     battlefood(opponentPokeName.toUpperCase() + " has appeared, what will you do ?!!");
+                                    battleStarted = true;
                                 }
 
                                 else{

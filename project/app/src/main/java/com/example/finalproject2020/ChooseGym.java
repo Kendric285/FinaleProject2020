@@ -376,7 +376,7 @@ public class ChooseGym extends AppCompatActivity {
                 gymName.setText("Pewter Gym");
             }else{
                 beat.setVisibility(View.VISIBLE);
-                gymName.setText("*BADGE COLLECTED*");
+                gymName.setText("*COLLECTED*");
             }
         }
         else if(gymNumber == 2){
@@ -386,7 +386,7 @@ public class ChooseGym extends AppCompatActivity {
                 gymName.setText("Cerulean Gym");
             }else{
                 beat.setVisibility(View.VISIBLE);
-                gymName.setText("*BADGE COLLECTED*");
+                gymName.setText("*COLLECTED*");
             }
 
         }
@@ -398,7 +398,7 @@ public class ChooseGym extends AppCompatActivity {
                 gymName.setText("Vermillion Gym");
             }else{
                 beat.setVisibility(View.VISIBLE);
-                gymName.setText("*BADGE COLLECTED*");
+                gymName.setText("*COLLECTED*");
             }
 
         }
@@ -410,7 +410,7 @@ public class ChooseGym extends AppCompatActivity {
                 gymName.setText("Celadon Gym");
             }else{
                 beat.setVisibility(View.VISIBLE);
-                gymName.setText("*BADGE COLLECTED*");
+                gymName.setText("*COLLECTED*");
             }
 
         }
@@ -424,7 +424,7 @@ public class ChooseGym extends AppCompatActivity {
                 gymName.setText("Fuchsia Gym");
             }else{
                 beat.setVisibility(View.VISIBLE);
-                gymName.setText("*BADGE COLLECTED*");
+                gymName.setText("*COLLECTED*");
             }
 
 
@@ -437,7 +437,7 @@ public class ChooseGym extends AppCompatActivity {
                 gymName.setText("Saffron Gym");
             }else{
                 beat.setVisibility(View.VISIBLE);
-                gymName.setText("*BADGE COLLECTED*");
+                gymName.setText("*COLLECTED*");
             }
 
         }
@@ -450,7 +450,7 @@ public class ChooseGym extends AppCompatActivity {
 
             }else{
                 beat.setVisibility(View.VISIBLE);
-                gymName.setText("*BADGE COLLECTED*");
+                gymName.setText("*COLLECTED*");
             }
 
         }
@@ -463,7 +463,7 @@ public class ChooseGym extends AppCompatActivity {
 
             }else{
                 beat.setVisibility(View.VISIBLE);
-                gymName.setText("*BADGE COLLECTED*");
+                gymName.setText("*COLLECTED*");
 
             }
 
