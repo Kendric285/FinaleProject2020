@@ -397,6 +397,8 @@ public class ChooseGym extends AppCompatActivity {
             }
 
         }
+
+        //x
         else if(gymNumber == 5){
             gymImageView.setImageResource(R.drawable.fuchsiagym);
 
