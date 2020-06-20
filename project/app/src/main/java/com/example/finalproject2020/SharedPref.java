@@ -43,13 +43,16 @@ public class SharedPref {
 
     }
 
-    public int addMoney(int x) {
+    public void addMoney(int x) {
         money = money + x;
-        return money;
+        editor.putInt("userMoney", money).commit();
+
     }
-    public int subMoney(int x){
+    public void subMoney(int x){
         money = money - x;
-        return money;
+        editor.putInt("userMoney", money).commit();
+
+
     }
 
     public void addPokemon (String x) {
@@ -74,7 +77,7 @@ public class SharedPref {
             pokemons[5] = x;
             editor.putString("pokemon6",pokemons[5]).commit();
         } else {
-            Log.d("TAG", "addPokemon: CANT CUZ U OUTTA SLOTS NIGGA");
+            Log.d("TAG", "addPokemon: CANT CUZ U OUTTA SLOTS");
         }
         //editor.putInt("MODE",mode).commit();
 
