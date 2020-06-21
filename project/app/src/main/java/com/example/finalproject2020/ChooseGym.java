@@ -113,10 +113,10 @@ public class ChooseGym extends AppCompatActivity {
         pokeBalls = findViewById(R.id.pokeballs);
 
         pokeImgs = new ImageView[6];
-        userMoney = 100;
+        //userMoney = sharedPref.returnMoney();
         userPokeBalls = 3;
 
-        money.setText("Money:" + userMoney);
+        money.setText("" + userMoney);
         pokeBalls.setText("PokeBalls: "+ userPokeBalls);
 
         seeBadges = findViewById(R.id.seeBadges);

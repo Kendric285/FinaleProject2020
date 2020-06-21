@@ -14,7 +14,7 @@ public class SharedPref {
     SharedPreferences.Editor editor;
     String[] pokemons = new String[6];
     Boolean[] badgeCollection = new Boolean[8];
-    int money;
+    int money = 50;
 
     public SharedPref(Context context) {
         mySharedPref = context.getSharedPreferences("filename",Context.MODE_PRIVATE);
@@ -35,7 +35,7 @@ public class SharedPref {
         badgeCollection[6] = mySharedPref.getBoolean("badge7", false);
         badgeCollection[7] = mySharedPref.getBoolean("badge8", false);
 
-        money = mySharedPref.getInt("userMoney",0);
+        money = mySharedPref.getInt("userMoney",50);
 
 
 
@@ -54,6 +54,11 @@ public class SharedPref {
 
 
     }
+
+    public int returnMoney(){
+        return money;
+    }
+
 
     public void addPokemon (String x) {
 

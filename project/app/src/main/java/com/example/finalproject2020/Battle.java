@@ -375,6 +375,9 @@ public class Battle extends AppCompatActivity {
                         battlefood(myPokeName.toUpperCase() + " wins !");
 
                     }
+
+                    //hello
+                    
                 }
             }
         });
@@ -1629,6 +1632,7 @@ battleStarted = true;
             if (opponentHP == 0 || opponentHP < 0) {
                 Log.d("poke2", "backToGyms2:DADDY " + gymNum + " THIS 4 U DADDY" + sharedPref.badgeCollection[gymNum - 1]);
                 sharedPref.addBadge(gymNum);
+                sharedPref.addMoney(100);
                 Log.d("poke2", "backToGyms3:DADDY " + gymNum + " THIS 4 U DADDY" + sharedPref.badgeCollection[gymNum - 1]);
             }
         }
