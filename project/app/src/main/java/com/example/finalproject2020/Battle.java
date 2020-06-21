@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -115,7 +116,7 @@ public class Battle extends AppCompatActivity {
     Handler setDelay;
     Runnable startDelay;
 
-
+    Boolean inBag;
 
 
     TextView battleNarration2;
@@ -186,7 +187,7 @@ public class Battle extends AppCompatActivity {
 
     int rnPoke = 0;
 
-
+    RelativeLayout backpack;
 
     RelativeLayout pokemans;
     Boolean choosing = false;
@@ -217,6 +218,8 @@ public class Battle extends AppCompatActivity {
         pok5 = findViewById(R.id.pok5);
         pok6 = findViewById(R.id.pok6);
         fight = false;
+        backpack = findViewById(R.id.bag);
+        inBag = false;
 
         pokemans = findViewById(R.id.pokemans);
 
@@ -383,7 +386,14 @@ public class Battle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //move2
-                if (fight == true && opponentIsAttacking == false && choosing == false) {
+                if (!fight && !inBag && !choosing) {
+                    inBag = true;
+                    backpack.setVisibility(VISIBLE);
+                }
+                if (inBag) {
+                    backpack.setVisibility(View.INVISIBLE);
+                    inBag = false; }
+                if (fight && !opponentIsAttacking && !choosing && !inBag) {
                     fight = false;
 
                     Log.d("poke", "onClick: " + opponentHP);
@@ -475,7 +485,7 @@ public class Battle extends AppCompatActivity {
             public void onClick(View v) {
                 //move3
 
-                if (fight == false && choosing == false && battleStarted){
+                if (fight == false && choosing == false && battleStarted && inBag == false){
                     pokemans.setVisibility(VISIBLE);
                     choosing = true;
                     tLeft.setText("");
@@ -492,7 +502,7 @@ public class Battle extends AppCompatActivity {
                 }
 
 
-                if (fight == true && opponentIsAttacking == false && choosing == false) {
+                if (fight == true && opponentIsAttacking == false && choosing == false && inBag == false) {
                     fight = false;
                     Log.d("poke", "onClick: " + opponentHP);
 
@@ -559,7 +569,7 @@ public class Battle extends AppCompatActivity {
             public void onClick(View v) {
                 //move4
 
-                if (fight == false && gymNum == 10 && battleStarted) {
+                if (fight == false && gymNum == 10 && battleStarted && inBag == false) {
                     int runAcc = r.nextInt(110);
                     if (runAcc > 40) {
                         backToGyms(10);
@@ -570,7 +580,7 @@ public class Battle extends AppCompatActivity {
                     battlefood("Cannot run in a trainer battle!");
                 }
 
-                if (fight == true && opponentIsAttacking == false && choosing == false) {
+                if (fight == true && opponentIsAttacking == false && choosing == false && inBag == false) {
                 fight = false;
 
 
