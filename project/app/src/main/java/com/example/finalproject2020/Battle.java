@@ -116,8 +116,6 @@ public class Battle extends AppCompatActivity {
     Handler setDelay;
     Runnable startDelay;
 
-    Boolean inBag;
-
 
     TextView battleNarration2;
 
@@ -191,6 +189,7 @@ public class Battle extends AppCompatActivity {
 
     RelativeLayout pokemans;
     Boolean choosing = false;
+    Boolean inBag;
 
     private String pokeImageFront1;
     private String pokeImageFront2;
@@ -199,7 +198,7 @@ public class Battle extends AppCompatActivity {
     private String pokeImageFront5;
     private String pokeImageFront6;
     private Boolean fight;
-    @Override///////807 POKEMONNNNS
+    @Override                                  ///////807 POKEMONNNNS///////
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle);
@@ -284,8 +283,6 @@ public class Battle extends AppCompatActivity {
 
 
 
-
-
         getOpponentPokemon(gymNum);
 
         battleNarration2.setVisibility(View.INVISIBLE);
@@ -300,7 +297,7 @@ public class Battle extends AppCompatActivity {
                     getMyPokemon(rnPoke);
                 }
 
-                if (gameOver == false) {
+                if (gameOver == false && !inBag && !choosing) {
                     if (textClicks > 0) {
 
                         if (fight == true && opponentIsAttacking == false && choosing == false) {
@@ -389,14 +386,14 @@ public class Battle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //move2
-                if (!fight && !inBag && !choosing) {
+                if (!fight && !inBag && !choosing && battleStarted) {
                     inBag = true;
                     backpack.setVisibility(VISIBLE);
                 }
-                if (inBag) {
+                else if (inBag) {
                     backpack.setVisibility(View.INVISIBLE);
                     inBag = false; }
-                if (fight && !opponentIsAttacking && !choosing && !inBag) {
+                else if (fight && !opponentIsAttacking && !choosing && !inBag) {
                     fight = false;
 
                     Log.d("poke", "onClick: " + opponentHP);
@@ -417,22 +414,7 @@ public class Battle extends AppCompatActivity {
                             textLengthTime = battleNarration.length() * 100;
                     //    }else{
                     //        battlefood( move2.toUpperCase() + " missed and was not effective");
-
-
                       //  }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                     } else {
                         noAttackDamage = new String[3];

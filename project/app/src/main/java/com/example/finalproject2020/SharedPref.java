@@ -55,7 +55,7 @@ public class SharedPref {
 
     }
 
-    public int returnMoney(){
+    public int getMoney(){
         return money;
     }
 
