@@ -48,7 +48,7 @@ import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import static android.view.View.VISIBLE;
-
+//quiz S https://docs.google.com/forms/d/e/1FAIpQLSchNX7yxJ4w7UzlsdoHVSlzWpL0iDWhHJemj7dZebtiDl8L8w/viewform
 
 public class Battle extends AppCompatActivity {
 
@@ -280,6 +280,9 @@ public class Battle extends AppCompatActivity {
         bLeft.setText("Backpack");
         tRight.setText("Pokemon");
         bRight.setText("Run");
+
+
+        
 
 
 
