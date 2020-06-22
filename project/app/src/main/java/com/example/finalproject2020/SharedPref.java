@@ -14,6 +14,8 @@ public class SharedPref {
     SharedPreferences.Editor editor;
     String[] pokemons = new String[6];
     Boolean[] badgeCollection = new Boolean[8];
+    int[] pokemonLvl = new int[6];
+    int[] pokemonExp = new int[6];
     int money = 50;
 
     public SharedPref(Context context) {
@@ -35,6 +37,20 @@ public class SharedPref {
         badgeCollection[6] = mySharedPref.getBoolean("badge7", false);
         badgeCollection[7] = mySharedPref.getBoolean("badge8", false);
 
+        pokemonLvl[0] = mySharedPref.getInt("lvl", 1);
+        pokemonLvl[1] = mySharedPref.getInt("lvl", 1);
+        pokemonLvl[2] = mySharedPref.getInt("lvl", 1);
+        pokemonLvl[3] = mySharedPref.getInt("lvl", 1);
+        pokemonLvl[4] = mySharedPref.getInt("lvl", 1);
+        pokemonLvl[5] = mySharedPref.getInt("lvl", 1);
+
+        pokemonExp[0] = mySharedPref.getInt("exp", 0);
+        pokemonExp[1] = mySharedPref.getInt("exp", 0);
+        pokemonExp[2] = mySharedPref.getInt("exp", 0);
+        pokemonExp[3] = mySharedPref.getInt("exp", 0);
+        pokemonExp[4] = mySharedPref.getInt("exp", 0);
+        pokemonExp[5] = mySharedPref.getInt("exp", 0);
+
         money = mySharedPref.getInt("userMoney",50);
 
 
@@ -55,7 +71,7 @@ public class SharedPref {
 
     }
 
-    public int returnMoney(){
+    public int getMoney(){
         return money;
     }
 
@@ -86,6 +102,16 @@ public class SharedPref {
         }
         //editor.putInt("MODE",mode).commit();
 
+    }
+
+    public void addExp(int x, int y){
+        pokemonExp[x] = pokemonExp[x] + y;
+        editor.putInt("exp",pokemonExp[x]).commit();
+    }
+
+    public void levelUp(int x){
+        pokemonLvl[x] = pokemonLvl[x] ++;
+        editor.putInt("lvl",pokemonLvl[x]).commit();
     }
 
     public void opponentPokemon() {

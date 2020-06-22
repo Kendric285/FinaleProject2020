@@ -6,6 +6,7 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import pl.droidsonroids.gif.GifImageView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -84,6 +85,8 @@ public class Battle extends AppCompatActivity {
     String move3i;
     String move4i;
 
+    ImageView[] pokeViews;
+
     String opponentMovei;
 
     ArrayList<Integer> badgeCollection = new ArrayList<Integer>();
@@ -116,8 +119,6 @@ public class Battle extends AppCompatActivity {
     Handler setDelay;
     Runnable startDelay;
 
-    Boolean inBag;
-
 
     TextView battleNarration2;
 
@@ -133,7 +134,7 @@ public class Battle extends AppCompatActivity {
     JSONObject usingPokemon;
 
     ImageView myPokemon;
-    ImageView opponentPokemonImage;
+    GifImageView opponentPokemonImage;
     String opponentPokemonImageURL;
 
     TextView pokeName;
@@ -147,7 +148,8 @@ public class Battle extends AppCompatActivity {
 
     boolean battleStarted;
 
-
+    int opponentLvl;
+    int myLvl;
 
     Random r = new Random();
 
@@ -160,6 +162,8 @@ public class Battle extends AppCompatActivity {
 
     int myHP;
     int opponentHP;
+
+    int[] currentHP;
 
     CountDownTimer healthPlr;
     CountDownTimer winnerPlr;
@@ -185,12 +189,19 @@ public class Battle extends AppCompatActivity {
     String opponentMoveUrl;
     JSONObject opponentObject;
 
+    TextView pokeball;
+
     int rnPoke = 0;
+    int currentPoke;
 
     RelativeLayout backpack;
 
     RelativeLayout pokemans;
     Boolean choosing = false;
+    Boolean inBag;
+    String opponentKi;
+
+    int allHP;
 
     private String pokeImageFront1;
     private String pokeImageFront2;
@@ -199,7 +210,7 @@ public class Battle extends AppCompatActivity {
     private String pokeImageFront5;
     private String pokeImageFront6;
     private Boolean fight;
-    @Override///////807 POKEMONNNNS
+    @Override                                  ///////807 POKEMONNNNS///////
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle);
@@ -220,19 +231,134 @@ public class Battle extends AppCompatActivity {
         fight = false;
         backpack = findViewById(R.id.bag);
         inBag = false;
+        pokeball = findViewById(R.id.pokeball);
+        currentHP = new int[6];
+        currentHP[0] = 300;currentHP[1] = 300;currentHP[2] = 300;currentHP[3] = 300;currentHP[4] = 300;currentHP[5] = 300;
+        pokeViews = new ImageView[6];
+        pokeViews[0] = findViewById(R.id.pok1);pokeViews[1] = findViewById(R.id.pok2);pokeViews[2] = findViewById(R.id.pok3);pokeViews[3] = findViewById(R.id.pok4);pokeViews[4] = findViewById(R.id.pok5);pokeViews[5] = findViewById(R.id.pok6);
 
+        allHP = currentHP[0]+currentHP[1]+currentHP[2]+currentHP[3]+currentHP[4]+currentHP[5];
         pokemans = findViewById(R.id.pokemans);
 
         getPokemon();
         getMyPokemon(0);
+        currentPoke = 0;
 
 
 
         Intent intent = getIntent();
 
+        pokeViews[0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentHP[currentPoke] = myHP;
+                if (!(currentHP[0] <= 0)) {
+                    currentPoke = 0;
+                    getMyPokemon(0);
+                    myHP = currentHP[0];
+                    choosing = false;
+                    pokemans.setVisibility(View.INVISIBLE);
+                    tLeft.setText("Fight");
+                    bLeft.setText("Backpack");
+                    tRight.setText("Pokemon");
+                    bRight.setText("Run");
+                    opponentAttacks();
+                }
+            }
+        });
+        pokeViews[1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentHP[currentPoke] = myHP;
+                if (!(currentHP[1] <= 0)) {
+                    currentPoke = 1;
+                    getMyPokemon(1);
+                    myHP = currentHP[1];
+                    choosing = false;
+                    pokemans.setVisibility(View.INVISIBLE);
+                    tLeft.setText("Fight");
+                    bLeft.setText("Backpack");
+                    tRight.setText("Pokemon");
+                    bRight.setText("Run");
+                    opponentAttacks();
+                }
+            }
+        });
+        pokeViews[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentHP[currentPoke] = myHP;
+                if (!(currentHP[2] <= 0)) {
+                    currentPoke = 2;
+                    getMyPokemon(2);
+                    myHP = currentHP[2];
+                    choosing = false;
+                    pokemans.setVisibility(View.INVISIBLE);
+                    tLeft.setText("Fight");
+                    bLeft.setText("Backpack");
+                    tRight.setText("Pokemon");
+                    bRight.setText("Run");
+                    opponentAttacks();
+                }
+            }
+        });pokeViews[3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentHP[currentPoke] = myHP;
+                if (!(currentHP[3] <= 0)) {
+                    currentPoke = 3;
+                    getMyPokemon(3);
+                    myHP = currentHP[3];
+                    choosing = false;
+                    pokemans.setVisibility(View.INVISIBLE);
+                    tLeft.setText("Fight");
+                    bLeft.setText("Backpack");
+                    tRight.setText("Pokemon");
+                    bRight.setText("Run");
+                    opponentAttacks();
+                }
+            }
+        });
+        pokeViews[4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentHP[currentPoke] = myHP;
+                if (!(currentHP[4] <= 0)) {
+                    currentPoke = 4;
+                    getMyPokemon(4);
+                    myHP = currentHP[4];
+                    choosing = false;
+                    pokemans.setVisibility(View.INVISIBLE);
+                    tLeft.setText("Fight");
+                    bLeft.setText("Backpack");
+                    tRight.setText("Pokemon");
+                    bRight.setText("Run");
+                    opponentAttacks();
+                }
+            }
+        });
+        pokeViews[5].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentHP[currentPoke] = myHP;
+                if (!(currentHP[5] <= 0)) {
+                    currentPoke = 5;
+                    getMyPokemon(5);
+                    myHP = currentHP[5];
+                    choosing = false;
+                    pokemans.setVisibility(View.INVISIBLE);
+                    tLeft.setText("Fight");
+                    bLeft.setText("Backpack");
+                    tRight.setText("Pokemon");
+                    bRight.setText("Run");
+                    opponentAttacks();
+                }
+            }
+        });
+
 
         gymNum = intent.getIntExtra("gymNumber",0);
-        badgeCollection = intent.getIntegerArrayListExtra("badgeCollection");
+        //badgeCollection = intent.getIntegerArrayListExtra("badgeCollection");
 
         battleNarration = findViewById(R.id.battleNarration);
 
@@ -287,11 +413,18 @@ public class Battle extends AppCompatActivity {
 
 
 
-
-
         getOpponentPokemon(gymNum);
 
         battleNarration2.setVisibility(View.INVISIBLE);
+
+        pokeball.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                opponentPokemonImage.setImageResource(R.drawable.ballcatch);
+                backpack.setVisibility(View.INVISIBLE);
+                catchPokemon();
+            }
+        });
 
 
         tLeft.setOnClickListener(new View.OnClickListener() {
@@ -303,7 +436,7 @@ public class Battle extends AppCompatActivity {
                     getMyPokemon(rnPoke);
                 }
 
-                if (gameOver == false) {
+                if (gameOver == false && !inBag && !choosing) {
                     if (textClicks > 0) {
 
                         if (fight == true && opponentIsAttacking == false && choosing == false) {
@@ -374,7 +507,9 @@ public class Battle extends AppCompatActivity {
                     }
                     if (myHP == 0 || myHP < 0) {
                         myHP = 0;
-                        battlefood(opponentPokemonNameText.getText() + " wins !");
+                        if (allHP == 0) {
+                            battlefood(opponentPokemonNameText.getText() + " wins !");
+                        }
 
                     } else if (opponentHP == 0 || opponentHP < 0) {
                         opponentHP = 0;
@@ -392,14 +527,14 @@ public class Battle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //move2
-                if (!fight && !inBag && !choosing) {
+                if (!fight && !inBag && !choosing && battleStarted && gymNum == 10 && !gameOver) {
                     inBag = true;
                     backpack.setVisibility(VISIBLE);
                 }
-                if (inBag) {
+                else if (inBag && gymNum == 10 && !gameOver) {
                     backpack.setVisibility(View.INVISIBLE);
                     inBag = false; }
-                if (fight && !opponentIsAttacking && !choosing && !inBag) {
+                else if (fight && !opponentIsAttacking && !choosing && !inBag) {
                     fight = false;
 
                     Log.d("poke", "onClick: " + opponentHP);
@@ -420,22 +555,7 @@ public class Battle extends AppCompatActivity {
                             textLengthTime = battleNarration.length() * 100;
                     //    }else{
                     //        battlefood( move2.toUpperCase() + " missed and was not effective");
-
-
                       //  }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                     } else {
                         noAttackDamage = new String[3];
@@ -476,8 +596,9 @@ public class Battle extends AppCompatActivity {
 
                 if(myHP == 0 || myHP < 0){
                     myHP = 0;
-                    battlefood(opponentPokemonNameText.getText() + " wins!");
-
+                    if (allHP == 0) {
+                        battlefood(opponentPokemonNameText.getText() + " wins!");
+                    }
                 }else if(opponentHP == 0 || opponentHP < 0) {
                     opponentHP = 0;
                     battlefood(myPokeName.toUpperCase() + " wins!");
@@ -491,7 +612,7 @@ public class Battle extends AppCompatActivity {
             public void onClick(View v) {
                 //move3
 
-                if (fight == false && choosing == false && battleStarted && inBag == false){
+                if (fight == false && choosing == false && battleStarted && inBag == false && !gameOver){
                     pokemans.setVisibility(VISIBLE);
                     choosing = true;
                     tLeft.setText("");
@@ -508,7 +629,7 @@ public class Battle extends AppCompatActivity {
                 }
 
 
-                if (fight == true && opponentIsAttacking == false && choosing == false && inBag == false) {
+                if (fight == true && opponentIsAttacking == false && choosing == false && inBag == false && !gameOver) {
                     fight = false;
                     Log.d("poke", "onClick: " + opponentHP);
 
@@ -559,8 +680,9 @@ public class Battle extends AppCompatActivity {
                 }
                 if(myHP == 0 || myHP < 0){
                     myHP = 0;
-                    battlefood(opponentPokemonNameText.getText() + " wins!");
-
+                    if (allHP == 0) {
+                        battlefood(opponentPokemonNameText.getText() + " wins!");
+                    }
                 }else if(opponentHP == 0 || opponentHP < 0) {
                     opponentHP = 0;
                     battlefood(myPokeName.toUpperCase() + " wins!");
@@ -575,7 +697,7 @@ public class Battle extends AppCompatActivity {
             public void onClick(View v) {
                 //move4
 
-                if (fight == false && gymNum == 10 && battleStarted && inBag == false) {
+                if (fight == false && gymNum == 10 && battleStarted && inBag == false && !gameOver) {
                     int runAcc = r.nextInt(110);
                     if (runAcc > 40) {
                         backToGyms(10);
@@ -659,8 +781,9 @@ public class Battle extends AppCompatActivity {
                 }
                 if(myHP == 0 || myHP < 0){
                     myHP = 0;
-                    battlefood(opponentPokemonNameText.getText() + " wins!");
-
+                    if (allHP == 0) {
+                        battlefood(opponentPokemonNameText.getText() + " wins!");
+                    }
                 }else if(opponentHP == 0 || opponentHP < 0) {
                     opponentHP = 0;
                     battlefood(myPokeName.toUpperCase() + " wins!");
@@ -1118,6 +1241,11 @@ public class Battle extends AppCompatActivity {
                  */
                 if (i[0] == length) {
                     timer.cancel();
+
+                    if (inBag) {
+                        opponentAttacks();
+                        inBag = false;
+                    }
                     /*
 
 
@@ -1198,6 +1326,12 @@ public class Battle extends AppCompatActivity {
 
                 if (i[0] == length) {
                     timer.cancel();
+
+                    if (inBag) {
+                        opponentAttacks();
+                        inBag = false;
+                    }
+
                     /*
 
 
@@ -1277,6 +1411,7 @@ public class Battle extends AppCompatActivity {
                             try {
                                 JSONObject obj = new JSONObject(myResponse);
                                 opponentObject = obj;
+                                opponentKi = myResponse;
                                 //JSONArray info = obj.getJSONArray("sprites");
                                 String opponentPokeName = obj.getString("name");
                                 JSONObject sprites = obj.getJSONObject("sprites");
@@ -1569,7 +1704,9 @@ battleStarted = true;
             }
 
         opponentIsAttacking = false;
-        fight = true;
+            if(!inBag) {
+                fight = true;
+            }
     }
 
     public void getOpponentMove(){
@@ -1609,7 +1746,9 @@ battleStarted = true;
                     if (gameOver == false) {
                        // backToGyms(gymNum);
                     }
-                    gameOver = true;
+                    if (allHP == 0) {
+                        gameOver = true;
+                    }
                 }else if(opponentHP == 0 || opponentHP < 0) {
                     opponentHP = 0;
                     if (gameOver == false) {
@@ -1734,6 +1873,21 @@ battleStarted = true;
 
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void catchPokemon(){
+        float acc = opponentHP/2;
+        float poop = opponentHP *(2/3);
+        float randAcc = r.nextInt() * poop;
+        if (randAcc < acc){
+            sharedPref.addPokemon(opponentKi);
+            inBag = false;
+            battlefood(opponentPokemonNameText.getText()+" has been captured!");
+            gameOver = true;
+        } else {
+            pic(opponentPokemonImageURL, opponentPokemonImage);
+            battlefood(opponentPokemonNameText.getText()+" escaped capture.          ");
         }
     }
 
