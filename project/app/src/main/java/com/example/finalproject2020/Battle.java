@@ -1882,7 +1882,6 @@ battleStarted = true;
         float acc = opponentHP/2;
         float poop = opponentHP *(2/3);
         float randAcc = r.nextInt() * poop;
-
         if (sharedPref.getBalls() > 0) {
             sharedPref.subBalls(1);
             if (next() == 1) {
@@ -1901,14 +1900,6 @@ battleStarted = true;
         final Random random = new Random();
         if (random.nextBoolean()) {
             return 1;
-
-        if (randAcc < acc){
-            sharedPref.addPokemon(opponentKi);
-            inBag = false;
-            battlefood(opponentPokemonNameText.getText()+" has been captured!");
-            sharedPref.addMoney(10);
-            gameOver = true;
-
         } else {
             return 2;
         }
