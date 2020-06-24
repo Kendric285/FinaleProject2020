@@ -27,6 +27,8 @@ import java.util.ArrayList;
 
 public class ChooseGym extends AppCompatActivity {
 
+    CountDownTimer popo;
+
     ImageView frontArrow;
     ImageView backArrow;
     ImageView gymImageView;
@@ -59,6 +61,7 @@ public class ChooseGym extends AppCompatActivity {
 
     Button wilderness;
 
+    TextView buyPoke;
 
     Button beat;
 
@@ -66,8 +69,8 @@ public class ChooseGym extends AppCompatActivity {
 
     Integer gymNumber;
 
-    Integer userMoney;
-    Integer userPokeBalls;
+    int userMoney;
+    int userPokeBalls;
 
     TextView money;
     TextView pokeBalls;
@@ -103,21 +106,12 @@ public class ChooseGym extends AppCompatActivity {
 
           wilderness = findViewById(R.id.wilderness);
 
-
-
-
-
-
+          buyPoke = findViewById(R.id.buyPoke);
 
         money = findViewById(R.id.money);
         pokeBalls = findViewById(R.id.pokeballs);
 
         pokeImgs = new ImageView[6];
-        //userMoney = sharedPref.returnMoney();
-        userPokeBalls = 3;
-
-        money.setText("" + userMoney);
-        pokeBalls.setText("PokeBalls: "+ userPokeBalls);
 
         seeBadges = findViewById(R.id.seeBadges);
         badgeCollectionImages = findViewById(R.id.badgeScroll);
@@ -132,6 +126,15 @@ public class ChooseGym extends AppCompatActivity {
             }
         });
 
+        buyPoke.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (userMoney > 50 || userMoney == 50) {
+                   sharedPref.subMoney(50);
+                   sharedPref.addBalls(1);
+                }
+            }
+        });
         seeBadges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -245,7 +248,7 @@ public class ChooseGym extends AppCompatActivity {
 
 
 
-
+popoHandler();
 
 
 
@@ -468,6 +471,29 @@ public class ChooseGym extends AppCompatActivity {
             }
 
         }
+    }
+
+    private void popoHandler(){
+        popo = new CountDownTimer(999999999,1) {
+            @Override
+            public void onTick (long millisUntilFinished){
+
+                if (userMoney != sharedPref.getMoney() || userPokeBalls != sharedPref.getBalls()) {
+                    userMoney = sharedPref.getMoney();
+                    userPokeBalls = sharedPref.getBalls();
+
+                    money.setText("Money: " + userMoney);
+                    pokeBalls.setText("PokeBalls: " + userPokeBalls);
+                }
+
+            }
+
+            @Override
+            public void onFinish () {
+
+            }
+
+        }.start();
     }
 
     /*private void pokeIdle(){

@@ -105,6 +105,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/buyPoke"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="552dp"
+        android:text="Buy: pokeballs [50 money]"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <Button
         android:id="@+id/beat"
         android:layout_width="162dp"
@@ -138,11 +149,51 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/pewterBadge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                app:srcCompat="@drawable/pewtergym"
+                tools:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/ceruleanBadge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                app:srcCompat="@drawable/ceruleangym"
+                tools:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/vermillionBadge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                app:srcCompat="@drawable/vermilliongym"
+                tools:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/celadonBadge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                app:srcCompat="@drawable/celadongym"
+                tools:visibility="invisible" />
+
+            <ImageView
                 android:id="@+id/fuchsiaBadge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
                 app:srcCompat="@drawable/fuchsiagym"
+                tools:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/saffronBadge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                app:srcCompat="@drawable/saffrongym"
                 tools:visibility="invisible" />
 
             <ImageView
@@ -159,46 +210,6 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
                 app:srcCompat="@drawable/viridiangym"
-                tools:visibility="invisible" />
-
-            <ImageView
-                android:id="@+id/saffronBadge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border"
-                app:srcCompat="@drawable/saffrongym"
-                tools:visibility="invisible" />
-
-            <ImageView
-                android:id="@+id/ceruleanBadge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border"
-                app:srcCompat="@drawable/ceruleangym"
-                tools:visibility="invisible" />
-
-            <ImageView
-                android:id="@+id/celadonBadge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border"
-                app:srcCompat="@drawable/celadongym"
-                tools:visibility="invisible" />
-
-            <ImageView
-                android:id="@+id/pewterBadge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border"
-                app:srcCompat="@drawable/pewtergym"
-                tools:visibility="invisible" />
-
-            <ImageView
-                android:id="@+id/vermillionBadge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border"
-                app:srcCompat="@drawable/vermilliongym"
                 tools:visibility="invisible" />
         </LinearLayout>
     </ScrollView>

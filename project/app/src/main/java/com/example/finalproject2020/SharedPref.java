@@ -17,6 +17,7 @@ public class SharedPref {
     int[] pokemonLvl = new int[6];
     int[] pokemonExp = new int[6];
     int money = 50;
+    int pokeball = 3;
 
     public SharedPref(Context context) {
         mySharedPref = context.getSharedPreferences("filename",Context.MODE_PRIVATE);
@@ -52,29 +53,19 @@ public class SharedPref {
         pokemonExp[5] = mySharedPref.getInt("exp", 0);
 
         money = mySharedPref.getInt("userMoney",50);
-
-
-
-
+        pokeball = mySharedPref.getInt("pokeballs", 3);
 
     }
 
-    public void addMoney(int x) {
-        money = money + x;
-        editor.putInt("userMoney", money).commit();
-
-    }
-    public void subMoney(int x){
-        money = money - x;
-        editor.putInt("userMoney", money).commit();
-
-
-    }
-
+    public void addMoney(int x) { money = money + x;editor.putInt("userMoney", money).commit(); }
+    public void subMoney(int x){ money = money - x;editor.putInt("userMoney", money).commit(); }
     public int getMoney(){
         return money;
     }
 
+    public void addBalls(int x) { pokeball = pokeball + x;editor.putInt("pokeballs",pokeball).commit(); }
+    public void subBalls(int x) { pokeball = pokeball - x;editor.putInt("pokeballs",pokeball).commit(); }
+    public int getBalls() {return pokeball;}
 
     public void addPokemon (String x) {
 
@@ -107,11 +98,15 @@ public class SharedPref {
     public void addExp(int x, int y){
         pokemonExp[x] = pokemonExp[x] + y;
         editor.putInt("exp",pokemonExp[x]).commit();
+        if(pokemonExp[x] > (pokemonLvl[x]*2) || pokemonExp[x] == (pokemonLvl[x]*2)){
+            levelUp(x);
+        }
     }
 
     public void levelUp(int x){
         pokemonLvl[x] = pokemonLvl[x] ++;
         editor.putInt("lvl",pokemonLvl[x]).commit();
+
     }
 
     public void opponentPokemon() {

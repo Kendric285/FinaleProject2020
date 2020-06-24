@@ -256,13 +256,13 @@ public class Battle extends AppCompatActivity {
                     currentPoke = 0;
                     getMyPokemon(0);
                     myHP = currentHP[0];
-                    choosing = false;
                     pokemans.setVisibility(View.INVISIBLE);
                     tLeft.setText("Fight");
                     bLeft.setText("Backpack");
                     tRight.setText("Pokemon");
                     bRight.setText("Run");
                     opponentAttacks();
+                    choosing = false;
                 }
             }
         });
@@ -274,13 +274,13 @@ public class Battle extends AppCompatActivity {
                     currentPoke = 1;
                     getMyPokemon(1);
                     myHP = currentHP[1];
-                    choosing = false;
                     pokemans.setVisibility(View.INVISIBLE);
                     tLeft.setText("Fight");
                     bLeft.setText("Backpack");
                     tRight.setText("Pokemon");
                     bRight.setText("Run");
                     opponentAttacks();
+                    choosing = false;
                 }
             }
         });
@@ -292,13 +292,13 @@ public class Battle extends AppCompatActivity {
                     currentPoke = 2;
                     getMyPokemon(2);
                     myHP = currentHP[2];
-                    choosing = false;
                     pokemans.setVisibility(View.INVISIBLE);
                     tLeft.setText("Fight");
                     bLeft.setText("Backpack");
                     tRight.setText("Pokemon");
                     bRight.setText("Run");
                     opponentAttacks();
+                    choosing = false;
                 }
             }
         });pokeViews[3].setOnClickListener(new View.OnClickListener() {
@@ -309,13 +309,13 @@ public class Battle extends AppCompatActivity {
                     currentPoke = 3;
                     getMyPokemon(3);
                     myHP = currentHP[3];
-                    choosing = false;
                     pokemans.setVisibility(View.INVISIBLE);
                     tLeft.setText("Fight");
                     bLeft.setText("Backpack");
                     tRight.setText("Pokemon");
                     bRight.setText("Run");
                     opponentAttacks();
+                    choosing = false;
                 }
             }
         });
@@ -327,13 +327,13 @@ public class Battle extends AppCompatActivity {
                     currentPoke = 4;
                     getMyPokemon(4);
                     myHP = currentHP[4];
-                    choosing = false;
                     pokemans.setVisibility(View.INVISIBLE);
                     tLeft.setText("Fight");
                     bLeft.setText("Backpack");
                     tRight.setText("Pokemon");
                     bRight.setText("Run");
                     opponentAttacks();
+                    choosing = false;
                 }
             }
         });
@@ -345,13 +345,13 @@ public class Battle extends AppCompatActivity {
                     currentPoke = 5;
                     getMyPokemon(5);
                     myHP = currentHP[5];
-                    choosing = false;
                     pokemans.setVisibility(View.INVISIBLE);
                     tLeft.setText("Fight");
                     bLeft.setText("Backpack");
                     tRight.setText("Pokemon");
                     bRight.setText("Run");
                     opponentAttacks();
+                    choosing = false;
                 }
             }
         });
@@ -1704,7 +1704,7 @@ battleStarted = true;
             }
 
         opponentIsAttacking = false;
-            if(!inBag) {
+            if(!inBag && !choosing) {
                 fight = true;
             }
     }
@@ -1734,6 +1734,8 @@ battleStarted = true;
         healthPlr = new CountDownTimer(999999999,1) {
             @Override
             public void onTick (long millisUntilFinished){
+
+                pokeball.setText("Pokeball: "+sharedPref.getBalls());
 
                 opponentHealth.setProgress(opponentHP);
                 opponentHealthNum.setText(opponentHP + "/300");
@@ -1880,14 +1882,26 @@ battleStarted = true;
         float acc = opponentHP/2;
         float poop = opponentHP *(2/3);
         float randAcc = r.nextInt() * poop;
-        if (randAcc < acc){
-            sharedPref.addPokemon(opponentKi);
-            inBag = false;
-            battlefood(opponentPokemonNameText.getText()+" has been captured!");
-            gameOver = true;
+        if (sharedPref.getBalls() > 0) {
+            sharedPref.subBalls(1);
+            if (next() == 1) {
+                sharedPref.addPokemon(opponentKi);
+                inBag = false;
+                battlefood(opponentPokemonNameText.getText() + " has been captured!");
+                gameOver = true;
+            } else {
+                pic(opponentPokemonImageURL, opponentPokemonImage);
+                battlefood(opponentPokemonNameText.getText() + " escaped capture.          ");
+            }
+        }
+    }
+
+    private int next() {
+        final Random random = new Random();
+        if (random.nextBoolean()) {
+            return 1;
         } else {
-            pic(opponentPokemonImageURL, opponentPokemonImage);
-            battlefood(opponentPokemonNameText.getText()+" escaped capture.          ");
+            return 2;
         }
     }
 
