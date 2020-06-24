@@ -52,6 +52,7 @@ import static android.view.View.VISIBLE;
 //quiz S https://docs.google.com/forms/d/e/1FAIpQLSchNX7yxJ4w7UzlsdoHVSlzWpL0iDWhHJemj7dZebtiDl8L8w/viewform
 
 public class Battle extends AppCompatActivity {
+    //Pokémon
 
     OkHttpClient client;
 
@@ -1790,6 +1791,12 @@ battleStarted = true;
                 Log.d("poke2", "backToGyms3:DADDY " + gymNum + " THIS 4 U DADDY" + sharedPref.badgeCollection[gymNum - 1]);
             }
         }
+        else{
+            if (opponentHP == 0 || opponentHP < 0) {
+                sharedPref.addMoney(10);
+            }
+
+        }
 
         startActivity(toGyms);
 
@@ -1893,6 +1900,9 @@ battleStarted = true;
                 pic(opponentPokemonImageURL, opponentPokemonImage);
                 battlefood(opponentPokemonNameText.getText() + " escaped capture.          ");
             }
+        }else{
+            makeToast("No Pokéballs Left!");
+
         }
     }
 
@@ -1903,6 +1913,9 @@ battleStarted = true;
         } else {
             return 2;
         }
+    }
+    public void makeToast(String x){
+        Toast.makeText(Battle.this, x, Toast.LENGTH_SHORT).show();
     }
 
 }
