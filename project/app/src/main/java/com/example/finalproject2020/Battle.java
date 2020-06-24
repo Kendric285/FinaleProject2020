@@ -1884,6 +1884,7 @@ battleStarted = true;
             sharedPref.addPokemon(opponentKi);
             inBag = false;
             battlefood(opponentPokemonNameText.getText()+" has been captured!");
+            sharedPref.addMoney(10);
             gameOver = true;
         } else {
             pic(opponentPokemonImageURL, opponentPokemonImage);
