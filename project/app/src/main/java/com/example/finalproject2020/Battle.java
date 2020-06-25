@@ -1736,7 +1736,7 @@ battleStarted = true;
             @Override
             public void onTick (long millisUntilFinished){
 
-                pokeball.setText("Pokeball: "+sharedPref.getBalls());
+                pokeball.setText("Pokeball * "+sharedPref.getBalls());
 
                 opponentHealth.setProgress(opponentHP);
                 opponentHealthNum.setText(opponentHP + "/300");
@@ -1797,6 +1797,7 @@ battleStarted = true;
             }
 
         }
+
 
         startActivity(toGyms);
 
