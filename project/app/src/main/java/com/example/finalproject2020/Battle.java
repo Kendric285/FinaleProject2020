@@ -80,6 +80,9 @@ public class Battle extends AppCompatActivity {
     int move2Str;
     int move3Str;
     int move4Str;
+    int pokeNum = 0;
+
+    int i = 1;
 
     String move1i;
     String move2i;
@@ -151,6 +154,8 @@ public class Battle extends AppCompatActivity {
 
     int opponentLvl;
     int myLvl;
+
+    int maxPoke;
 
     Random r = new Random();
 
@@ -364,7 +369,7 @@ public class Battle extends AppCompatActivity {
 
         hide = findViewById(R.id.button);
 
-        myHP = 300;
+        myHP = 5;
         opponentHP = 5;
 
         opponentHealth.setMax(opponentHP);
@@ -1071,6 +1076,7 @@ public class Battle extends AppCompatActivity {
             opponentPokemon = new int[2];
             opponentPokemon[0] = 95;
             opponentPokemon[1] = 74;
+            maxPoke = 1;
         }
         else if(x == 2){
             opponentPokemon = new int[4];
@@ -1083,6 +1089,7 @@ public class Battle extends AppCompatActivity {
             opponentPokemon[1] = 121;
             opponentPokemon[2] = 131;
             opponentPokemon[3] = 119;
+            maxPoke = 3;
         }
         else if(x == 3){
             opponentPokemon = new int[3];
@@ -1093,6 +1100,7 @@ public class Battle extends AppCompatActivity {
             opponentPokemon[0] = 100;
             opponentPokemon[1] = 26;
             opponentPokemon[2] = 25;
+            maxPoke = 2;
 
         }
         else if(x == 4){
@@ -1105,6 +1113,7 @@ public class Battle extends AppCompatActivity {
             opponentPokemon[0] = 71;
             opponentPokemon[1] = 114;
             opponentPokemon[2] = 45;
+            maxPoke = 2;
         }
         else if(x == 5){
             opponentPokemon = new int[3];
@@ -1117,6 +1126,7 @@ public class Battle extends AppCompatActivity {
             opponentPokemon[0] = 109;
             opponentPokemon[1] = 89;
             opponentPokemon[2] = 110;
+            maxPoke = 2;
         }
         else if(x == 6){
             opponentPokemon = new int[4];
@@ -1130,6 +1140,7 @@ public class Battle extends AppCompatActivity {
             opponentPokemon[1] = 122;
             opponentPokemon[2] = 65;
             opponentPokemon[3] = 196;
+            maxPoke = 3;
         }
         else if(x == 7){
             opponentPokemon = new int[7];
@@ -1144,6 +1155,7 @@ public class Battle extends AppCompatActivity {
             opponentPokemon[4] = 38;
             opponentPokemon[5] = 126;
             opponentPokemon[6] = 467;
+            maxPoke = 5;
         }
         else if(x == 8){
             opponentPokemon = new int[3];
@@ -1154,6 +1166,7 @@ public class Battle extends AppCompatActivity {
             opponentPokemon[0] = 111;
             opponentPokemon[1] = 115;
             opponentPokemon[2] = 51;
+            maxPoke = 4;
         }
 
         else if(x == 10){
@@ -1387,7 +1400,7 @@ public class Battle extends AppCompatActivity {
     }
     public void opponentThrowsPokemon(){
         Random rand = new Random();
-        int pokeNum = r.nextInt(opponentPokemon.length);
+        //int pokeNum = r.nextInt(opponentPokemon.length);
 
         final String type;
         Log.d("mode", "onClick: ");
@@ -1424,144 +1437,39 @@ public class Battle extends AppCompatActivity {
                                 opponentPokemonImageURL = sprites.getString("front_default");
 
 
-
                                 if (gymNum == 1){
                                     //
-                                    battleNarration.setText("");
-                                    if(battleNarration.getVisibility() == VISIBLE){
-                                        battleNarration.setText("");
-                                        battleNarration2.setText("");
-                                        battleNarration2.setVisibility(VISIBLE);
-                                        battleNarration.setVisibility(View.INVISIBLE);
-                                        setBattleNarration2("BROCK sent out " + opponentPokeName.toUpperCase() + " !");
-                                    }else{
-                                        battleNarration.setText("");
-                                        battleNarration2.setText("");
-                                        battleNarration2.setVisibility(View.INVISIBLE);
-                                        battleNarration.setVisibility(VISIBLE);
-                                        setBattleNarration("BROCK sent out " + opponentPokeName.toUpperCase() + " !");
-                                    }
-battleStarted = true;
+                                    battlefood(("BROCK sent out " + opponentPokeName.toUpperCase() + " !"));
+                                    battleStarted = true;
 
                                 }
                                 else if(gymNum == 2){
-                                    battleNarration.setText("");
-                                    if(battleNarration.getVisibility() == VISIBLE){
-                                        battleNarration.setText("");
-                                        battleNarration2.setText("");
-                                        battleNarration2.setVisibility(VISIBLE);
-                                        battleNarration.setVisibility(View.INVISIBLE);
-                                        setBattleNarration2("MISTY sent out " + opponentPokeName.toUpperCase() + " !");
-                                    }else{
-                                        battleNarration.setText("");
-                                        battleNarration2.setText("");
-                                        battleNarration2.setVisibility(View.INVISIBLE);
-                                        battleNarration.setVisibility(VISIBLE);
-                                        setBattleNarration("MISTY sent out " + opponentPokeName.toUpperCase() + " !");
-                                    }
+                                    battlefood(("MISTY sent out " + opponentPokeName.toUpperCase() + " !"));
                                     battleStarted = true;
                                 }
                                 else if(gymNum == 3){
-                                    battleNarration.setText("");
-                                    if(battleNarration.getVisibility() == VISIBLE){
-                                        battleNarration.setText("");
-                                        battleNarration2.setText("");
-                                        battleNarration2.setVisibility(VISIBLE);
-                                        battleNarration.setVisibility(View.INVISIBLE);
-                                        setBattleNarration2("Lt. SURGE sent out " + opponentPokeName.toUpperCase() + " !");
-                                    }else{
-                                        battleNarration.setText("");
-                                        battleNarration2.setText("");
-                                        battleNarration2.setVisibility(View.INVISIBLE);
-                                        battleNarration.setVisibility(VISIBLE);
-                                        setBattleNarration("Lt. SURGE sent out " + opponentPokeName.toUpperCase() + " !");
-                                    }
+                                    battlefood(("Lt. SURGE sent out " + opponentPokeName.toUpperCase() + " !"));
 
                                     battleStarted = true;
                                 }
                                 else if(gymNum == 4){
-                                    battleNarration.setText("");
-                                    if(battleNarration.getVisibility() == VISIBLE){
-                                        battleNarration.setText("");
-                                        battleNarration2.setText("");
-                                        battleNarration2.setVisibility(VISIBLE);
-                                        battleNarration.setVisibility(View.INVISIBLE);
-                                        setBattleNarration2("ERIKA sent out " + opponentPokeName.toUpperCase() + " !");
-                                    }else{
-                                        battleNarration.setText("");
-                                        battleNarration2.setText("");
-                                        battleNarration2.setVisibility(View.INVISIBLE);
-                                        battleNarration.setVisibility(VISIBLE);
-                                        setBattleNarration("ERIKA sent out " + opponentPokeName.toUpperCase() + " !");
-                                    }
+                                    battlefood(("ERIKA sent out " + opponentPokeName.toUpperCase() + " !"));
                                     battleStarted = true;
                                 }
                                 else if(gymNum == 5){
-                                    battleNarration.setText("");
-                                    if(battleNarration.getVisibility() == VISIBLE){
-                                        battleNarration.setText("");
-                                        battleNarration2.setText("");
-                                        battleNarration2.setVisibility(VISIBLE);
-                                        battleNarration.setVisibility(View.INVISIBLE);
-                                        setBattleNarration2("KOGA sent out " + opponentPokeName.toUpperCase() + " !");
-                                    }else{
-                                        battleNarration.setText("");
-                                        battleNarration2.setText("");
-                                        battleNarration2.setVisibility(View.INVISIBLE);
-                                        battleNarration.setVisibility(VISIBLE);
-                                        setBattleNarration("KOGA sent out " + opponentPokeName.toUpperCase() + " !");
-                                    }
+                                    battlefood(("KOGA sent out " + opponentPokeName.toUpperCase() + " !"));
                                     battleStarted = true;
                                 }
                                 else if(gymNum == 6){
-                                    battleNarration.setText("");
-                                    if(battleNarration.getVisibility() == VISIBLE){
-                                        battleNarration.setText("");
-                                        battleNarration2.setText("");
-                                        battleNarration2.setVisibility(VISIBLE);
-                                        battleNarration.setVisibility(View.INVISIBLE);
-                                        setBattleNarration2("SABRINA sent out " + opponentPokeName.toUpperCase() + " !");
-                                    }else{
-                                        battleNarration.setText("");
-                                        battleNarration2.setText("");
-                                        battleNarration2.setVisibility(View.INVISIBLE);
-                                        battleNarration.setVisibility(VISIBLE);
-                                        setBattleNarration("SABRINA sent out " + opponentPokeName.toUpperCase() + " !");
-                                    }
+                                    battlefood(("SABRINA sent out " + opponentPokeName.toUpperCase() + " !"));
                                     battleStarted = true;
                                 }
                                 else if(gymNum == 7){
-                                    battleNarration.setText("");
-                                    if(battleNarration.getVisibility() == VISIBLE){
-                                        battleNarration.setText("");
-                                        battleNarration2.setText("");
-                                        battleNarration2.setVisibility(VISIBLE);
-                                        battleNarration.setVisibility(View.INVISIBLE);
-                                        setBattleNarration2("BLAINE sent out " + opponentPokeName.toUpperCase() + " !");
-                                    }else{
-                                        battleNarration.setText("");
-                                        battleNarration2.setText("");
-                                        battleNarration2.setVisibility(View.INVISIBLE);
-                                        battleNarration.setVisibility(VISIBLE);
-                                        setBattleNarration("BLAINE sent out " + opponentPokeName.toUpperCase() + " !");
-                                    }
+                                    battlefood(("BLAINE sent out " + opponentPokeName.toUpperCase() + " !"));
                                     battleStarted = true;
                                 }
                                 else if(gymNum == 8){
-                                    battleNarration.setText("");
-                                    if(battleNarration.getVisibility() == VISIBLE){
-                                        battleNarration.setText("");
-                                        battleNarration2.setText("");
-                                        battleNarration2.setVisibility(VISIBLE);
-                                        battleNarration.setVisibility(View.INVISIBLE);
-                                        setBattleNarration2("GIOVANNI sent out " + opponentPokeName.toUpperCase() + " !");
-                                    }else{
-                                        battleNarration.setText("");
-                                        battleNarration2.setText("");
-                                        battleNarration2.setVisibility(View.INVISIBLE);
-                                        battleNarration.setVisibility(VISIBLE);
-                                        setBattleNarration("GIOVANNI sent out " + opponentPokeName.toUpperCase() + " !");
-                                    }
+                                    battlefood(("GIOVANNI sent out " + opponentPokeName.toUpperCase() + " !"));
                                     battleStarted = true;
                                 }
                                 else if(gymNum == 10){
@@ -1767,10 +1675,26 @@ battleStarted = true;
                          */
                     }
                     if (allHP == 0) {
+                        pic("", myPokemon);
                         gameOver = true;
+                    } else if (pokemans.getVisibility() != VISIBLE) {
+                        makeToast(myPokeName + " has fainted!");
+                        pokemans.setVisibility(VISIBLE);
+                        choosing = true;
+                        fight = false;
+                        tLeft.setText("");
+                        bLeft.setText("");
+                        tRight.setText("back");
+                        bRight.setText("");
                     }
-                }else if(opponentHP == 0 || opponentHP < 0) {
+                }else if((opponentHP == 0 || opponentHP < 0) && i == 1) {
                     opponentHP = 0;
+
+
+
+
+
+
                     if (gameOver == false) {
                         /*
                         backToGyms(gymNum);
