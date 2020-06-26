@@ -80,9 +80,9 @@ public class Battle extends AppCompatActivity {
     int move2Str;
     int move3Str;
     int move4Str;
-    int pokeNum = 0;
+    int pokeNum;
 
-    int i = 1;
+    int i;
 
     String move1i;
     String move2i;
@@ -235,20 +235,22 @@ public class Battle extends AppCompatActivity {
         pok5 = findViewById(R.id.pok5);
         pok6 = findViewById(R.id.pok6);
         fight = false;
+        i = 1;
         backpack = findViewById(R.id.bag);
         inBag = false;
         pokeball = findViewById(R.id.pokeball);
+        pokeball = findViewById(R.id.pokeball);
         currentHP = new int[6];
-        currentHP[0] = 300;currentHP[1] = 300;currentHP[2] = 300;currentHP[3] = 300;currentHP[4] = 300;currentHP[5] = 300;
+        currentHP[0] = 300;if(sharedPref.pokemons[1] !=""|| sharedPref.pokemons[1] == null){currentHP[1] = 5;}if(sharedPref.pokemons[2] !=""|| sharedPref.pokemons[2] == null){currentHP[2] = 300;}if(sharedPref.pokemons[3] !=""|| sharedPref.pokemons[3] == null){currentHP[3] = 300;}if(sharedPref.pokemons[4] !=""|| sharedPref.pokemons[4] == null){currentHP[4] = 300;}if(sharedPref.pokemons[5] !=""|| sharedPref.pokemons[5] == null){currentHP[5] = 300;}
         pokeViews = new ImageView[6];
         pokeViews[0] = findViewById(R.id.pok1);pokeViews[1] = findViewById(R.id.pok2);pokeViews[2] = findViewById(R.id.pok3);pokeViews[3] = findViewById(R.id.pok4);pokeViews[4] = findViewById(R.id.pok5);pokeViews[5] = findViewById(R.id.pok6);
 
-        allHP = currentHP[0]+currentHP[1]+currentHP[2]+currentHP[3]+currentHP[4]+currentHP[5];
         pokemans = findViewById(R.id.pokemans);
 
         getPokemon();
         getMyPokemon(0);
         currentPoke = 0;
+        pokeNum = 0;
 
 
 
@@ -369,7 +371,7 @@ public class Battle extends AppCompatActivity {
 
         hide = findViewById(R.id.button);
 
-        myHP = 5;
+        myHP = 300;
         opponentHP = 5;
 
         opponentHealth.setMax(opponentHP);
@@ -606,7 +608,6 @@ public class Battle extends AppCompatActivity {
                 }else if(opponentHP == 0 || opponentHP < 0) {
                     opponentHP = 0;
                     battlefood(myPokeName.toUpperCase() + " wins!");
-
                 }
             }
         });
@@ -690,7 +691,6 @@ public class Battle extends AppCompatActivity {
                 }else if(opponentHP == 0 || opponentHP < 0) {
                     opponentHP = 0;
                     battlefood(myPokeName.toUpperCase() + " wins!");
-
                 }
 
             }
@@ -791,7 +791,6 @@ public class Battle extends AppCompatActivity {
                 }else if(opponentHP == 0 || opponentHP < 0) {
                     opponentHP = 0;
                     battlefood(myPokeName.toUpperCase() + " wins!");
-
                 }
 
 
@@ -1074,8 +1073,8 @@ public class Battle extends AppCompatActivity {
             setBattleNarration("BROCK would like to battle!");
 
             opponentPokemon = new int[2];
-            opponentPokemon[0] = 95;
-            opponentPokemon[1] = 74;
+            opponentPokemon[0] = 74;
+            opponentPokemon[1] = 95;
             maxPoke = 1;
         }
         else if(x == 2){
@@ -1242,7 +1241,6 @@ public class Battle extends AppCompatActivity {
                 battleNarration.append(String.valueOf(c));
                 i[0]++;
                 typing = true;
-                Log.d("poke", "RUNNING: ");
                 hide.setVisibility(VISIBLE);
 
                 /*
@@ -1336,7 +1334,6 @@ public class Battle extends AppCompatActivity {
                 typing = true;
 
                 hide.setVisibility(VISIBLE);
-                Log.d("poke", "RUNNING: ");
 
                 /*
 
@@ -1401,7 +1398,7 @@ public class Battle extends AppCompatActivity {
     public void opponentThrowsPokemon(){
         Random rand = new Random();
         //int pokeNum = r.nextInt(opponentPokemon.length);
-
+        opponentHP = 5;
         final String type;
         Log.d("mode", "onClick: ");
         final Request request = new Request.Builder()
@@ -1443,50 +1440,47 @@ public class Battle extends AppCompatActivity {
                                     battleStarted = true;
 
                                 }
-                                else if(gymNum == 2){
+                                if(gymNum == 2){
                                     battlefood(("MISTY sent out " + opponentPokeName.toUpperCase() + " !"));
                                     battleStarted = true;
                                 }
-                                else if(gymNum == 3){
+                                if(gymNum == 3){
                                     battlefood(("Lt. SURGE sent out " + opponentPokeName.toUpperCase() + " !"));
 
                                     battleStarted = true;
                                 }
-                                else if(gymNum == 4){
+                                if(gymNum == 4){
                                     battlefood(("ERIKA sent out " + opponentPokeName.toUpperCase() + " !"));
                                     battleStarted = true;
                                 }
-                                else if(gymNum == 5){
+                                if(gymNum == 5){
                                     battlefood(("KOGA sent out " + opponentPokeName.toUpperCase() + " !"));
                                     battleStarted = true;
                                 }
-                                else if(gymNum == 6){
+                                if(gymNum == 6){
                                     battlefood(("SABRINA sent out " + opponentPokeName.toUpperCase() + " !"));
                                     battleStarted = true;
                                 }
-                                else if(gymNum == 7){
+                                if(gymNum == 7){
                                     battlefood(("BLAINE sent out " + opponentPokeName.toUpperCase() + " !"));
                                     battleStarted = true;
                                 }
-                                else if(gymNum == 8){
+                                if(gymNum == 8){
                                     battlefood(("GIOVANNI sent out " + opponentPokeName.toUpperCase() + " !"));
                                     battleStarted = true;
                                 }
-                                else if(gymNum == 10){
+                                if(gymNum == 10){
                                     battlefood(opponentPokeName.toUpperCase() + " has appeared, what will you do ?!!");
                                     battleStarted = true;
                                 }
 
-                                else{
-                                    System.out.println("toobad");
-                                }
                                 pic(opponentPokemonImageURL, opponentPokemonImage);
                                 opponentPokemonNameText.setText(opponentPokeName.toUpperCase());
                                 /*
                                 hide.setVisibility(View.INVISIBLE);
 
                                  */
-
+i = 1;
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -1666,6 +1660,10 @@ public class Battle extends AppCompatActivity {
                 myHealth.setProgress(myHP);
                 myHealthNum.setText(myHP +"/300");
 
+                currentHP[currentPoke] = myHP;
+                allHP = currentHP[0]+currentHP[1]+currentHP[2]+currentHP[3]+currentHP[4]+currentHP[5];
+                //og.d("poke", "ALL HEALTH!!!!!- ew-ro-23o-4i2-3    " + allHP);
+
                 if(myHP == 0 || myHP < 0){
                     myHP = 0;
                     if (gameOver == false) {
@@ -1674,10 +1672,13 @@ public class Battle extends AppCompatActivity {
 
                          */
                     }
-                    if (allHP == 0) {
-                        pic("", myPokemon);
+                    if ((allHP == 0 || allHP < 0) && i == 1) {
+                        pic("https://images-wixmp-530a50041672c69d335ba4cf.wixmp.com/templates/image/b77fe464cfc445da9003a5383a3e1acf.jpg/v1/fill/w_322,h_182,q_90,usm_0.60_1.00_0.01/b77fe464cfc445da9003a5383a3e1acf.jpg", myPokemon);
+                        makeToast(myPokeName + " has fainted!");
+                        battlefood(opponentPokemonNameText.getText() + " wins!");
                         gameOver = true;
-                    } else if (pokemans.getVisibility() != VISIBLE) {
+                        i = 2;
+                    } else if (pokemans.getVisibility() != VISIBLE && i == 1) {
                         makeToast(myPokeName + " has fainted!");
                         pokemans.setVisibility(VISIBLE);
                         choosing = true;
@@ -1687,21 +1688,31 @@ public class Battle extends AppCompatActivity {
                         tRight.setText("back");
                         bRight.setText("");
                     }
-                }else if((opponentHP == 0 || opponentHP < 0) && i == 1) {
+                }else if((opponentHP == 0 || opponentHP < 0) && i == 1 && (((pokeNum) != maxPoke) && pokeNum < maxPoke)) {
                     opponentHP = 0;
-
-
-
-
-
-
+                    pokeNum = pokeNum + 1;
+                    Log.d("poke", "POKENUM: "+pokeNum+ "       MAXPOKE: "+ maxPoke);
+                    i = 2;
+                    //if (gymNum != 1) {
+                        if (pokeNum != maxPoke+1) {
+                            opponentThrowsPokemon();
+                        }
+                    /*} else {
+                        if (pokeNum == maxPoke) {
+                        opponentThrowsPokemon();
+                    }}*/
                     if (gameOver == false) {
                         /*
                         backToGyms(gymNum);
 
                          */
                     }
-                    gameOver = true;
+                }else if((pokeNum) == maxPoke) {
+                    Log.d("poke", "onTick: working mf");
+                    if(opponentHP == 0) {
+                        gameOver = true;
+                        pic("https://images-wixmp-530a50041672c69d335ba4cf.wixmp.com/templates/image/b77fe464cfc445da9003a5383a3e1acf.jpg/v1/fill/w_322,h_182,q_90,usm_0.60_1.00_0.01/b77fe464cfc445da9003a5383a3e1acf.jpg", opponentPokemonImage);
+                    }
                 }
 
             }
