@@ -359,7 +359,6 @@ public class Battle extends AppCompatActivity {
 
 
         gymNum = intent.getIntExtra("gymNumber",0);
-        //badgeCollection = intent.getIntegerArrayListExtra("badgeCollection");
 
         battleNarration = findViewById(R.id.battleNarration);
 
@@ -431,7 +430,6 @@ public class Battle extends AppCompatActivity {
         tLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //move1
 
                 if (move1Str == 0 && move2Str == 0 && move3Str == 0 && move4Str == 0){
                     getMyPokemon(rnPoke);
@@ -450,17 +448,22 @@ public class Battle extends AppCompatActivity {
 
                             if (move1Str != 0) {
 
-
+                                /*
                                 // if(move1Acc > accCalculate) {
+
+                                 */
                                 opponentHP = opponentHP - move1Str;
 
                                 battlefood(move1.toUpperCase() + " did " + move1Str + " damage very effective!");
                                 Log.d("poke", "onClick: " + myPokeName.toUpperCase() + " used " + move1.toUpperCase());
 
                                 textLengthTime = battleNarration.length() * 100;
+                                /*
                                 //  }else{
                                 // battlefood( move1.toUpperCase() + " missed and was not effective");
                                 //  }
+
+                                 */
 
 
                             } else if (move1Str == 0) {
@@ -518,7 +521,7 @@ public class Battle extends AppCompatActivity {
 
                     }
 
-                    //hello
+
 
                 }
             }
@@ -527,7 +530,6 @@ public class Battle extends AppCompatActivity {
         bLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //move2
                 if (!fight && !inBag && !choosing && battleStarted && gymNum == 10 && !gameOver) {
                     inBag = true;
                     backpack.setVisibility(VISIBLE);
@@ -547,16 +549,12 @@ public class Battle extends AppCompatActivity {
                     if (move2Str != 0) {
 
 
-                     //   if(move2Acc > accCalculate) {
                             opponentHP = opponentHP - move2Str;
 
                             battlefood(move2.toUpperCase()+" did "+move2Str+" damage very effective!");
                             Log.d("poke", "onClick: " + myPokeName + " used " + move2);
 
                             textLengthTime = battleNarration.length() * 100;
-                    //    }else{
-                    //        battlefood( move2.toUpperCase() + " missed and was not effective");
-                      //  }
 
                     } else {
                         noAttackDamage = new String[3];
@@ -1213,7 +1211,10 @@ public class Battle extends AppCompatActivity {
     }
     public void setBattleNarration(final String s) {
         if (typing = true) {
+            /*
            // timer1.cancel();
+
+             */
         }
         final int[] i = new int[1];
         i[0] = 0;
@@ -1259,9 +1260,11 @@ public class Battle extends AppCompatActivity {
 
                      */
                     hide();
-
+                    /*
                     //hiding = true;
                     //hide.setVisibility(View.INVISIBLE);
+
+                     */
                 }
 
             }
@@ -1286,7 +1289,10 @@ public class Battle extends AppCompatActivity {
                     Log.d("poke", "INVDISIFGADFJDAJRJEIGJIREJIGJIREJGIJRIJEGIIJG ");
 
                     typing = false;
+                    /*
                     //hide.setVisibility(View.INVISIBLE);
+
+                     */
                 }
             }
         };
@@ -1296,7 +1302,10 @@ public class Battle extends AppCompatActivity {
     }
     public void setBattleNarration2(final String s) {
         if (typing = true) {
+            /*
           //timer2.cancel();
+
+             */
         }
         final int[] i = new int[1];
         i[0] = 0;
@@ -1337,17 +1346,12 @@ public class Battle extends AppCompatActivity {
 
 
 
-                    hide = findViewById(R.id.button);
 
-
-                    hide.setHeight(1);
-                    hide.setWidth(1);
 
                      */
                     hide();
 
-                    //hiding = true;
-                    //hide.setVisibility(View.INVISIBLE);
+
                 }
 
 
@@ -1373,7 +1377,6 @@ public class Battle extends AppCompatActivity {
                     hide();
 
                     typing = false;
-                    //hide.setVisibility(View.INVISIBLE);
                 }
 
             }
@@ -1404,7 +1407,6 @@ public class Battle extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
                     final String myResponse = response.body().string();
-                    // Log.d("mode", "onResponse: " + myResponse);
 
                     Battle.this.runOnUiThread(new Runnable() {
                         @Override
@@ -1413,12 +1415,14 @@ public class Battle extends AppCompatActivity {
                                 JSONObject obj = new JSONObject(myResponse);
                                 opponentObject = obj;
                                 opponentKi = myResponse;
-                                //JSONArray info = obj.getJSONArray("sprites");
+                                  /*
+                            JSONArray info = obj.getJSONArray("sprites");
+
+             */
                                 String opponentPokeName = obj.getString("name");
                                 JSONObject sprites = obj.getJSONObject("sprites");
                                 opponentPokemonImageURL = sprites.getString("front_default");
 
-                                // pokeMoves STATS
 
 
                                 if (gymNum == 1){
@@ -1570,7 +1574,10 @@ battleStarted = true;
                                 }
                                 pic(opponentPokemonImageURL, opponentPokemonImage);
                                 opponentPokemonNameText.setText(opponentPokeName.toUpperCase());
-                                //hide.setVisibility(View.INVISIBLE);
+                                /*
+                                hide.setVisibility(View.INVISIBLE);
+
+                                 */
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -1652,7 +1659,11 @@ battleStarted = true;
                     public void onResponse(Call call, Response response) throws IOException {
                         if (response.isSuccessful()) {
                             final String myResponse = response.body().string();
-                            // Log.d("mode", "onResponse: " + myResponse);
+
+                            /*
+                             Log.d("mode", "onResponse: " + myResponse);
+
+                             */
 
                             Battle.this.runOnUiThread(new Runnable() {
                                 @Override
@@ -1672,7 +1683,10 @@ battleStarted = true;
                     }
                 });
 
-               // battleNarration.setText("");
+                /*
+               battleNarration.setText("");
+
+                 */
 
 
                 Log.d("attack", "opponentAttacks: " + opponentMoveStr);
@@ -1747,7 +1761,10 @@ battleStarted = true;
                 if(myHP == 0 || myHP < 0){
                     myHP = 0;
                     if (gameOver == false) {
+                        /*
                        // backToGyms(gymNum);
+
+                         */
                     }
                     if (allHP == 0) {
                         gameOver = true;
@@ -1755,7 +1772,10 @@ battleStarted = true;
                 }else if(opponentHP == 0 || opponentHP < 0) {
                     opponentHP = 0;
                     if (gameOver == false) {
-                     //   backToGyms(gymNum);
+                        /*
+                        backToGyms(gymNum);
+
+                         */
                     }
                     gameOver = true;
                 }
@@ -1804,12 +1824,18 @@ battleStarted = true;
     }
 
     public void getPokemon() {
-        //poke = y;
+        /*
+        poke = y;
+
+         */
         Log.d("mode", "onClick: ");
 
         try {
             JSONObject obj = new JSONObject(sharedPref.pokemons[0]);
-            //JSONArray info = obj.getJSONArray("sprites");
+              /*
+            JSONArray info = obj.getJSONArray("sprites");
+
+             */
             String name = obj.getString("name");
             Log.d("pokemon", "run: " + name);
             JSONObject sprites = obj.getJSONObject("sprites");
@@ -1822,7 +1848,10 @@ battleStarted = true;
 
         try {
             JSONObject obj = new JSONObject(sharedPref.pokemons[1]);
-            //JSONArray info = obj.getJSONArray("sprites");
+              /*
+            JSONArray info = obj.getJSONArray("sprites");
+
+             */
             String name = obj.getString("name");
             Log.d("pokemon", "run: " + name);
             JSONObject sprites = obj.getJSONObject("sprites");
@@ -1835,7 +1864,10 @@ battleStarted = true;
 
         try {
             JSONObject obj = new JSONObject(sharedPref.pokemons[2]);
-            //JSONArray info = obj.getJSONArray("sprites");
+              /*
+            JSONArray info = obj.getJSONArray("sprites");
+
+             */
             String name = obj.getString("name");
             Log.d("pokemon", "run: " + name);
             JSONObject sprites = obj.getJSONObject("sprites");
@@ -1848,7 +1880,10 @@ battleStarted = true;
 
         try {
             JSONObject obj = new JSONObject(sharedPref.pokemons[3]);
-            //JSONArray info = obj.getJSONArray("sprites");
+              /*
+            JSONArray info = obj.getJSONArray("sprites");
+
+             */
             String name = obj.getString("name");
             Log.d("pokemon", "run: " + name);
             JSONObject sprites = obj.getJSONObject("sprites");
@@ -1861,7 +1896,10 @@ battleStarted = true;
 
         try {
             JSONObject obj = new JSONObject(sharedPref.pokemons[4]);
-            //JSONArray info = obj.getJSONArray("sprites");
+              /*
+            JSONArray info = obj.getJSONArray("sprites");
+
+             */
             String name = obj.getString("name");
             Log.d("pokemon", "run: " + name);
             JSONObject sprites = obj.getJSONObject("sprites");
@@ -1874,7 +1912,10 @@ battleStarted = true;
 
         try {
             JSONObject obj = new JSONObject(sharedPref.pokemons[5]);
-            //JSONArray info = obj.getJSONArray("sprites");
+            /*
+            JSONArray info = obj.getJSONArray("sprites");
+
+             */
             String name = obj.getString("name");
             Log.d("pokemon", "run: " + name);
             JSONObject sprites = obj.getJSONObject("sprites");
