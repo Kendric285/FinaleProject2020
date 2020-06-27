@@ -241,7 +241,7 @@ public class Battle extends AppCompatActivity {
         pokeball = findViewById(R.id.pokeball);
         pokeball = findViewById(R.id.pokeball);
         currentHP = new int[6];
-        currentHP[0] = 300;if(sharedPref.pokemons[1] !=""|| sharedPref.pokemons[1] == null){currentHP[1] = 5;}if(sharedPref.pokemons[2] !=""|| sharedPref.pokemons[2] == null){currentHP[2] = 300;}if(sharedPref.pokemons[3] !=""|| sharedPref.pokemons[3] == null){currentHP[3] = 300;}if(sharedPref.pokemons[4] !=""|| sharedPref.pokemons[4] == null){currentHP[4] = 300;}if(sharedPref.pokemons[5] !=""|| sharedPref.pokemons[5] == null){currentHP[5] = 300;}
+        currentHP[0] = 300;if(sharedPref.pokemons[1] !=""|| sharedPref.pokemons[1] == null){currentHP[1] = 300;}if(sharedPref.pokemons[2] !=""|| sharedPref.pokemons[2] == null){currentHP[2] = 300;}if(sharedPref.pokemons[3] !=""|| sharedPref.pokemons[3] == null){currentHP[3] = 300;}if(sharedPref.pokemons[4] !=""|| sharedPref.pokemons[4] == null){currentHP[4] = 300;}if(sharedPref.pokemons[5] !=""|| sharedPref.pokemons[5] == null){currentHP[5] = 300;}
         pokeViews = new ImageView[6];
         pokeViews[0] = findViewById(R.id.pok1);pokeViews[1] = findViewById(R.id.pok2);pokeViews[2] = findViewById(R.id.pok3);pokeViews[3] = findViewById(R.id.pok4);pokeViews[4] = findViewById(R.id.pok5);pokeViews[5] = findViewById(R.id.pok6);
 
@@ -269,7 +269,7 @@ public class Battle extends AppCompatActivity {
                     bLeft.setText("Backpack");
                     tRight.setText("Pokemon");
                     bRight.setText("Run");
-                    opponentAttacks();
+                   // opponentAttacks();
                     choosing = false;
                 }
             }
@@ -287,7 +287,7 @@ public class Battle extends AppCompatActivity {
                     bLeft.setText("Backpack");
                     tRight.setText("Pokemon");
                     bRight.setText("Run");
-                    opponentAttacks();
+                   // opponentAttacks();
                     choosing = false;
                 }
             }
@@ -305,7 +305,7 @@ public class Battle extends AppCompatActivity {
                     bLeft.setText("Backpack");
                     tRight.setText("Pokemon");
                     bRight.setText("Run");
-                    opponentAttacks();
+                    //opponentAttacks();
                     choosing = false;
                 }
             }
@@ -322,7 +322,7 @@ public class Battle extends AppCompatActivity {
                     bLeft.setText("Backpack");
                     tRight.setText("Pokemon");
                     bRight.setText("Run");
-                    opponentAttacks();
+                   // opponentAttacks();
                     choosing = false;
                 }
             }
@@ -340,7 +340,7 @@ public class Battle extends AppCompatActivity {
                     bLeft.setText("Backpack");
                     tRight.setText("Pokemon");
                     bRight.setText("Run");
-                    opponentAttacks();
+                   // opponentAttacks();
                     choosing = false;
                 }
             }
@@ -358,7 +358,7 @@ public class Battle extends AppCompatActivity {
                     bLeft.setText("Backpack");
                     tRight.setText("Pokemon");
                     bRight.setText("Run");
-                    opponentAttacks();
+                  //  opponentAttacks();
                     choosing = false;
                 }
             }
@@ -372,9 +372,9 @@ public class Battle extends AppCompatActivity {
         hide = findViewById(R.id.button);
 
         myHP = 300;
-        opponentHP = 5;
+        opponentHP = 300;
 
-        opponentHealth.setMax(opponentHP);
+        opponentHealth.setMax(300);
         opponentHealth.setProgress(opponentHP);
 
         opponentPokemonNameText = findViewById(R.id.pokeName2);
@@ -524,7 +524,9 @@ public class Battle extends AppCompatActivity {
 
                     } else if (opponentHP == 0 || opponentHP < 0) {
                         opponentHP = 0;
-                        battlefood(myPokeName.toUpperCase() + " wins !");
+                        if (maxPoke == pokeNum){
+                            battlefood(myPokeName.toUpperCase() + " wins!");
+                        }
 
                     }
 
@@ -608,7 +610,10 @@ public class Battle extends AppCompatActivity {
                     }
                 }else if(opponentHP == 0 || opponentHP < 0) {
                     opponentHP = 0;
-                    battlefood(myPokeName.toUpperCase() + " wins!");
+                    if (maxPoke == pokeNum){
+                        battlefood(myPokeName.toUpperCase() + " wins!");
+                    }
+
                 }
             }
         });
@@ -691,7 +696,9 @@ public class Battle extends AppCompatActivity {
                     }
                 }else if(opponentHP == 0 || opponentHP < 0) {
                     opponentHP = 0;
-                    battlefood(myPokeName.toUpperCase() + " wins!");
+                    if (maxPoke == pokeNum){
+                        battlefood(myPokeName.toUpperCase() + " wins!");
+                }
                 }
 
             }
@@ -791,7 +798,9 @@ public class Battle extends AppCompatActivity {
                     }
                 }else if(opponentHP == 0 || opponentHP < 0) {
                     opponentHP = 0;
-                    battlefood(myPokeName.toUpperCase() + " wins!");
+                    if (maxPoke == pokeNum){
+                        battlefood(myPokeName.toUpperCase() + " wins!");
+                    }
                 }
 
 
