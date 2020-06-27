@@ -1187,7 +1187,7 @@ public class Battle extends AppCompatActivity {
             setBattleNarration("You've encountered a wild Pokémon");
 
 
-            int randWild = r.nextInt(807);
+            int randWild = r.nextInt(151);
 
             opponentPokemon[0] = randWild;
         }
@@ -1408,7 +1408,7 @@ public class Battle extends AppCompatActivity {
     public void opponentThrowsPokemon(){
         Random rand = new Random();
         //int pokeNum = r.nextInt(opponentPokemon.length);
-        opponentHP = 300;
+        opponentHP = 50;
         final String type;
         Log.d("mode", "onClick: ");
         final Request request = new Request.Builder()
