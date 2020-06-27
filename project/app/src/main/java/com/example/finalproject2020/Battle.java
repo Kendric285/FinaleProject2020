@@ -455,22 +455,22 @@ public class Battle extends AppCompatActivity {
 
                             if (move1Str != 0) {
 
-                                /*
-                                // if(move1Acc > accCalculate) {
 
-                                 */
+                                 if(next() == 1) {
+
+
                                 opponentHP = opponentHP - move1Str;
 
                                 battlefood(move1.toUpperCase() + " did " + move1Str + " damage very effective!");
                                 Log.d("poke", "onClick: " + myPokeName.toUpperCase() + " used " + move1.toUpperCase());
 
                                 textLengthTime = battleNarration.length() * 100;
-                                /*
-                                //  }else{
-                                // battlefood( move1.toUpperCase() + " missed and was not effective");
-                                //  }
 
-                                 */
+                                  }else{
+                                 battlefood( move1.toUpperCase() + " missed and was not effective");
+                                  }
+
+
 
 
                             } else if (move1Str == 0) {
@@ -554,14 +554,15 @@ public class Battle extends AppCompatActivity {
                     accCalculate = r.nextInt(110);
 
                     if (move2Str != 0) {
-
+                        if (next() == 1) {
 
                             opponentHP = opponentHP - move2Str;
 
-                            battlefood(move2.toUpperCase()+" did "+move2Str+" damage very effective!");
+                            battlefood(move2.toUpperCase() + " did " + move2Str + " damage very effective!");
                             Log.d("poke", "onClick: " + myPokeName + " used " + move2);
 
                             textLengthTime = battleNarration.length() * 100;
+                        } else {battlefood(move2.toUpperCase() + " missed not effective.");}
 
                     } else {
                         noAttackDamage = new String[3];
@@ -644,16 +645,16 @@ public class Battle extends AppCompatActivity {
 
                     if (move3Str != 0) {
 
-                   //     if(move3Acc > accCalculate) {
+                        if(next()==1) {
                             opponentHP = opponentHP - move3Str;
 
                             battlefood(move3.toUpperCase()+" did "+move3Str+" damage very effective!");
                             Log.d("poke", "onClick: " + myPokeName.toUpperCase() + " used " + move3);
 
                             textLengthTime = battleNarration.length() * 100;
-                      //  }else{
-                            //battlefood(move3.toUpperCase() + " missed and was not effective");
-                     //   }
+                        }else{
+                            battlefood(move3.toUpperCase() + " missed and was not effective");
+                        }
 
                     } else {
                         noAttackDamage = new String[3];
@@ -725,7 +726,7 @@ public class Battle extends AppCompatActivity {
                     if (move4Str != 0) {
 
 
-                        if(move4Acc > accCalculate) {
+                        if(next()==1) {
                             opponentHP = opponentHP - move4Str;
 
                                 battlefood(move4.toUpperCase() + " did " + move4Str + " damage");
@@ -1398,7 +1399,7 @@ public class Battle extends AppCompatActivity {
     public void opponentThrowsPokemon(){
         Random rand = new Random();
         //int pokeNum = r.nextInt(opponentPokemon.length);
-        opponentHP = 5;
+        opponentHP = 300;
         final String type;
         Log.d("mode", "onClick: ");
         final Request request = new Request.Builder()
@@ -1598,7 +1599,7 @@ i = 1;
 
                     accCalculate = r.nextInt(110);
 
-                    if(opponentMoveAcc < accCalculate) {
+                    if(next() == 1) {
                         myHP = myHP - opponentMoveStr;
 
                         battlefood(opponentPokemonNameText.getText()  + "'S " +opponentMoveName.toUpperCase()+" did "+opponentMoveStr+" damage very effective!");
@@ -1651,6 +1652,8 @@ i = 1;
         healthPlr = new CountDownTimer(999999999,1) {
             @Override
             public void onTick (long millisUntilFinished){
+
+                next();
 
                 pokeball.setText("Pokeball * "+sharedPref.getBalls());
 
